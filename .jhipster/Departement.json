@@ -1,0 +1,22 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162651",
+  "entityTableName": "departement",
+  "fields": [
+    {
+      "fieldName": "departmentName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Departement",
+  "relationships": [
+    {
+      "otherEntityName": "enseignant",
+      "relationshipName": "chefDepartement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

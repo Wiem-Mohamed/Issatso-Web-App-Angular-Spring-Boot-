@@ -38,6 +38,26 @@ public class CacheConfiguration {
         return cm -> {
             createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE);
             createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_EMAIL_CACHE);
+            createCache(cm, com.mycompany.myapp.domain.Actualite.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Avis.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.DemandeEnseignant.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.DemandeEtudiant.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Departement.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Enseignant.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Enseignant.class.getName() + ".matieres");
+            createCache(cm, com.mycompany.myapp.domain.Enseignant.class.getName() + ".groupes");
+            createCache(cm, com.mycompany.myapp.domain.Etudiant.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Evenement.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Evenement.class.getName() + ".partenaires");
+            createCache(cm, com.mycompany.myapp.domain.Groupe.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Groupe.class.getName() + ".etudiantNames");
+            createCache(cm, com.mycompany.myapp.domain.Groupe.class.getName() + ".enseigants");
+            createCache(cm, com.mycompany.myapp.domain.Matiere.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Matiere.class.getName() + ".supportDeCours");
+            createCache(cm, com.mycompany.myapp.domain.OffreStage.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Partenaire.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Partenaire.class.getName() + ".evenements");
+            createCache(cm, com.mycompany.myapp.domain.SupportDeCours.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

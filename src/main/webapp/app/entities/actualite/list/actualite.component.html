@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="ActualiteHeading">
+    <span jhiTranslate="issatsoApp.actualite.home.title">Actualites</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="issatsoApp.actualite.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-actualite"
+        [routerLink]="['/actualite/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="issatsoApp.actualite.home.createLabel"> Créer un nouveau Actualite </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="actualites?.length === 0">
+    <span jhiTranslate="issatsoApp.actualite.home.notFound">Aucun Actualite trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="actualites && actualites.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="titre">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.actualite.titre">Titre</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="image">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.actualite.image">Image</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contenu">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.actualite.contenu">Contenu</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="datePublication">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.actualite.datePublication">Date Publication</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actualite of actualites; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/actualite', actualite.id, 'view']">{{ actualite.id }}</a>
+          </td>
+          <td>{{ actualite.titre }}</td>
+          <td>
+            <a *ngIf="actualite.image" (click)="openFile(actualite.image, actualite.imageContentType)">
+              <img
+                [src]="'data:' + actualite.imageContentType + ';base64,' + actualite.image"
+                style="max-height: 30px"
+                alt="actualite image"
+              />
+            </a>
+            <span *ngIf="actualite.image">{{ actualite.imageContentType }}, {{ byteSize(actualite.image) }}</span>
+          </td>
+          <td>{{ actualite.contenu }}</td>
+          <td>{{ actualite.datePublication | formatMediumDatetime }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/actualite', actualite.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/actualite', actualite.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(actualite)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

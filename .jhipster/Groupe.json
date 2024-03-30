@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162655",
+  "entityTableName": "groupe",
+  "fields": [
+    {
+      "fieldName": "nomGroupe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "filiere",
+      "fieldType": "Filiere",
+      "fieldValues": "ING,LEEA,LEM,LGC,LGEnerg,LGM,LISI,LSI,MPGM,PREPA"
+    }
+  ],
+  "name": "Groupe",
+  "relationships": [
+    {
+      "otherEntityName": "etudiant",
+      "otherEntityRelationshipName": "groupe",
+      "relationshipName": "etudiantName",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enseignant",
+      "otherEntityRelationshipName": "groupe",
+      "relationshipName": "enseigant",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,29 @@
+{
+  "issatsoApp": {
+    "partenaire": {
+      "home": {
+        "title": "Partenaires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Partenaire",
+        "createOrEditLabel": "Créer ou éditer un Partenaire",
+        "notFound": "Aucun Partenaire trouvé"
+      },
+      "created": "Un nouveau Partenaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Partenaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Partenaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Partenaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Partenaire"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "description": "Description",
+      "domaineActivite": "Domaine Activite",
+      "adresse": "Adresse",
+      "contact": "Contact",
+      "evenement": "Evenement"
+    }
+  }
+}

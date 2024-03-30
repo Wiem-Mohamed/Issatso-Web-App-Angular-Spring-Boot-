@@ -1,0 +1,153 @@
+<div>
+  <h2 id="page-heading" data-cy="EnseignantHeading">
+    <span jhiTranslate="issatsoApp.enseignant.home.title">Enseignants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="issatsoApp.enseignant.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-enseignant"
+        [routerLink]="['/enseignant/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="issatsoApp.enseignant.home.createLabel"> Créer un nouveau Enseignant </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="enseignants?.length === 0">
+    <span jhiTranslate="issatsoApp.enseignant.home.notFound">Aucun Enseignant trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="enseignants && enseignants.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nom">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.nom">Nom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prenom">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.prenom">Prenom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cin">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.cin">Cin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numTel">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.numTel">Num Tel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateEmbauche">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.dateEmbauche">Date Embauche</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="grade">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.grade">Grade</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="chefDepartement.id">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.chefDepartement">Chef Departement</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="groupe.id">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.enseignant.groupe">Groupe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enseignant of enseignants; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/enseignant', enseignant.id, 'view']">{{ enseignant.id }}</a>
+          </td>
+          <td>{{ enseignant.nom }}</td>
+          <td>{{ enseignant.prenom }}</td>
+          <td>{{ enseignant.cin }}</td>
+          <td>{{ enseignant.email }}</td>
+          <td>{{ enseignant.numTel }}</td>
+          <td>{{ enseignant.dateEmbauche | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'issatsoApp.Grade.' + enseignant.grade }}">{{ enseignant.grade }}</td>
+          <td>
+            <div *ngIf="enseignant.chefDepartement">
+              <a [routerLink]="['/enseignant', enseignant.chefDepartement.id, 'view']">{{ enseignant.chefDepartement.id }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let groupe of enseignant.groupes; let last = last">
+              <a class="form-control-static" [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/enseignant', enseignant.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/enseignant', enseignant.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(enseignant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

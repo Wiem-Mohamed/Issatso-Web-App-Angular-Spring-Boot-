@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162647",
+  "entityTableName": "actualite",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "contenu",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "datePublication",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Actualite",
+  "relationships": [],
+  "searchEngine": "no"
+}

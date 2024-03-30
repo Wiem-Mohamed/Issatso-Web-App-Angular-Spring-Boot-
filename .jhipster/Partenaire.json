@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162658",
+  "entityTableName": "partenaire",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "domaineActivite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contact",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Partenaire",
+  "relationships": [
+    {
+      "otherEntityName": "evenement",
+      "relationshipName": "evenement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

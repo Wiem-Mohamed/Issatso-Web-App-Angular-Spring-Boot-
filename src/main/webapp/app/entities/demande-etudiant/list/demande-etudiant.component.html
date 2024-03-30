@@ -1,0 +1,109 @@
+<div>
+  <h2 id="page-heading" data-cy="DemandeEtudiantHeading">
+    <span jhiTranslate="issatsoApp.demandeEtudiant.home.title">DemandeEtudiants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="issatsoApp.demandeEtudiant.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-demande-etudiant"
+        [routerLink]="['/demande-etudiant/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="issatsoApp.demandeEtudiant.home.createLabel"> Créer un nouveau Demande Etudiant </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="demandeEtudiants?.length === 0">
+    <span jhiTranslate="issatsoApp.demandeEtudiant.home.notFound">Aucun Demande Etudiant trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="demandeEtudiants && demandeEtudiants.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sujet">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.demandeEtudiant.sujet">Sujet</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.demandeEtudiant.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="statut">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.demandeEtudiant.statut">Statut</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCreation">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.demandeEtudiant.dateCreation">Date Creation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demandeEtudiant of demandeEtudiants; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'view']">{{ demandeEtudiant.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'issatsoApp.SujetEtud.' + demandeEtudiant.sujet }}">{{ demandeEtudiant.sujet }}</td>
+          <td>{{ demandeEtudiant.description }}</td>
+          <td jhiTranslate="{{ 'issatsoApp.Status.' + demandeEtudiant.statut }}">{{ demandeEtudiant.statut }}</td>
+          <td>{{ demandeEtudiant.dateCreation | formatMediumDatetime }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(demandeEtudiant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

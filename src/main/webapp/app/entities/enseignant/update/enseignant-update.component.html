@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-enseignant-heading" data-cy="EnseignantCreateUpdateHeading" jhiTranslate="issatsoApp.enseignant.home.createOrEditLabel">
+        Créer ou éditer un Enseignant
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.cin" for="field_cin">Cin</label>
+          <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.numTel" for="field_numTel">Num Tel</label>
+          <input type="text" class="form-control" name="numTel" id="field_numTel" data-cy="numTel" formControlName="numTel" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.dateEmbauche" for="field_dateEmbauche">Date Embauche</label>
+          <div class="d-flex">
+            <input
+              id="field_dateEmbauche"
+              data-cy="dateEmbauche"
+              type="datetime-local"
+              class="form-control"
+              name="dateEmbauche"
+              formControlName="dateEmbauche"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.grade" for="field_grade">Grade</label>
+          <select class="form-control" name="grade" formControlName="grade" id="field_grade" data-cy="grade">
+            <option [ngValue]="null">{{ 'issatsoApp.Grade.null' | translate }}</option>
+            <option *ngFor="let grade of gradeValues" [value]="grade">{{ 'issatsoApp.Grade.' + grade | translate }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.enseignant.chefDepartement" for="field_chefDepartement"
+            >Chef Departement</label
+          >
+          <select
+            class="form-control"
+            id="field_chefDepartement"
+            data-cy="chefDepartement"
+            name="chefDepartement"
+            formControlName="chefDepartement"
+            [compareWith]="compareEnseignant"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="enseignantOption" *ngFor="let enseignantOption of enseignantsSharedCollection">
+              {{ enseignantOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="issatsoApp.enseignant.groupe" for="field_groupes">Groupe</label>
+          <select
+            class="form-control"
+            id="field_groupes"
+            data-cy="groupe"
+            multiple
+            name="groupes"
+            formControlName="groupes"
+            [compareWith]="compareGroupe"
+          >
+            <option [ngValue]="groupeOption" *ngFor="let groupeOption of groupesSharedCollection">{{ groupeOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

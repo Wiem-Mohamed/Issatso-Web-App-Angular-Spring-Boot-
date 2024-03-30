@@ -1,0 +1,10 @@
+{
+  "issatsoApp": {
+    "Domaine": {
+      "null": "",
+      "INFORMATIQUE": "INFORMATIQUE",
+      "MECANIQUE": "MECANIQUE",
+      "ENERGITIQUE": "ENERGITIQUE"
+    }
+  }
+}

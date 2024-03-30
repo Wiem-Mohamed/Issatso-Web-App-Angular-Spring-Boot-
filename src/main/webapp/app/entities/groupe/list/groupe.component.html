@@ -1,0 +1,85 @@
+<div>
+  <h2 id="page-heading" data-cy="GroupeHeading">
+    <span jhiTranslate="issatsoApp.groupe.home.title">Groupes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="issatsoApp.groupe.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-groupe"
+        [routerLink]="['/groupe/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="issatsoApp.groupe.home.createLabel"> Créer un nouveau Groupe </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="groupes?.length === 0">
+    <span jhiTranslate="issatsoApp.groupe.home.notFound">Aucun Groupe trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="groupes && groupes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomGroupe">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.groupe.nomGroupe">Nom Groupe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="filiere">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.groupe.filiere">Filiere</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let groupe of groupes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.id }}</a>
+          </td>
+          <td>{{ groupe.nomGroupe }}</td>
+          <td jhiTranslate="{{ 'issatsoApp.Filiere.' + groupe.filiere }}">{{ groupe.filiere }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/groupe', groupe.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/groupe', groupe.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(groupe)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

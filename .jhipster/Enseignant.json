@@ -1,0 +1,60 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162652",
+  "entityTableName": "enseignant",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numTel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateEmbauche",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "Grade",
+      "fieldValues": "PROFESSEUR,VACATAIRE,MAITRE_ASSISTANT"
+    }
+  ],
+  "name": "Enseignant",
+  "relationships": [
+    {
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "nomEnseigant",
+      "relationshipName": "matiere",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enseignant",
+      "relationshipName": "chefDepartement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "groupe",
+      "otherEntityRelationshipName": "enseigant",
+      "relationshipName": "groupe",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

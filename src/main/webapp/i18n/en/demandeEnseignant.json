@@ -1,0 +1,27 @@
+{
+  "issatsoApp": {
+    "demandeEnseignant": {
+      "home": {
+        "title": "Demande Enseignants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Demande Enseignant",
+        "createOrEditLabel": "Create or edit a Demande Enseignant",
+        "notFound": "No Demande Enseignants found"
+      },
+      "created": "A new Demande Enseignant is created with identifier {{ param }}",
+      "updated": "A Demande Enseignant is updated with identifier {{ param }}",
+      "deleted": "A Demande Enseignant is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Demande Enseignant {{ id }}?"
+      },
+      "detail": {
+        "title": "Demande Enseignant"
+      },
+      "id": "ID",
+      "sujet": "Sujet",
+      "description": "Description",
+      "statut": "Statut",
+      "dateCreation": "Date Creation"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="offreStage">
+      <h2 data-cy="offreStageDetailsHeading"><span jhiTranslate="issatsoApp.offreStage.detail.title">Offre Stage</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ offreStage.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.titre">Titre</span></dt>
+        <dd>
+          <span>{{ offreStage.titre }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.description">Description</span></dt>
+        <dd>
+          <span>{{ offreStage.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.domaine">Domaine</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'issatsoApp.Domaine.' + offreStage.domaine }}">{{ offreStage.domaine }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ offreStage.dateDebut | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ offreStage.dateFin | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.entreprise">Entreprise</span></dt>
+        <dd>
+          <span>{{ offreStage.entreprise }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.lieu">Lieu</span></dt>
+        <dd>
+          <span>{{ offreStage.lieu }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.offreStage.departement">Departement</span></dt>
+        <dd>
+          <div *ngIf="offreStage.departement">
+            <a [routerLink]="['/departement', offreStage.departement.id, 'view']">{{ offreStage.departement.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/offre-stage', offreStage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

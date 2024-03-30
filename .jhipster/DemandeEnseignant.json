@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162649",
+  "entityTableName": "demande_enseignant",
+  "fields": [
+    {
+      "fieldName": "sujet",
+      "fieldType": "SujetEns",
+      "fieldValues": "Conge,Rattrapage"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "Status",
+      "fieldValues": "EnAttente,Terminee,Refusee"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "DemandeEnseignant",
+  "relationships": [],
+  "searchEngine": "no"
+}

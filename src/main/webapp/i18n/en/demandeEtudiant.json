@@ -1,0 +1,27 @@
+{
+  "issatsoApp": {
+    "demandeEtudiant": {
+      "home": {
+        "title": "Demande Etudiants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Demande Etudiant",
+        "createOrEditLabel": "Create or edit a Demande Etudiant",
+        "notFound": "No Demande Etudiants found"
+      },
+      "created": "A new Demande Etudiant is created with identifier {{ param }}",
+      "updated": "A Demande Etudiant is updated with identifier {{ param }}",
+      "deleted": "A Demande Etudiant is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Demande Etudiant {{ id }}?"
+      },
+      "detail": {
+        "title": "Demande Etudiant"
+      },
+      "id": "ID",
+      "sujet": "Sujet",
+      "description": "Description",
+      "statut": "Statut",
+      "dateCreation": "Date Creation"
+    }
+  }
+}

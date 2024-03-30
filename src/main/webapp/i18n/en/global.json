@@ -7,6 +7,19 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "actualite": "Actualite",
+        "avis": "Avis",
+        "demandeEnseignant": "Demande Enseignant",
+        "demandeEtudiant": "Demande Etudiant",
+        "departement": "Departement",
+        "enseignant": "Enseignant",
+        "etudiant": "Etudiant",
+        "evenement": "Evenement",
+        "groupe": "Groupe",
+        "matiere": "Matiere",
+        "offreStage": "Offre Stage",
+        "partenaire": "Partenaire",
+        "supportDeCours": "Support De Cours",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

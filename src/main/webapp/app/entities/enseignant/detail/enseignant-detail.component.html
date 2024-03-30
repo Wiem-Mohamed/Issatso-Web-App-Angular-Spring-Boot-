@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="enseignant">
+      <h2 data-cy="enseignantDetailsHeading"><span jhiTranslate="issatsoApp.enseignant.detail.title">Enseignant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ enseignant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.nom">Nom</span></dt>
+        <dd>
+          <span>{{ enseignant.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ enseignant.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.cin">Cin</span></dt>
+        <dd>
+          <span>{{ enseignant.cin }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.email">Email</span></dt>
+        <dd>
+          <span>{{ enseignant.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.numTel">Num Tel</span></dt>
+        <dd>
+          <span>{{ enseignant.numTel }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.dateEmbauche">Date Embauche</span></dt>
+        <dd>
+          <span>{{ enseignant.dateEmbauche | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.grade">Grade</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'issatsoApp.Grade.' + enseignant.grade }}">{{ enseignant.grade }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.chefDepartement">Chef Departement</span></dt>
+        <dd>
+          <div *ngIf="enseignant.chefDepartement">
+            <a [routerLink]="['/enseignant', enseignant.chefDepartement.id, 'view']">{{ enseignant.chefDepartement.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.enseignant.groupe">Groupe</span></dt>
+        <dd>
+          <span *ngFor="let groupe of enseignant.groupes; let last = last">
+            <a [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/enseignant', enseignant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

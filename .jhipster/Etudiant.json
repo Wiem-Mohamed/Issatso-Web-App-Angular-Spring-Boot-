@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162653",
+  "entityTableName": "etudiant",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numInscription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateAffectation",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Etudiant",
+  "relationships": [
+    {
+      "otherEntityName": "groupe",
+      "otherEntityRelationshipName": "etudiantName",
+      "relationshipName": "groupe",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

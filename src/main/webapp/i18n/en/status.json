@@ -1,0 +1,10 @@
+{
+  "issatsoApp": {
+    "Status": {
+      "null": "",
+      "EnAttente": "EnAttente",
+      "Terminee": "Terminee",
+      "Refusee": "Refusee"
+    }
+  }
+}

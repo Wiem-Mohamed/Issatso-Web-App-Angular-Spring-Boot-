@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity SupportDeCours.
+    -->
+    <changeSet id="20240330162659-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="nom_matiere_id"
+                                 baseTableName="support_de_cours"
+                                 constraintName="fk_support_de_cours__nom_matiere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="matiere"
+                                 />
+    </changeSet>
+</databaseChangeLog>

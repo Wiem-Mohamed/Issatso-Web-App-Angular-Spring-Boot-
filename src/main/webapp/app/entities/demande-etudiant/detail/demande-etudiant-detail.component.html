@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="demandeEtudiant">
+      <h2 data-cy="demandeEtudiantDetailsHeading"><span jhiTranslate="issatsoApp.demandeEtudiant.detail.title">Demande Etudiant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ demandeEtudiant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.demandeEtudiant.sujet">Sujet</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'issatsoApp.SujetEtud.' + demandeEtudiant.sujet }}">{{ demandeEtudiant.sujet }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.demandeEtudiant.description">Description</span></dt>
+        <dd>
+          <span>{{ demandeEtudiant.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.demandeEtudiant.statut">Statut</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'issatsoApp.Status.' + demandeEtudiant.statut }}">{{ demandeEtudiant.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.demandeEtudiant.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ demandeEtudiant.dateCreation | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

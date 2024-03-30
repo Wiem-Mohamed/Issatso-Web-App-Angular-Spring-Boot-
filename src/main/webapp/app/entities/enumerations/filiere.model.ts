@@ -1,0 +1,21 @@
+export enum Filiere {
+  ING = 'ING',
+
+  LEEA = 'LEEA',
+
+  LEM = 'LEM',
+
+  LGC = 'LGC',
+
+  LGEnerg = 'LGEnerg',
+
+  LGM = 'LGM',
+
+  LISI = 'LISI',
+
+  LSI = 'LSI',
+
+  MPGM = 'MPGM',
+
+  PREPA = 'PREPA',
+}

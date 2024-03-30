@@ -1,0 +1,31 @@
+{
+  "issatsoApp": {
+    "offreStage": {
+      "home": {
+        "title": "OffreStages",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Offre Stage",
+        "createOrEditLabel": "Créer ou éditer un Offre Stage",
+        "notFound": "Aucun Offre Stage trouvé"
+      },
+      "created": "Un nouveau Offre Stage a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Offre Stage avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Offre Stage avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Offre Stage {{ id }} ?"
+      },
+      "detail": {
+        "title": "Offre Stage"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "description": "Description",
+      "domaine": "Domaine",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "entreprise": "Entreprise",
+      "lieu": "Lieu",
+      "departement": "Departement"
+    }
+  }
+}

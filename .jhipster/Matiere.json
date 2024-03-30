@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162656",
+  "entityTableName": "matiere",
+  "fields": [
+    {
+      "fieldName": "matiereName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Matiere",
+  "relationships": [
+    {
+      "otherEntityName": "supportDeCours",
+      "otherEntityRelationshipName": "nomMatiere",
+      "relationshipName": "supportDeCours",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enseignant",
+      "relationshipName": "nomEnseigant",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

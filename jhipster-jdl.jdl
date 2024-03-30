@@ -1,0 +1,134 @@
+entity Etudiant {
+	nom String,
+	prenom String,
+	email String,
+    numInscription String,
+    dateAffectation Instant
+}
+
+entity Groupe {
+	nomGroupe String,
+    filiere Filiere
+}
+entity SupportDeCours { 
+    titre String, 
+    description String, 
+    contenu String, 
+    dateDepot Instant
+}
+
+entity Matiere {
+	matiereName String
+}
+
+entity Departement {
+	departmentName String required
+}
+
+enum Filiere {
+	ING, LEEA, LEM, LGC, LGEnerg, LGM, LISI, LSI, MPGM, PREPA
+}
+
+entity Enseignant {
+
+	nom String,
+	prenom String,
+    cin String,
+	email String,
+	numTel String,
+	dateEmbauche Instant,
+	grade Grade
+}
+
+entity Avis {
+	sujet String,
+    description TextBlob,
+    dateCreation Instant
+}
+enum Grade {
+    PROFESSEUR, VACATAIRE, MAITRE_ASSISTANT
+}
+
+entity DemandeEtudiant {
+    sujet SujetEtud,
+    description TextBlob,
+    statut Status,
+    dateCreation Instant
+}
+
+entity DemandeEnseignant {
+    sujet SujetEns,
+    description TextBlob,
+    statut Status,
+    dateCreation Instant
+}
+enum SujetEtud {
+    Stage, Bourse, Attestation_de_reussite
+}
+enum SujetEns {
+    Conge, Rattrapage
+}
+enum Status {
+    EnAttente, Terminee, Refusee
+}
+
+entity Actualite {
+    titre String,
+    image ImageBlob,
+    contenu TextBlob,
+    datePublication Instant
+}
+
+entity Partenaire {
+    nom String,
+    description TextBlob,
+    domaineActivite String,
+    adresse String,
+    contact String
+}
+entity OffreStage {
+    titre String,
+    description TextBlob,
+    domaine Domaine,
+    dateDebut Instant,
+    dateFin Instant,
+    entreprise String,
+    lieu String
+}
+enum Domaine {
+    INFORMATIQUE, MECANIQUE, ENERGITIQUE
+}
+entity Evenement {
+    titre String,
+    description TextBlob,
+    dateDebut Instant,
+    dateFin Instant,
+    lieu String,
+    organisateur String
+}
+
+relationship OneToOne {
+	Departement{chefDepartement} to Enseignant
+}
+relationship ManyToMany {
+	Enseignant{groupe} to Groupe{enseigant}
+}
+relationship OneToMany {
+	Groupe{etudiantName} to Etudiant{groupe}
+}
+relationship ManyToOne {
+	Enseignant{chefDepartement} to Enseignant
+}
+relationship ManyToMany {
+    Partenaire{evenement} to Evenement
+}
+relationship ManyToOne {
+    OffreStage{departement} to Departement
+}
+relationship OneToMany {
+	Matiere to SupportDeCours{nomMatiere}
+}
+relationship OneToMany {
+	Enseignant to Matiere{nomEnseigant}
+}
+

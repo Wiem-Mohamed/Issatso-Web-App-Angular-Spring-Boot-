@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-etudiant-heading" data-cy="EtudiantCreateUpdateHeading" jhiTranslate="issatsoApp.etudiant.home.createOrEditLabel">
+        Créer ou éditer un Etudiant
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.numInscription" for="field_numInscription">Num Inscription</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numInscription"
+            id="field_numInscription"
+            data-cy="numInscription"
+            formControlName="numInscription"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.dateAffectation" for="field_dateAffectation">Date Affectation</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAffectation"
+              data-cy="dateAffectation"
+              type="datetime-local"
+              class="form-control"
+              name="dateAffectation"
+              formControlName="dateAffectation"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.groupe" for="field_groupe">Groupe</label>
+          <select
+            class="form-control"
+            id="field_groupe"
+            data-cy="groupe"
+            name="groupe"
+            formControlName="groupe"
+            [compareWith]="compareGroupe"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="groupeOption" *ngFor="let groupeOption of groupesSharedCollection">{{ groupeOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

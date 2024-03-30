@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162659",
+  "entityTableName": "support_de_cours",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contenu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateDepot",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "SupportDeCours",
+  "relationships": [
+    {
+      "otherEntityName": "matiere",
+      "relationshipName": "nomMatiere",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,27 @@
+{
+  "issatsoApp": {
+    "actualite": {
+      "home": {
+        "title": "Actualites",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Actualite",
+        "createOrEditLabel": "Create or edit a Actualite",
+        "notFound": "No Actualites found"
+      },
+      "created": "A new Actualite is created with identifier {{ param }}",
+      "updated": "A Actualite is updated with identifier {{ param }}",
+      "deleted": "A Actualite is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Actualite {{ id }}?"
+      },
+      "detail": {
+        "title": "Actualite"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "image": "Image",
+      "contenu": "Contenu",
+      "datePublication": "Date Publication"
+    }
+  }
+}

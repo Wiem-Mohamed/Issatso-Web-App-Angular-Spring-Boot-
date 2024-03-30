@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="etudiant">
+      <h2 data-cy="etudiantDetailsHeading"><span jhiTranslate="issatsoApp.etudiant.detail.title">Etudiant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ etudiant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.nom">Nom</span></dt>
+        <dd>
+          <span>{{ etudiant.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ etudiant.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.email">Email</span></dt>
+        <dd>
+          <span>{{ etudiant.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.numInscription">Num Inscription</span></dt>
+        <dd>
+          <span>{{ etudiant.numInscription }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.dateAffectation">Date Affectation</span></dt>
+        <dd>
+          <span>{{ etudiant.dateAffectation | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.groupe">Groupe</span></dt>
+        <dd>
+          <div *ngIf="etudiant.groupe">
+            <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']">{{ etudiant.groupe.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/etudiant', etudiant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

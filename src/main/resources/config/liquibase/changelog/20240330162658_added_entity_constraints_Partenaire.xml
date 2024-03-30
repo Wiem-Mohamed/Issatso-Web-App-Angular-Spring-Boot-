@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Partenaire.
+    -->
+    <changeSet id="20240330162658-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="partenaire_id"
+                                 baseTableName="rel_partenaire__evenement"
+                                 constraintName="fk_rel_partenaire__evenement__partenaire_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="partenaire"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="evenement_id"
+                                 baseTableName="rel_partenaire__evenement"
+                                 constraintName="fk_rel_partenaire__evenement__evenement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evenement"
+                                 />
+    </changeSet>
+</databaseChangeLog>

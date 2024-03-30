@@ -1,0 +1,28 @@
+{
+  "issatsoApp": {
+    "supportDeCours": {
+      "home": {
+        "title": "SupportDeCours",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Support De Cours",
+        "createOrEditLabel": "Créer ou éditer un Support De Cours",
+        "notFound": "Aucun Support De Cours trouvé"
+      },
+      "created": "Un nouveau Support De Cours a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Support De Cours avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Support De Cours avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Support De Cours {{ id }} ?"
+      },
+      "detail": {
+        "title": "Support De Cours"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "description": "Description",
+      "contenu": "Contenu",
+      "dateDepot": "Date Depot",
+      "nomMatiere": "Nom Matiere"
+    }
+  }
+}

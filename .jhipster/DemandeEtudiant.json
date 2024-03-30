@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162650",
+  "entityTableName": "demande_etudiant",
+  "fields": [
+    {
+      "fieldName": "sujet",
+      "fieldType": "SujetEtud",
+      "fieldValues": "Stage,Bourse,Attestation_de_reussite"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "Status",
+      "fieldValues": "EnAttente,Terminee,Refusee"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "DemandeEtudiant",
+  "relationships": [],
+  "searchEngine": "no"
+}

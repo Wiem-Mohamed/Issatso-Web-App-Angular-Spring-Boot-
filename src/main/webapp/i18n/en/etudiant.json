@@ -1,0 +1,29 @@
+{
+  "issatsoApp": {
+    "etudiant": {
+      "home": {
+        "title": "Etudiants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Etudiant",
+        "createOrEditLabel": "Create or edit a Etudiant",
+        "notFound": "No Etudiants found"
+      },
+      "created": "A new Etudiant is created with identifier {{ param }}",
+      "updated": "A Etudiant is updated with identifier {{ param }}",
+      "deleted": "A Etudiant is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Etudiant {{ id }}?"
+      },
+      "detail": {
+        "title": "Etudiant"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "email": "Email",
+      "numInscription": "Num Inscription",
+      "dateAffectation": "Date Affectation",
+      "groupe": "Groupe"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="groupe">
+      <h2 data-cy="groupeDetailsHeading"><span jhiTranslate="issatsoApp.groupe.detail.title">Groupe</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ groupe.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.groupe.nomGroupe">Nom Groupe</span></dt>
+        <dd>
+          <span>{{ groupe.nomGroupe }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.groupe.filiere">Filiere</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'issatsoApp.Filiere.' + groupe.filiere }}">{{ groupe.filiere }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/groupe', groupe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

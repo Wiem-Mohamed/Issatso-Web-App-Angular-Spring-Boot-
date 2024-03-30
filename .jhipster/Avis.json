@@ -1,0 +1,23 @@
+{
+  "applications": "*",
+  "changelogDate": "20240330162648",
+  "entityTableName": "avis",
+  "fields": [
+    {
+      "fieldName": "sujet",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Avis",
+  "relationships": [],
+  "searchEngine": "no"
+}

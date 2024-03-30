@@ -1,0 +1,30 @@
+{
+  "issatsoApp": {
+    "evenement": {
+      "home": {
+        "title": "Evenements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Evenement",
+        "createOrEditLabel": "Create or edit a Evenement",
+        "notFound": "No Evenements found"
+      },
+      "created": "A new Evenement is created with identifier {{ param }}",
+      "updated": "A Evenement is updated with identifier {{ param }}",
+      "deleted": "A Evenement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Evenement {{ id }}?"
+      },
+      "detail": {
+        "title": "Evenement"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "description": "Description",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "lieu": "Lieu",
+      "organisateur": "Organisateur",
+      "partenaire": "Partenaire"
+    }
+  }
+}
