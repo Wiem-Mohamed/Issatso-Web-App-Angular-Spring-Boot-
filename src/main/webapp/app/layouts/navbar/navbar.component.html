@@ -43,7 +43,7 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_COORDINATION', 'ROLE_ETUDIANT', 'ROLE_ENSEIGNANT']">
               <a
                 class="dropdown-item"
                 routerLink="/actualite"
@@ -55,7 +55,7 @@
                 <span jhiTranslate="global.menu.entities.actualite">Actualite</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_COORDINATION', 'ROLE_ETUDIANT']">
               <a
                 class="dropdown-item"
                 routerLink="/avis"
@@ -67,7 +67,7 @@
                 <span jhiTranslate="global.menu.entities.avis">Avis</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_RESPONSABLE_ADMINISTRATION', 'ROLE_ENSEIGNANT']">
               <a
                 class="dropdown-item"
                 routerLink="/demande-enseignant"
@@ -79,7 +79,7 @@
                 <span jhiTranslate="global.menu.entities.demandeEnseignant">Demande Enseignant</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_ACADEMIQUE', 'ROLE_ETUDIANT']">
               <a
                 class="dropdown-item"
                 routerLink="/demande-etudiant"
@@ -91,7 +91,7 @@
                 <span jhiTranslate="global.menu.entities.demandeEtudiant">Demande Etudiant</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">
               <a
                 class="dropdown-item"
                 routerLink="/departement"
@@ -103,7 +103,7 @@
                 <span jhiTranslate="global.menu.entities.departement">Departement</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_RESPONSABLE_ADMINISTRATION', 'ROLE_ADMIN']">
               <a
                 class="dropdown-item"
                 routerLink="/enseignant"
@@ -115,7 +115,7 @@
                 <span jhiTranslate="global.menu.entities.enseignant">Enseignant</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_ACADEMIQUE', 'ROLE_ADMIN']">
               <a
                 class="dropdown-item"
                 routerLink="/etudiant"
@@ -127,7 +127,7 @@
                 <span jhiTranslate="global.menu.entities.etudiant">Etudiant</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'">
               <a
                 class="dropdown-item"
                 routerLink="/evenement"
@@ -139,7 +139,7 @@
                 <span jhiTranslate="global.menu.entities.evenement">Evenement</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_ACADEMIQUE', 'ROLE_ETUDIANT', 'ROLE_ENSEIGNANT']">
               <a
                 class="dropdown-item"
                 routerLink="/groupe"
@@ -151,7 +151,7 @@
                 <span jhiTranslate="global.menu.entities.groupe">Groupe</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">
               <a
                 class="dropdown-item"
                 routerLink="/matiere"
@@ -163,7 +163,7 @@
                 <span jhiTranslate="global.menu.entities.matiere">Matiere</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_RELATION_PUBLIQUE', 'ROLE_ETUDIANT']">
               <a
                 class="dropdown-item"
                 routerLink="/offre-stage"
@@ -175,7 +175,7 @@
                 <span jhiTranslate="global.menu.entities.offreStage">Offre Stage</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'">
               <a
                 class="dropdown-item"
                 routerLink="/partenaire"
@@ -187,7 +187,7 @@
                 <span jhiTranslate="global.menu.entities.partenaire">Partenaire</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ETUDIANT', 'ROLE_ENSEIGNANT']">
               <a
                 class="dropdown-item"
                 routerLink="/support-de-cours"
