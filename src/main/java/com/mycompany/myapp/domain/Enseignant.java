@@ -49,10 +49,6 @@ public class Enseignant implements Serializable {
     @JsonIgnoreProperties(value = { "supportDeCours", "nomEnseigant" }, allowSetters = true)
     private Set<Matiere> matieres = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "matieres", "chefDepartement", "groupes", "departement" }, allowSetters = true)
-    private Enseignant chefDepartement;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "rel_enseignant__groupe",
@@ -200,19 +196,6 @@ public class Enseignant implements Serializable {
     public Enseignant removeMatiere(Matiere matiere) {
         this.matieres.remove(matiere);
         matiere.setNomEnseigant(null);
-        return this;
-    }
-
-    public Enseignant getChefDepartement() {
-        return this.chefDepartement;
-    }
-
-    public void setChefDepartement(Enseignant enseignant) {
-        this.chefDepartement = enseignant;
-    }
-
-    public Enseignant chefDepartement(Enseignant enseignant) {
-        this.setChefDepartement(enseignant);
         return this;
     }
 

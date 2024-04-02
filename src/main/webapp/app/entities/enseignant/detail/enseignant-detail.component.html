@@ -42,16 +42,10 @@
         <dd>
           <span jhiTranslate="{{ 'issatsoApp.Grade.' + enseignant.grade }}">{{ enseignant.grade }}</span>
         </dd>
-        <dt><span jhiTranslate="issatsoApp.enseignant.chefDepartement">Chef Departement</span></dt>
-        <dd>
-          <div *ngIf="enseignant.chefDepartement">
-            <a [routerLink]="['/enseignant', enseignant.chefDepartement.id, 'view']">{{ enseignant.chefDepartement.id }}</a>
-          </div>
-        </dd>
         <dt><span jhiTranslate="issatsoApp.enseignant.groupe">Groupe</span></dt>
         <dd>
           <span *ngFor="let groupe of enseignant.groupes; let last = last">
-            <a [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.id }}</a
+            <a [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.nomGroupe }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>

@@ -62,25 +62,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="issatsoApp.enseignant.chefDepartement" for="field_chefDepartement"
-            >Chef Departement</label
-          >
-          <select
-            class="form-control"
-            id="field_chefDepartement"
-            data-cy="chefDepartement"
-            name="chefDepartement"
-            formControlName="chefDepartement"
-            [compareWith]="compareEnseignant"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="enseignantOption" *ngFor="let enseignantOption of enseignantsSharedCollection">
-              {{ enseignantOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="mb-3">
           <label jhiTranslate="issatsoApp.enseignant.groupe" for="field_groupes">Groupe</label>
           <select
             class="form-control"
@@ -91,7 +72,7 @@
             formControlName="groupes"
             [compareWith]="compareGroupe"
           >
-            <option [ngValue]="groupeOption" *ngFor="let groupeOption of groupesSharedCollection">{{ groupeOption.id }}</option>
+            <option [ngValue]="groupeOption" *ngFor="let groupeOption of groupesSharedCollection">{{ groupeOption.nomGroupe }}</option>
           </select>
         </div>
       </div>

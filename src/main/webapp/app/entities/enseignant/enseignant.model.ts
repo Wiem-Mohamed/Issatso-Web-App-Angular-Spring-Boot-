@@ -11,8 +11,7 @@ export interface IEnseignant {
   numTel?: string | null;
   dateEmbauche?: dayjs.Dayjs | null;
   grade?: keyof typeof Grade | null;
-  chefDepartement?: Pick<IEnseignant, 'id'> | null;
-  groupes?: Pick<IGroupe, 'id'>[] | null;
+  groupes?: Pick<IGroupe, 'id' | 'nomGroupe'>[] | null;
 }
 
 export type NewEnseignant = Omit<IEnseignant, 'id'> & { id: null };

@@ -38,7 +38,6 @@ type EnseignantFormGroupContent = {
   numTel: FormControl<EnseignantFormRawValue['numTel']>;
   dateEmbauche: FormControl<EnseignantFormRawValue['dateEmbauche']>;
   grade: FormControl<EnseignantFormRawValue['grade']>;
-  chefDepartement: FormControl<EnseignantFormRawValue['chefDepartement']>;
   groupes: FormControl<EnseignantFormRawValue['groupes']>;
 };
 
@@ -66,7 +65,6 @@ export class EnseignantFormService {
       numTel: new FormControl(enseignantRawValue.numTel),
       dateEmbauche: new FormControl(enseignantRawValue.dateEmbauche),
       grade: new FormControl(enseignantRawValue.grade),
-      chefDepartement: new FormControl(enseignantRawValue.chefDepartement),
       groupes: new FormControl(enseignantRawValue.groupes ?? []),
     });
   }

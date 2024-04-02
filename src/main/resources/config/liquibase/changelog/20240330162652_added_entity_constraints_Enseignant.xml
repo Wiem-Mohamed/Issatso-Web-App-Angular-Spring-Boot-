@@ -8,13 +8,6 @@
     -->
     <changeSet id="20240330162652-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="chef_departement_id"
-                                 baseTableName="enseignant"
-                                 constraintName="fk_enseignant__chef_departement_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="enseignant"
-                                 />
-
         <addForeignKeyConstraint baseColumnNames="enseignant_id"
                                  baseTableName="rel_enseignant__groupe"
                                  constraintName="fk_rel_enseignant__groupe__enseignant_id"

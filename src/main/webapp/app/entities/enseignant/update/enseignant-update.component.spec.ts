@@ -48,28 +48,6 @@ describe('Enseignant Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call Enseignant query and add missing value', () => {
-      const enseignant: IEnseignant = { id: 456 };
-      const chefDepartement: IEnseignant = { id: 88859 };
-      enseignant.chefDepartement = chefDepartement;
-
-      const enseignantCollection: IEnseignant[] = [{ id: 57333 }];
-      jest.spyOn(enseignantService, 'query').mockReturnValue(of(new HttpResponse({ body: enseignantCollection })));
-      const additionalEnseignants = [chefDepartement];
-      const expectedCollection: IEnseignant[] = [...additionalEnseignants, ...enseignantCollection];
-      jest.spyOn(enseignantService, 'addEnseignantToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ enseignant });
-      comp.ngOnInit();
-
-      expect(enseignantService.query).toHaveBeenCalled();
-      expect(enseignantService.addEnseignantToCollectionIfMissing).toHaveBeenCalledWith(
-        enseignantCollection,
-        ...additionalEnseignants.map(expect.objectContaining)
-      );
-      expect(comp.enseignantsSharedCollection).toEqual(expectedCollection);
-    });
-
     it('Should call Groupe query and add missing value', () => {
       const enseignant: IEnseignant = { id: 456 };
       const groupes: IGroupe[] = [{ id: 26729 }];
@@ -94,15 +72,12 @@ describe('Enseignant Management Update Component', () => {
 
     it('Should update editForm', () => {
       const enseignant: IEnseignant = { id: 456 };
-      const chefDepartement: IEnseignant = { id: 96520 };
-      enseignant.chefDepartement = chefDepartement;
       const groupe: IGroupe = { id: 20524 };
       enseignant.groupes = [groupe];
 
       activatedRoute.data = of({ enseignant });
       comp.ngOnInit();
 
-      expect(comp.enseignantsSharedCollection).toContain(chefDepartement);
       expect(comp.groupesSharedCollection).toContain(groupe);
       expect(comp.enseignant).toEqual(enseignant);
     });
@@ -177,16 +152,6 @@ describe('Enseignant Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
-    describe('compareEnseignant', () => {
-      it('Should forward to enseignantService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
-        jest.spyOn(enseignantService, 'compareEnseignant');
-        comp.compareEnseignant(entity, entity2);
-        expect(enseignantService.compareEnseignant).toHaveBeenCalledWith(entity, entity2);
-      });
-    });
-
     describe('compareGroupe', () => {
       it('Should forward to groupeService', () => {
         const entity = { id: 123 };

@@ -29,13 +29,10 @@
             <column name="num_tel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_embauche" type="DATETIME">
+            <column name="date_embauche" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="grade" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="chef_departement_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

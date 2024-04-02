@@ -25,7 +25,6 @@ export class EnseignantUpdateComponent implements OnInit {
   enseignant: IEnseignant | null = null;
   gradeValues = Object.keys(Grade);
 
-  enseignantsSharedCollection: IEnseignant[] = [];
   groupesSharedCollection: IGroupe[] = [];
 
   editForm: EnseignantFormGroup = this.enseignantFormService.createEnseignantFormGroup();
@@ -36,8 +35,6 @@ export class EnseignantUpdateComponent implements OnInit {
     protected groupeService: GroupeService,
     protected activatedRoute: ActivatedRoute
   ) {}
-
-  compareEnseignant = (o1: IEnseignant | null, o2: IEnseignant | null): boolean => this.enseignantService.compareEnseignant(o1, o2);
 
   compareGroupe = (o1: IGroupe | null, o2: IGroupe | null): boolean => this.groupeService.compareGroupe(o1, o2);
 
@@ -89,10 +86,6 @@ export class EnseignantUpdateComponent implements OnInit {
     this.enseignant = enseignant;
     this.enseignantFormService.resetForm(this.editForm, enseignant);
 
-    this.enseignantsSharedCollection = this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(
-      this.enseignantsSharedCollection,
-      enseignant.chefDepartement
-    );
     this.groupesSharedCollection = this.groupeService.addGroupeToCollectionIfMissing<IGroupe>(
       this.groupesSharedCollection,
       ...(enseignant.groupes ?? [])
@@ -100,16 +93,6 @@ export class EnseignantUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    this.enseignantService
-      .query()
-      .pipe(map((res: HttpResponse<IEnseignant[]>) => res.body ?? []))
-      .pipe(
-        map((enseignants: IEnseignant[]) =>
-          this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(enseignants, this.enseignant?.chefDepartement)
-        )
-      )
-      .subscribe((enseignants: IEnseignant[]) => (this.enseignantsSharedCollection = enseignants));
-
     this.groupeService
       .query()
       .pipe(map((res: HttpResponse<IGroupe[]>) => res.body ?? []))

@@ -27,7 +27,6 @@ describe('Enseignant Form Service', () => {
             numTel: expect.any(Object),
             dateEmbauche: expect.any(Object),
             grade: expect.any(Object),
-            chefDepartement: expect.any(Object),
             groupes: expect.any(Object),
           })
         );
@@ -46,7 +45,6 @@ describe('Enseignant Form Service', () => {
             numTel: expect.any(Object),
             dateEmbauche: expect.any(Object),
             grade: expect.any(Object),
-            chefDepartement: expect.any(Object),
             groupes: expect.any(Object),
           })
         );

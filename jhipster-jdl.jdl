@@ -10,10 +10,10 @@ entity Groupe {
 	nomGroupe String,
     filiere Filiere
 }
-entity SupportDeCours { 
-    titre String, 
-    description String, 
-    contenu String, 
+entity SupportDeCours {
+    titre String,
+    description String,
+    contenu String,
     dateDepot Instant
 }
 
@@ -111,13 +111,10 @@ relationship OneToOne {
 	Departement{chefDepartement} to Enseignant
 }
 relationship ManyToMany {
-	Enseignant{groupe} to Groupe{enseigant}
+	Enseignant{groupe(nomGroupe)} to Groupe{enseigant}
 }
 relationship OneToMany {
 	Groupe{etudiantName} to Etudiant{groupe}
-}
-relationship ManyToOne {
-	Enseignant{chefDepartement} to Enseignant
 }
 relationship ManyToMany {
     Partenaire{evenement} to Evenement

@@ -80,13 +80,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="chefDepartement.id">
-            <div class="d-flex">
-              <span jhiTranslate="issatsoApp.enseignant.chefDepartement">Chef Departement</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="groupe.id">
+          <th scope="col" jhiSortBy="groupe.nomGroupe">
             <div class="d-flex">
               <span jhiTranslate="issatsoApp.enseignant.groupe">Groupe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -108,13 +102,8 @@
           <td>{{ enseignant.dateEmbauche | formatMediumDatetime }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Grade.' + enseignant.grade }}">{{ enseignant.grade }}</td>
           <td>
-            <div *ngIf="enseignant.chefDepartement">
-              <a [routerLink]="['/enseignant', enseignant.chefDepartement.id, 'view']">{{ enseignant.chefDepartement.id }}</a>
-            </div>
-          </td>
-          <td>
             <span *ngFor="let groupe of enseignant.groupes; let last = last">
-              <a class="form-control-static" [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.id }}</a
+              <a class="form-control-static" [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.nomGroupe }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
