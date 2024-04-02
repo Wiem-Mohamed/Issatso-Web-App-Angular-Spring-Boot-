@@ -68,9 +68,18 @@ export default class RegisterComponent implements AfterViewInit {
       this.doNotMatch = true;
     } else {
       const { login, email } = this.registerForm.getRawValue();
-      this.registerService
-        .save({ login, email, password, langKey: this.translateService.currentLang })
-        .subscribe({ next: () => (this.success = true), error: response => this.processError(response) });
+      this.registerService.save({ login, email, password, langKey: this.translateService.currentLang }).subscribe(
+        () => {
+          // L'inscription a réussi.
+          this.success = true;
+        },
+        (error: HttpErrorResponse) => {
+          // Gérez les erreurs ici.
+          this.processError(error);
+          // Assurez-vous de réinitialiser le succès si l'inscription échoue.
+          this.success = false;
+        }
+      );
     }
   }
 
