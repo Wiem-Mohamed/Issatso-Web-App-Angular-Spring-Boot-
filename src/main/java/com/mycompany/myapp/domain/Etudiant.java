@@ -30,7 +30,7 @@ public class Etudiant implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "num_inscription")
+    @Column(name = "num_inscription", unique = true)
     private String numInscription;
 
     @Column(name = "date_affectation")

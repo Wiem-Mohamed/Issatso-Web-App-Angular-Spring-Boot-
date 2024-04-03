@@ -45,7 +45,7 @@
         <dt><span jhiTranslate="issatsoApp.enseignant.groupe">Groupe</span></dt>
         <dd class="element">
           <span *ngFor="let groupe of enseignant.groupes; let last = last">
-            <a [routerLink]="['/groupe', groupe.id, 'view']" id="nomg">{{ groupe.nomGroupe }}</a
+            <a [routerLink]="['/groupe', groupe.id, 'view']" class="nomg">{{ groupe.nomGroupe }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>

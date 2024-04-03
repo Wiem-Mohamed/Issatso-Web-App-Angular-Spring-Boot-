@@ -1,7 +1,12 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-etudiant-heading" data-cy="EtudiantCreateUpdateHeading" jhiTranslate="issatsoApp.etudiant.home.createOrEditLabel">
+      <h2
+        id="jhi-etudiant-heading"
+        data-cy="EtudiantCreateUpdateHeading"
+        jhiTranslate="issatsoApp.etudiant.home.createOrEditLabel"
+        class="titre"
+      >
         Créer ou éditer un Etudiant
       </h2>
 
@@ -38,6 +43,9 @@
             data-cy="numInscription"
             formControlName="numInscription"
           />
+          <div class="form-text text-danger" *ngIf="errorNumInscritExists" jhiTranslate="issatsoApp.etudiant.error">
+            <strong>Numéro d'inscription est déjà utilisé !</strong>
+          </div>
         </div>
 
         <div class="mb-3">

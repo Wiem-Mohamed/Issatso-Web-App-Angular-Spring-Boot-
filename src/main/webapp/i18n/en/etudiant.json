@@ -8,6 +8,7 @@
         "createOrEditLabel": "Create or edit a Etudiant",
         "notFound": "No Etudiants found"
       },
+      "error": "inscription number exists",
       "created": "A new Etudiant is created with identifier {{ param }}",
       "updated": "A Etudiant is updated with identifier {{ param }}",
       "deleted": "A Etudiant is deleted with identifier {{ param }}",

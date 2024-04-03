@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="etudiant">
-      <h2 data-cy="etudiantDetailsHeading"><span jhiTranslate="issatsoApp.etudiant.detail.title">Etudiant</span></h2>
+      <h2 data-cy="etudiantDetailsHeading"><span jhiTranslate="issatsoApp.etudiant.detail.title" class="titre">Etudiant</span></h2>
 
       <hr />
 
@@ -11,50 +11,55 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.nom">Nom</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.nom }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.prenom">Prenom</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.prenom }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.email">Email</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.email }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.numInscription">Num Inscription</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.numInscription }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.dateAffectation">Date Affectation</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.dateAffectation | formatMediumDatetime }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.filiere">Filiere</span></dt>
-        <dd>
+        <dd class="element">
           <span jhiTranslate="{{ 'issatsoApp.Filiere.' + etudiant.filiere }}">{{ etudiant.filiere }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.niveau">Niveau</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ etudiant.niveau }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.groupe">Groupe</span></dt>
-        <dd>
+        <dd class="element">
           <div *ngIf="etudiant.groupe">
-            <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']">{{ etudiant.groupe.nomGroupe }}</a>
+            <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']" class="nomg">{{ etudiant.groupe.nomGroupe }}</a>
           </div>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/etudiant', etudiant.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
+        type="button"
+        [routerLink]="['/etudiant', etudiant.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

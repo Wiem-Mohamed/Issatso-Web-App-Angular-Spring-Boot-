@@ -13,6 +13,8 @@ import { EntityArrayResponseType, EtudiantService } from '../service/etudiant.se
 import { EtudiantDeleteDialogComponent } from '../delete/etudiant-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-etudiant',
@@ -26,6 +28,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class EtudiantComponent implements OnInit {

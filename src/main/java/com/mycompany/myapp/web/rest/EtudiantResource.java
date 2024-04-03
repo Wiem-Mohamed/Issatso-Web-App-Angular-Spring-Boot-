@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.domain.Etudiant;
 import com.mycompany.myapp.repository.EtudiantRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import com.mycompany.myapp.web.rest.errors.NumInscriptionAlreadyUsedException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,6 +49,13 @@ public class EtudiantResource {
     @PostMapping("/etudiants")
     public ResponseEntity<Etudiant> createEtudiant(@RequestBody Etudiant etudiant) throws URISyntaxException {
         log.debug("REST request to save Etudiant : {}", etudiant);
+
+        // Vérifier si un article avec le même Codebarres existe déjà
+        Optional<Etudiant> existingEtudiant = etudiantRepository.findByNumInscription(etudiant.getNumInscription());
+        if (existingEtudiant.isPresent()) {
+            throw new NumInscriptionAlreadyUsedException();
+        }
+
         if (etudiant.getId() != null) {
             throw new BadRequestAlertException("A new etudiant cannot already have an ID", ENTITY_NAME, "idexists");
         }

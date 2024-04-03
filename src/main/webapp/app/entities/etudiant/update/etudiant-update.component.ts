@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -14,6 +14,8 @@ import { IGroupe } from 'app/entities/groupe/groupe.model';
 import { GroupeService } from 'app/entities/groupe/service/groupe.service';
 import { Filiere } from 'app/entities/enumerations/filiere.model';
 
+import { NumInscription_ALREADY_USED_TYPE } from 'app/config/error.constants';
+
 @Component({
   standalone: true,
   selector: 'jhi-etudiant-update',
@@ -24,6 +26,7 @@ export class EtudiantUpdateComponent implements OnInit {
   isSaving = false;
   etudiant: IEtudiant | null = null;
   filiereValues = Object.keys(Filiere);
+  errorNumInscritExists = false;
 
   groupesSharedCollection: IGroupe[] = [];
 
@@ -54,6 +57,7 @@ export class EtudiantUpdateComponent implements OnInit {
   }
 
   save(): void {
+    this.errorNumInscritExists = false;
     this.isSaving = true;
     const etudiant = this.etudiantFormService.getEtudiant(this.editForm);
     if (etudiant.id !== null) {
@@ -64,10 +68,20 @@ export class EtudiantUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IEtudiant>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
-    });
+    result.subscribe(
+      (res: HttpResponse<IEtudiant>) => {
+        this.onSaveSuccess();
+      },
+      (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.status === 400 && errorResponse.error.type === NumInscription_ALREADY_USED_TYPE) {
+          // num inscrit existe déjà
+          this.errorNumInscritExists = true;
+        } else {
+          this.onSaveError();
+        }
+        this.onSaveFinalize();
+      }
+    );
   }
 
   protected onSaveSuccess(): void {
