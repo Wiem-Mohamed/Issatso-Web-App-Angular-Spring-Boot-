@@ -1,7 +1,12 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-enseignant-heading" data-cy="EnseignantCreateUpdateHeading" jhiTranslate="issatsoApp.enseignant.home.createOrEditLabel">
+      <h2
+        id="jhi-enseignant-heading"
+        data-cy="EnseignantCreateUpdateHeading"
+        jhiTranslate="issatsoApp.enseignant.home.createOrEditLabel"
+        class="titre"
+      >
         Créer ou éditer un Enseignant
       </h2>
 
@@ -26,6 +31,9 @@
         <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.enseignant.cin" for="field_cin">Cin</label>
           <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
+          <div class="form-text text-danger" *ngIf="errorCinExists" jhiTranslate="issatsoApp.enseignant.error">
+            <strong>Cette cin existe déjà !</strong>
+          </div>
         </div>
 
         <div class="mb-3">

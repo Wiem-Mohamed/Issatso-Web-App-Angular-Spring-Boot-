@@ -37,7 +37,6 @@ type EvenementFormGroupContent = {
   dateDebut: FormControl<EvenementFormRawValue['dateDebut']>;
   dateFin: FormControl<EvenementFormRawValue['dateFin']>;
   lieu: FormControl<EvenementFormRawValue['lieu']>;
-  organisateur: FormControl<EvenementFormRawValue['organisateur']>;
   partenaires: FormControl<EvenementFormRawValue['partenaires']>;
 };
 
@@ -63,7 +62,6 @@ export class EvenementFormService {
       dateDebut: new FormControl(evenementRawValue.dateDebut),
       dateFin: new FormControl(evenementRawValue.dateFin),
       lieu: new FormControl(evenementRawValue.lieu),
-      organisateur: new FormControl(evenementRawValue.organisateur),
       partenaires: new FormControl(evenementRawValue.partenaires ?? []),
     });
   }

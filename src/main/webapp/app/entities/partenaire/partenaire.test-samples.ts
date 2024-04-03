@@ -1,24 +1,22 @@
 import { IPartenaire, NewPartenaire } from './partenaire.model';
 
 export const sampleWithRequiredData: IPartenaire = {
-  id: 34738,
+  id: 72688,
 };
 
 export const sampleWithPartialData: IPartenaire = {
-  id: 12193,
-  nom: 'Recyclé',
-  domaineActivite: 'users compressing Voiture',
-  adresse: 'Incroyable',
-  contact: 'Nissan',
+  id: 49851,
+  nom: 'users compressing Voiture',
+  description: '../fake-data/blob/hipster.txt',
 };
 
 export const sampleWithFullData: IPartenaire = {
-  id: 19945,
-  nom: 'Uranium Folk',
+  id: 31843,
+  nom: 'Incroyable',
   description: '../fake-data/blob/hipster.txt',
-  domaineActivite: 'Leu backing',
-  adresse: 'bleuet b de',
-  contact: 'compressing man',
+  domaineActivite: 'Uranium Folk',
+  adresse: 'Leu backing',
+  contact: 'bleuet b de',
 };
 
 export const sampleWithNewData: NewPartenaire = {

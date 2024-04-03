@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +13,8 @@ import { EvenementService } from '../service/evenement.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
+import { IPartenaire } from 'app/entities/partenaire/partenaire.model';
+import { PartenaireService } from 'app/entities/partenaire/service/partenaire.service';
 
 @Component({
   standalone: true,
@@ -24,6 +26,8 @@ export class EvenementUpdateComponent implements OnInit {
   isSaving = false;
   evenement: IEvenement | null = null;
 
+  partenairesSharedCollection: IPartenaire[] = [];
+
   editForm: EvenementFormGroup = this.evenementFormService.createEvenementFormGroup();
 
   constructor(
@@ -31,8 +35,11 @@ export class EvenementUpdateComponent implements OnInit {
     protected eventManager: EventManager,
     protected evenementService: EvenementService,
     protected evenementFormService: EvenementFormService,
+    protected partenaireService: PartenaireService,
     protected activatedRoute: ActivatedRoute
   ) {}
+
+  comparePartenaire = (o1: IPartenaire | null, o2: IPartenaire | null): boolean => this.partenaireService.comparePartenaire(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ evenement }) => {
@@ -40,6 +47,8 @@ export class EvenementUpdateComponent implements OnInit {
       if (evenement) {
         this.updateForm(evenement);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -94,5 +103,22 @@ export class EvenementUpdateComponent implements OnInit {
   protected updateForm(evenement: IEvenement): void {
     this.evenement = evenement;
     this.evenementFormService.resetForm(this.editForm, evenement);
+
+    this.partenairesSharedCollection = this.partenaireService.addPartenaireToCollectionIfMissing<IPartenaire>(
+      this.partenairesSharedCollection,
+      ...(evenement.partenaires ?? [])
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.partenaireService
+      .query()
+      .pipe(map((res: HttpResponse<IPartenaire[]>) => res.body ?? []))
+      .pipe(
+        map((partenaires: IPartenaire[]) =>
+          this.partenaireService.addPartenaireToCollectionIfMissing<IPartenaire>(partenaires, ...(this.evenement?.partenaires ?? []))
+        )
+      )
+      .subscribe((partenaires: IPartenaire[]) => (this.partenairesSharedCollection = partenaires));
   }
 }

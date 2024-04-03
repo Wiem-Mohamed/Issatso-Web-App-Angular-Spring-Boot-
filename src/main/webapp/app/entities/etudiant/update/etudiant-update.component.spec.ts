@@ -50,10 +50,10 @@ describe('Etudiant Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Groupe query and add missing value', () => {
       const etudiant: IEtudiant = { id: 456 };
-      const groupe: IGroupe = { id: 51033 };
+      const groupe: IGroupe = { id: 49457 };
       etudiant.groupe = groupe;
 
-      const groupeCollection: IGroupe[] = [{ id: 49457 }];
+      const groupeCollection: IGroupe[] = [{ id: 17959 }];
       jest.spyOn(groupeService, 'query').mockReturnValue(of(new HttpResponse({ body: groupeCollection })));
       const additionalGroupes = [groupe];
       const expectedCollection: IGroupe[] = [...additionalGroupes, ...groupeCollection];
@@ -72,7 +72,7 @@ describe('Etudiant Management Update Component', () => {
 
     it('Should update editForm', () => {
       const etudiant: IEtudiant = { id: 456 };
-      const groupe: IGroupe = { id: 17959 };
+      const groupe: IGroupe = { id: 29288 };
       etudiant.groupe = groupe;
 
       activatedRoute.data = of({ etudiant });

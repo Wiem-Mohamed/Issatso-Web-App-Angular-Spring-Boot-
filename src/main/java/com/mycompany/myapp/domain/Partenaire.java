@@ -37,12 +37,7 @@ public class Partenaire implements Serializable {
     @Column(name = "contact")
     private String contact;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_partenaire__evenement",
-        joinColumns = @JoinColumn(name = "partenaire_id"),
-        inverseJoinColumns = @JoinColumn(name = "evenement_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "partenaires")
     @JsonIgnoreProperties(value = { "partenaires" }, allowSetters = true)
     private Set<Evenement> evenements = new HashSet<>();
 
@@ -131,6 +126,12 @@ public class Partenaire implements Serializable {
     }
 
     public void setEvenements(Set<Evenement> evenements) {
+        if (this.evenements != null) {
+            this.evenements.forEach(i -> i.removePartenaire(this));
+        }
+        if (evenements != null) {
+            evenements.forEach(i -> i.addPartenaire(this));
+        }
         this.evenements = evenements;
     }
 

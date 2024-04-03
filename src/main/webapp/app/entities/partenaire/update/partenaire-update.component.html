@@ -52,21 +52,6 @@
           <label class="form-label" jhiTranslate="issatsoApp.partenaire.contact" for="field_contact">Contact</label>
           <input type="text" class="form-control" name="contact" id="field_contact" data-cy="contact" formControlName="contact" />
         </div>
-
-        <div class="mb-3">
-          <label jhiTranslate="issatsoApp.partenaire.evenement" for="field_evenements">Evenement</label>
-          <select
-            class="form-control"
-            id="field_evenements"
-            data-cy="evenement"
-            multiple
-            name="evenements"
-            formControlName="evenements"
-            [compareWith]="compareEvenement"
-          >
-            <option [ngValue]="evenementOption" *ngFor="let evenementOption of evenementsSharedCollection">{{ evenementOption.id }}</option>
-          </select>
-        </div>
       </div>
 
       <div>

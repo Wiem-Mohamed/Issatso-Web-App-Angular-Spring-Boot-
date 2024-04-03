@@ -1,11 +1,11 @@
-id;nom;prenom;email;num_inscription;date_affectation
-1;generate;personnel cogner Électrique;Caribert.Lefebvre89@gmail.com;RAM Électrique Picardie;2024-03-29T17:03:27
-2;Account assez;Metal siemens;Florian_Leroy41@hotmail.fr;Roupie 5th;2024-03-30T08:20:22
-3;Chèque Fromage;Borders Bijoux Homme;Mauricette43@gmail.com;Directeur SQL;2024-03-30T11:29:24
-4;Bronze RSS;Selenium Corse;Judical.Remy@hotmail.fr;a markets;2024-03-30T12:57:31
-5;Avon;Plastique Prêt chocolat;Bastien.Aubert@yahoo.fr;a virtual Livre;2024-03-30T12:17:58
-6;Boule Intelligent;siemens;Mdric_Dumont61@gmail.com;Granit délégation;2024-03-30T00:43:16
-7;siffler c;Granit;Faustine79@gmail.com;que calculate syndicate;2024-03-30T12:28:07
-8;du rédaction;Doux;Astart_Roy37@yahoo.fr;watt paiement;2024-03-30T09:26:12
-9;ha;Pop;Camlien27@hotmail.fr;Tampon Terbium Adaptive;2024-03-29T18:45:11
-10;structure sépia;Impasse;Aldonce_Gautier13@hotmail.fr;Neutrois Borders parsing;2024-03-30T06:09:45
+id;nom;prenom;email;num_inscription;date_affectation;filiere;niveau
+1;generate;personnel cogner Électrique;Caribert.Lefebvre89@gmail.com;RAM Électrique Picardie;2024-03-29T17:03:27;LGEnerg;41602
+2;b male avant;joule dépôt japonais;Maxime.Petit@gmail.com;Chèque Fromage;2024-03-29T18:00:57;ING;56165
+3;Essence;Grand quantifying;Victor.Dumont72@yahoo.fr;dépôt;2024-03-30T13:16:04;ING;15827
+4;Country Selenium;Account;Clarence.Garnier@hotmail.fr;a markets Plastique;2024-03-30T06:41:59;LISI;7221
+5;expedite;perspiciatis Franc;Briac.Simon@hotmail.fr;a Béton;2024-03-30T11:33:32;LGM;79923
+6;intuitive;Buckinghamshire;Genevive80@hotmail.fr;Gender reboot;2024-03-30T00:05:42;LISI;60564
+7;électrique tertiary;Bretagne;Hippolyte.Nicolas79@yahoo.fr;que calculate syndicate;2024-03-30T12:28:07;LGC;42237
+8;aïe;orange;Roselin_Picard@yahoo.fr;Account ha a;2024-03-30T14:14:52;LEM;80258
+9;facture;main Adaptive;Violette_Joly81@hotmail.fr;Impasse;2024-03-29T20:25:58;LGM;39558
+10;disparaître d’administration Borders;Beauté;Rebecca6@hotmail.fr;Coordinateur;2024-03-30T10:51:59;ING;41621

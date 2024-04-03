@@ -29,7 +29,7 @@ public class Enseignant implements Serializable {
     @Column(name = "prenom")
     private String prenom;
 
-    @Column(name = "cin")
+    @Column(name = "cin", unique = true)
     private String cin;
 
     @Column(name = "email")
@@ -61,8 +61,6 @@ public class Enseignant implements Serializable {
     @JsonIgnoreProperties(value = { "chefDepartement" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "chefDepartement")
     private Departement departement;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
         return this.id;
@@ -242,8 +240,6 @@ public class Enseignant implements Serializable {
         this.setDepartement(departement);
         return this;
     }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {

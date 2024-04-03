@@ -6,14 +6,13 @@ import { Status } from 'app/entities/enumerations/status.model';
 import { IDemandeEnseignant, NewDemandeEnseignant } from './demande-enseignant.model';
 
 export const sampleWithRequiredData: IDemandeEnseignant = {
-  id: 22956,
+  id: 65039,
 };
 
 export const sampleWithPartialData: IDemandeEnseignant = {
-  id: 8444,
-  sujet: 'Conge',
+  id: 84786,
+  description: '../fake-data/blob/hipster.txt',
   statut: 'Refusee',
-  dateCreation: dayjs('2024-03-29T22:15'),
 };
 
 export const sampleWithFullData: IDemandeEnseignant = {
@@ -22,6 +21,7 @@ export const sampleWithFullData: IDemandeEnseignant = {
   description: '../fake-data/blob/hipster.txt',
   statut: 'Terminee',
   dateCreation: dayjs('2024-03-29T21:18'),
+  proprietaire: 'Homme Béton safre',
 };
 
 export const sampleWithNewData: NewDemandeEnseignant = {

@@ -5,6 +5,7 @@ export interface IGroupe {
   id: number;
   nomGroupe?: string | null;
   filiere?: keyof typeof Filiere | null;
+  niveau?: number | null;
   enseigants?: Pick<IEnseignant, 'id'>[] | null;
 }
 

@@ -9,8 +9,6 @@ import { of, Subject, from } from 'rxjs';
 import { PartenaireFormService } from './partenaire-form.service';
 import { PartenaireService } from '../service/partenaire.service';
 import { IPartenaire } from '../partenaire.model';
-import { IEvenement } from 'app/entities/evenement/evenement.model';
-import { EvenementService } from 'app/entities/evenement/service/evenement.service';
 
 import { PartenaireUpdateComponent } from './partenaire-update.component';
 
@@ -20,7 +18,6 @@ describe('Partenaire Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let partenaireFormService: PartenaireFormService;
   let partenaireService: PartenaireService;
-  let evenementService: EvenementService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -42,43 +39,17 @@ describe('Partenaire Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     partenaireFormService = TestBed.inject(PartenaireFormService);
     partenaireService = TestBed.inject(PartenaireService);
-    evenementService = TestBed.inject(EvenementService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should call Evenement query and add missing value', () => {
-      const partenaire: IPartenaire = { id: 456 };
-      const evenements: IEvenement[] = [{ id: 72149 }];
-      partenaire.evenements = evenements;
-
-      const evenementCollection: IEvenement[] = [{ id: 45498 }];
-      jest.spyOn(evenementService, 'query').mockReturnValue(of(new HttpResponse({ body: evenementCollection })));
-      const additionalEvenements = [...evenements];
-      const expectedCollection: IEvenement[] = [...additionalEvenements, ...evenementCollection];
-      jest.spyOn(evenementService, 'addEvenementToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ partenaire });
-      comp.ngOnInit();
-
-      expect(evenementService.query).toHaveBeenCalled();
-      expect(evenementService.addEvenementToCollectionIfMissing).toHaveBeenCalledWith(
-        evenementCollection,
-        ...additionalEvenements.map(expect.objectContaining)
-      );
-      expect(comp.evenementsSharedCollection).toEqual(expectedCollection);
-    });
-
     it('Should update editForm', () => {
       const partenaire: IPartenaire = { id: 456 };
-      const evenement: IEvenement = { id: 21351 };
-      partenaire.evenements = [evenement];
 
       activatedRoute.data = of({ partenaire });
       comp.ngOnInit();
 
-      expect(comp.evenementsSharedCollection).toContain(evenement);
       expect(comp.partenaire).toEqual(partenaire);
     });
   });
@@ -148,18 +119,6 @@ describe('Partenaire Management Update Component', () => {
       expect(partenaireService.update).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Compare relationships', () => {
-    describe('compareEvenement', () => {
-      it('Should forward to evenementService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
-        jest.spyOn(evenementService, 'compareEvenement');
-        comp.compareEvenement(entity, entity2);
-        expect(evenementService.compareEvenement).toHaveBeenCalledWith(entity, entity2);
-      });
     });
   });
 });

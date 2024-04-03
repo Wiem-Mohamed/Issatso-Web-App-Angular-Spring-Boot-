@@ -28,4 +28,6 @@ public interface EnseignantRepository extends EnseignantRepositoryWithBagRelatio
     default Page<Enseignant> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    Optional<Enseignant> findByCin(String cin);
 }

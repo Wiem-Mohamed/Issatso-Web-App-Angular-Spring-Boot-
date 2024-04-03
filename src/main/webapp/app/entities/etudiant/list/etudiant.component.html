@@ -68,7 +68,19 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="groupe.id">
+          <th scope="col" jhiSortBy="filiere">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.etudiant.filiere">Filiere</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="niveau">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.etudiant.niveau">Niveau</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="groupe.nomGroupe">
             <div class="d-flex">
               <span jhiTranslate="issatsoApp.etudiant.groupe">Groupe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -87,9 +99,11 @@
           <td>{{ etudiant.email }}</td>
           <td>{{ etudiant.numInscription }}</td>
           <td>{{ etudiant.dateAffectation | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'issatsoApp.Filiere.' + etudiant.filiere }}">{{ etudiant.filiere }}</td>
+          <td>{{ etudiant.niveau }}</td>
           <td>
             <div *ngIf="etudiant.groupe">
-              <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']">{{ etudiant.groupe.id }}</a>
+              <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']">{{ etudiant.groupe.nomGroupe }}</a>
             </div>
           </td>
           <td class="text-end">

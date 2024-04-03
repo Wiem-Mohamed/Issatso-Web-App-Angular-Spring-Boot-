@@ -2,7 +2,6 @@ package com.mycompany.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -10,20 +9,13 @@ import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Partenaire;
 import com.mycompany.myapp.repository.PartenaireRepository;
 import jakarta.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,7 +26,6 @@ import org.springframework.util.Base64Utils;
  * Integration tests for the {@link PartenaireResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class PartenaireResourceIT {
@@ -62,9 +53,6 @@ class PartenaireResourceIT {
 
     @Autowired
     private PartenaireRepository partenaireRepository;
-
-    @Mock
-    private PartenaireRepository partenaireRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -166,23 +154,6 @@ class PartenaireResourceIT {
             .andExpect(jsonPath("$.[*].domaineActivite").value(hasItem(DEFAULT_DOMAINE_ACTIVITE)))
             .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE)))
             .andExpect(jsonPath("$.[*].contact").value(hasItem(DEFAULT_CONTACT)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllPartenairesWithEagerRelationshipsIsEnabled() throws Exception {
-        when(partenaireRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restPartenaireMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(partenaireRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllPartenairesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(partenaireRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restPartenaireMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(partenaireRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

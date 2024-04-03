@@ -36,6 +36,9 @@ public class DemandeEtudiant implements Serializable {
     @Column(name = "date_creation")
     private Instant dateCreation;
 
+    @Column(name = "proprietaire")
+    private String proprietaire;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -103,6 +106,19 @@ public class DemandeEtudiant implements Serializable {
         this.dateCreation = dateCreation;
     }
 
+    public String getProprietaire() {
+        return this.proprietaire;
+    }
+
+    public DemandeEtudiant proprietaire(String proprietaire) {
+        this.setProprietaire(proprietaire);
+        return this;
+    }
+
+    public void setProprietaire(String proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -131,6 +147,7 @@ public class DemandeEtudiant implements Serializable {
             ", description='" + getDescription() + "'" +
             ", statut='" + getStatut() + "'" +
             ", dateCreation='" + getDateCreation() + "'" +
+            ", proprietaire='" + getProprietaire() + "'" +
             "}";
     }
 }

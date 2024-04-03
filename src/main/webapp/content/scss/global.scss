@@ -7,6 +7,37 @@
 Bootstrap tweaks
 ===============================================================*/
 
+* {
+  font-family: cursive;
+}
+.footer {
+  display: flex;
+  justify-content: right;
+}
+
+.footer p {
+  color: gray;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+}
+.titre {
+  color: #1a237e;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+.bouton {
+  text-align: center;
+}
+
+.element {
+  color: gray;
+  text-align: center;
+}
+
+#nomg {
+  text-decoration: none;
+  color: #e5288c;
+}
+
 body,
 h1,
 h2,

@@ -20,6 +20,7 @@ type GroupeFormGroupContent = {
   id: FormControl<IGroupe['id'] | NewGroupe['id']>;
   nomGroupe: FormControl<IGroupe['nomGroupe']>;
   filiere: FormControl<IGroupe['filiere']>;
+  niveau: FormControl<IGroupe['niveau']>;
   enseigants: FormControl<IGroupe['enseigants']>;
 };
 
@@ -42,6 +43,7 @@ export class GroupeFormService {
       ),
       nomGroupe: new FormControl(groupeRawValue.nomGroupe),
       filiere: new FormControl(groupeRawValue.filiere),
+      niveau: new FormControl(groupeRawValue.niveau),
       enseigants: new FormControl(groupeRawValue.enseigants ?? []),
     });
   }

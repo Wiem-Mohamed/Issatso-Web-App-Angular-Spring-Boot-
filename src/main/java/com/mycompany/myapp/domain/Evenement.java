@@ -38,10 +38,12 @@ public class Evenement implements Serializable {
     @Column(name = "lieu")
     private String lieu;
 
-    @Column(name = "organisateur")
-    private String organisateur;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "evenements")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_evenement__partenaire",
+        joinColumns = @JoinColumn(name = "evenement_id"),
+        inverseJoinColumns = @JoinColumn(name = "partenaire_id")
+    )
     @JsonIgnoreProperties(value = { "evenements" }, allowSetters = true)
     private Set<Partenaire> partenaires = new HashSet<>();
 
@@ -125,30 +127,11 @@ public class Evenement implements Serializable {
         this.lieu = lieu;
     }
 
-    public String getOrganisateur() {
-        return this.organisateur;
-    }
-
-    public Evenement organisateur(String organisateur) {
-        this.setOrganisateur(organisateur);
-        return this;
-    }
-
-    public void setOrganisateur(String organisateur) {
-        this.organisateur = organisateur;
-    }
-
     public Set<Partenaire> getPartenaires() {
         return this.partenaires;
     }
 
     public void setPartenaires(Set<Partenaire> partenaires) {
-        if (this.partenaires != null) {
-            this.partenaires.forEach(i -> i.removeEvenement(this));
-        }
-        if (partenaires != null) {
-            partenaires.forEach(i -> i.addEvenement(this));
-        }
         this.partenaires = partenaires;
     }
 
@@ -198,7 +181,6 @@ public class Evenement implements Serializable {
             ", dateDebut='" + getDateDebut() + "'" +
             ", dateFin='" + getDateFin() + "'" +
             ", lieu='" + getLieu() + "'" +
-            ", organisateur='" + getOrganisateur() + "'" +
             "}";
     }
 }

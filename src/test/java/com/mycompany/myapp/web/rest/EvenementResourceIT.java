@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -11,13 +12,20 @@ import com.mycompany.myapp.repository.EvenementRepository;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +36,7 @@ import org.springframework.util.Base64Utils;
  * Integration tests for the {@link EvenementResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class EvenementResourceIT {
@@ -47,9 +56,6 @@ class EvenementResourceIT {
     private static final String DEFAULT_LIEU = "AAAAAAAAAA";
     private static final String UPDATED_LIEU = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ORGANISATEUR = "AAAAAAAAAA";
-    private static final String UPDATED_ORGANISATEUR = "BBBBBBBBBB";
-
     private static final String ENTITY_API_URL = "/api/evenements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -58,6 +64,9 @@ class EvenementResourceIT {
 
     @Autowired
     private EvenementRepository evenementRepository;
+
+    @Mock
+    private EvenementRepository evenementRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -79,8 +88,7 @@ class EvenementResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .dateDebut(DEFAULT_DATE_DEBUT)
             .dateFin(DEFAULT_DATE_FIN)
-            .lieu(DEFAULT_LIEU)
-            .organisateur(DEFAULT_ORGANISATEUR);
+            .lieu(DEFAULT_LIEU);
         return evenement;
     }
 
@@ -96,8 +104,7 @@ class EvenementResourceIT {
             .description(UPDATED_DESCRIPTION)
             .dateDebut(UPDATED_DATE_DEBUT)
             .dateFin(UPDATED_DATE_FIN)
-            .lieu(UPDATED_LIEU)
-            .organisateur(UPDATED_ORGANISATEUR);
+            .lieu(UPDATED_LIEU);
         return evenement;
     }
 
@@ -124,7 +131,6 @@ class EvenementResourceIT {
         assertThat(testEvenement.getDateDebut()).isEqualTo(DEFAULT_DATE_DEBUT);
         assertThat(testEvenement.getDateFin()).isEqualTo(DEFAULT_DATE_FIN);
         assertThat(testEvenement.getLieu()).isEqualTo(DEFAULT_LIEU);
-        assertThat(testEvenement.getOrganisateur()).isEqualTo(DEFAULT_ORGANISATEUR);
     }
 
     @Test
@@ -161,8 +167,24 @@ class EvenementResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].dateDebut").value(hasItem(DEFAULT_DATE_DEBUT.toString())))
             .andExpect(jsonPath("$.[*].dateFin").value(hasItem(DEFAULT_DATE_FIN.toString())))
-            .andExpect(jsonPath("$.[*].lieu").value(hasItem(DEFAULT_LIEU)))
-            .andExpect(jsonPath("$.[*].organisateur").value(hasItem(DEFAULT_ORGANISATEUR)));
+            .andExpect(jsonPath("$.[*].lieu").value(hasItem(DEFAULT_LIEU)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllEvenementsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(evenementRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restEvenementMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(evenementRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllEvenementsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(evenementRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restEvenementMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(evenementRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -181,8 +203,7 @@ class EvenementResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.dateDebut").value(DEFAULT_DATE_DEBUT.toString()))
             .andExpect(jsonPath("$.dateFin").value(DEFAULT_DATE_FIN.toString()))
-            .andExpect(jsonPath("$.lieu").value(DEFAULT_LIEU))
-            .andExpect(jsonPath("$.organisateur").value(DEFAULT_ORGANISATEUR));
+            .andExpect(jsonPath("$.lieu").value(DEFAULT_LIEU));
     }
 
     @Test
@@ -209,8 +230,7 @@ class EvenementResourceIT {
             .description(UPDATED_DESCRIPTION)
             .dateDebut(UPDATED_DATE_DEBUT)
             .dateFin(UPDATED_DATE_FIN)
-            .lieu(UPDATED_LIEU)
-            .organisateur(UPDATED_ORGANISATEUR);
+            .lieu(UPDATED_LIEU);
 
         restEvenementMockMvc
             .perform(
@@ -229,7 +249,6 @@ class EvenementResourceIT {
         assertThat(testEvenement.getDateDebut()).isEqualTo(UPDATED_DATE_DEBUT);
         assertThat(testEvenement.getDateFin()).isEqualTo(UPDATED_DATE_FIN);
         assertThat(testEvenement.getLieu()).isEqualTo(UPDATED_LIEU);
-        assertThat(testEvenement.getOrganisateur()).isEqualTo(UPDATED_ORGANISATEUR);
     }
 
     @Test
@@ -300,7 +319,7 @@ class EvenementResourceIT {
         Evenement partialUpdatedEvenement = new Evenement();
         partialUpdatedEvenement.setId(evenement.getId());
 
-        partialUpdatedEvenement.titre(UPDATED_TITRE).description(UPDATED_DESCRIPTION).lieu(UPDATED_LIEU).organisateur(UPDATED_ORGANISATEUR);
+        partialUpdatedEvenement.titre(UPDATED_TITRE).description(UPDATED_DESCRIPTION).lieu(UPDATED_LIEU);
 
         restEvenementMockMvc
             .perform(
@@ -319,7 +338,6 @@ class EvenementResourceIT {
         assertThat(testEvenement.getDateDebut()).isEqualTo(DEFAULT_DATE_DEBUT);
         assertThat(testEvenement.getDateFin()).isEqualTo(DEFAULT_DATE_FIN);
         assertThat(testEvenement.getLieu()).isEqualTo(UPDATED_LIEU);
-        assertThat(testEvenement.getOrganisateur()).isEqualTo(UPDATED_ORGANISATEUR);
     }
 
     @Test
@@ -339,8 +357,7 @@ class EvenementResourceIT {
             .description(UPDATED_DESCRIPTION)
             .dateDebut(UPDATED_DATE_DEBUT)
             .dateFin(UPDATED_DATE_FIN)
-            .lieu(UPDATED_LIEU)
-            .organisateur(UPDATED_ORGANISATEUR);
+            .lieu(UPDATED_LIEU);
 
         restEvenementMockMvc
             .perform(
@@ -359,7 +376,6 @@ class EvenementResourceIT {
         assertThat(testEvenement.getDateDebut()).isEqualTo(UPDATED_DATE_DEBUT);
         assertThat(testEvenement.getDateFin()).isEqualTo(UPDATED_DATE_FIN);
         assertThat(testEvenement.getLieu()).isEqualTo(UPDATED_LIEU);
-        assertThat(testEvenement.getOrganisateur()).isEqualTo(UPDATED_ORGANISATEUR);
     }
 
     @Test

@@ -29,7 +29,7 @@
             <column name="num_tel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_embauche" type="${datetimeType}">
+            <column name="date_embauche" type="DATETIME">
                 <constraints nullable="true" />
             </column>
             <column name="grade" type="varchar(255)">

@@ -23,13 +23,18 @@
     {
       "fieldName": "lieu",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "organisateur",
-      "fieldType": "String"
     }
   ],
   "name": "Evenement",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "partenaire",
+      "otherEntityRelationshipName": "evenement",
+      "relationshipName": "partenaire",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
   "searchEngine": "no"
 }

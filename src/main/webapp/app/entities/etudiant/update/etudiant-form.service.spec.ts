@@ -25,6 +25,8 @@ describe('Etudiant Form Service', () => {
             email: expect.any(Object),
             numInscription: expect.any(Object),
             dateAffectation: expect.any(Object),
+            filiere: expect.any(Object),
+            niveau: expect.any(Object),
             groupe: expect.any(Object),
           })
         );
@@ -41,6 +43,8 @@ describe('Etudiant Form Service', () => {
             email: expect.any(Object),
             numInscription: expect.any(Object),
             dateAffectation: expect.any(Object),
+            filiere: expect.any(Object),
+            niveau: expect.any(Object),
             groupe: expect.any(Object),
           })
         );

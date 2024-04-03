@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -14,6 +14,8 @@ import { IGroupe } from 'app/entities/groupe/groupe.model';
 import { GroupeService } from 'app/entities/groupe/service/groupe.service';
 import { Grade } from 'app/entities/enumerations/grade.model';
 
+import { CIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
+
 @Component({
   standalone: true,
   selector: 'jhi-enseignant-update',
@@ -24,6 +26,7 @@ export class EnseignantUpdateComponent implements OnInit {
   isSaving = false;
   enseignant: IEnseignant | null = null;
   gradeValues = Object.keys(Grade);
+  errorCinExists = false;
 
   groupesSharedCollection: IGroupe[] = [];
 
@@ -54,6 +57,7 @@ export class EnseignantUpdateComponent implements OnInit {
   }
 
   save(): void {
+    this.errorCinExists = false;
     this.isSaving = true;
     const enseignant = this.enseignantFormService.getEnseignant(this.editForm);
     if (enseignant.id !== null) {
@@ -64,10 +68,20 @@ export class EnseignantUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IEnseignant>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
-    });
+    result.subscribe(
+      (res: HttpResponse<IEnseignant>) => {
+        this.onSaveSuccess();
+      },
+      (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.status === 400 && errorResponse.error.type === CIN_ALREADY_USED_TYPE) {
+          // Le code-barres existe déjà
+          this.errorCinExists = true;
+        } else {
+          this.onSaveError();
+        }
+        this.onSaveFinalize();
+      }
+    );
   }
 
   protected onSaveSuccess(): void {

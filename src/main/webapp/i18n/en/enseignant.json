@@ -8,6 +8,7 @@
         "createOrEditLabel": "Create or edit a Enseignant",
         "notFound": "No Enseignants found"
       },
+      "error": "cin exists",
       "created": "A new Enseignant is created with identifier {{ param }}",
       "updated": "A Enseignant is updated with identifier {{ param }}",
       "deleted": "A Enseignant is deleted with identifier {{ param }}",

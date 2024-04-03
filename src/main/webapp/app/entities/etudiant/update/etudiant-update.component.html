@@ -56,6 +56,19 @@
         </div>
 
         <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.filiere" for="field_filiere">Filiere</label>
+          <select class="form-control" name="filiere" formControlName="filiere" id="field_filiere" data-cy="filiere">
+            <option [ngValue]="null">{{ 'issatsoApp.Filiere.null' | translate }}</option>
+            <option *ngFor="let filiere of filiereValues" [value]="filiere">{{ 'issatsoApp.Filiere.' + filiere | translate }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.etudiant.niveau" for="field_niveau">Niveau</label>
+          <input type="number" class="form-control" name="niveau" id="field_niveau" data-cy="niveau" formControlName="niveau" />
+        </div>
+
+        <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.etudiant.groupe" for="field_groupe">Groupe</label>
           <select
             class="form-control"
@@ -66,7 +79,7 @@
             [compareWith]="compareGroupe"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="groupeOption" *ngFor="let groupeOption of groupesSharedCollection">{{ groupeOption.id }}</option>
+            <option [ngValue]="groupeOption" *ngFor="let groupeOption of groupesSharedCollection">{{ groupeOption.nomGroupe }}</option>
           </select>
         </div>
       </div>

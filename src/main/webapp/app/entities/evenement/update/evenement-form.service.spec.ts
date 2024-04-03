@@ -25,7 +25,6 @@ describe('Evenement Form Service', () => {
             dateDebut: expect.any(Object),
             dateFin: expect.any(Object),
             lieu: expect.any(Object),
-            organisateur: expect.any(Object),
             partenaires: expect.any(Object),
           })
         );
@@ -42,7 +41,6 @@ describe('Evenement Form Service', () => {
             dateDebut: expect.any(Object),
             dateFin: expect.any(Object),
             lieu: expect.any(Object),
-            organisateur: expect.any(Object),
             partenaires: expect.any(Object),
           })
         );

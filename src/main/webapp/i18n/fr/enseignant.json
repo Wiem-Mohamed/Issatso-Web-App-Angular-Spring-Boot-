@@ -8,6 +8,7 @@
         "createOrEditLabel": "Créer ou éditer un Enseignant",
         "notFound": "Aucun Enseignant trouvé"
       },
+      "error": "cin existe",
       "created": "Un nouveau Enseignant a été créé avec l'identifiant {{ param }}",
       "updated": "Le Enseignant avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Enseignant avec l'identifiant {{ param }} a été supprimé",

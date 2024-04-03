@@ -21,6 +21,10 @@
     {
       "fieldName": "dateCreation",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "proprietaire",
+      "fieldType": "String"
     }
   ],
   "name": "DemandeEnseignant",

@@ -65,15 +65,20 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="issatsoApp.evenement.organisateur" for="field_organisateur">Organisateur</label>
-          <input
-            type="text"
+          <label jhiTranslate="issatsoApp.evenement.partenaire" for="field_partenaires">Partenaire</label>
+          <select
             class="form-control"
-            name="organisateur"
-            id="field_organisateur"
-            data-cy="organisateur"
-            formControlName="organisateur"
-          />
+            id="field_partenaires"
+            data-cy="partenaire"
+            multiple
+            name="partenaires"
+            formControlName="partenaires"
+            [compareWith]="comparePartenaire"
+          >
+            <option [ngValue]="partenaireOption" *ngFor="let partenaireOption of partenairesSharedCollection">
+              {{ partenaireOption.nom }}
+            </option>
+          </select>
         </div>
       </div>
 

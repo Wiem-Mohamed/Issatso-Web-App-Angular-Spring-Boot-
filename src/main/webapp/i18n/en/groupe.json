@@ -20,7 +20,8 @@
       "id": "ID",
       "nomGroupe": "Nom Groupe",
       "filiere": "Filiere",
-      "etudiantName": "Etudiant Name",
+      "niveau": "Niveau",
+      "etudiant": "Etudiant",
       "enseigant": "Enseigant"
     }
   }

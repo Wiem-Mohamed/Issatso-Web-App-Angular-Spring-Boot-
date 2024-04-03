@@ -1,6 +1,7 @@
 package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -35,8 +36,15 @@ public class Etudiant implements Serializable {
     @Column(name = "date_affectation")
     private Instant dateAffectation;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "filiere")
+    private Filiere filiere;
+
+    @Column(name = "niveau")
+    private Integer niveau;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "etudiantNames", "enseigants" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "etudiants", "enseigants" }, allowSetters = true)
     private Groupe groupe;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -119,6 +127,32 @@ public class Etudiant implements Serializable {
         this.dateAffectation = dateAffectation;
     }
 
+    public Filiere getFiliere() {
+        return this.filiere;
+    }
+
+    public Etudiant filiere(Filiere filiere) {
+        this.setFiliere(filiere);
+        return this;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
+    }
+
+    public Integer getNiveau() {
+        return this.niveau;
+    }
+
+    public Etudiant niveau(Integer niveau) {
+        this.setNiveau(niveau);
+        return this;
+    }
+
+    public void setNiveau(Integer niveau) {
+        this.niveau = niveau;
+    }
+
     public Groupe getGroupe() {
         return this.groupe;
     }
@@ -161,6 +195,8 @@ public class Etudiant implements Serializable {
             ", email='" + getEmail() + "'" +
             ", numInscription='" + getNumInscription() + "'" +
             ", dateAffectation='" + getDateAffectation() + "'" +
+            ", filiere='" + getFiliere() + "'" +
+            ", niveau=" + getNiveau() +
             "}";
     }
 }

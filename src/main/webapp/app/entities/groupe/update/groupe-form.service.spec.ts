@@ -22,6 +22,7 @@ describe('Groupe Form Service', () => {
             id: expect.any(Object),
             nomGroupe: expect.any(Object),
             filiere: expect.any(Object),
+            niveau: expect.any(Object),
             enseigants: expect.any(Object),
           })
         );
@@ -35,6 +36,7 @@ describe('Groupe Form Service', () => {
             id: expect.any(Object),
             nomGroupe: expect.any(Object),
             filiere: expect.any(Object),
+            niveau: expect.any(Object),
             enseigants: expect.any(Object),
           })
         );

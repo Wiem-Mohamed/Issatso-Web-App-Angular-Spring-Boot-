@@ -24,6 +24,7 @@ describe('DemandeEnseignant Form Service', () => {
             description: expect.any(Object),
             statut: expect.any(Object),
             dateCreation: expect.any(Object),
+            proprietaire: expect.any(Object),
           })
         );
       });
@@ -38,6 +39,7 @@ describe('DemandeEnseignant Form Service', () => {
             description: expect.any(Object),
             statut: expect.any(Object),
             dateCreation: expect.any(Object),
+            proprietaire: expect.any(Object),
           })
         );
       });

@@ -29,13 +29,24 @@
             <column name="lieu" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="organisateur" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="evenement" columnName="date_debut" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="evenement" columnName="date_fin" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20240330162654-1-relations" author="jhipster">
+
+        <createTable tableName="rel_evenement__partenaire">
+            <column name="partenaire_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="evenement_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="evenement_id, partenaire_id" tableName="rel_evenement__partenaire"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -60,7 +71,6 @@
             <column name="date_debut" type="date"/>
             <column name="date_fin" type="date"/>
             <column name="lieu" type="string"/>
-            <column name="organisateur" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

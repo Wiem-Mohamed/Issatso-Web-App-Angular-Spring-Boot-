@@ -138,6 +138,12 @@ public class EtudiantResource {
                 if (etudiant.getDateAffectation() != null) {
                     existingEtudiant.setDateAffectation(etudiant.getDateAffectation());
                 }
+                if (etudiant.getFiliere() != null) {
+                    existingEtudiant.setFiliere(etudiant.getFiliere());
+                }
+                if (etudiant.getNiveau() != null) {
+                    existingEtudiant.setNiveau(etudiant.getNiveau());
+                }
 
                 return existingEtudiant;
             })
@@ -152,12 +158,17 @@ public class EtudiantResource {
     /**
      * {@code GET  /etudiants} : get all the etudiants.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of etudiants in body.
      */
     @GetMapping("/etudiants")
-    public List<Etudiant> getAllEtudiants() {
+    public List<Etudiant> getAllEtudiants(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Etudiants");
-        return etudiantRepository.findAll();
+        if (eagerload) {
+            return etudiantRepository.findAllWithEagerRelationships();
+        } else {
+            return etudiantRepository.findAll();
+        }
     }
 
     /**
@@ -169,7 +180,7 @@ public class EtudiantResource {
     @GetMapping("/etudiants/{id}")
     public ResponseEntity<Etudiant> getEtudiant(@PathVariable Long id) {
         log.debug("REST request to get Etudiant : {}", id);
-        Optional<Etudiant> etudiant = etudiantRepository.findById(id);
+        Optional<Etudiant> etudiant = etudiantRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(etudiant);
     }
 

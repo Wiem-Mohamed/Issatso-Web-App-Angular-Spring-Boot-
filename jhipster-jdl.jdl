@@ -3,12 +3,15 @@ entity Etudiant {
 	prenom String,
 	email String,
     numInscription String,
-    dateAffectation Instant
+    dateAffectation Instant,
+    filiere Filiere,
+    niveau Integer
 }
 
 entity Groupe {
 	nomGroupe String,
-    filiere Filiere
+    filiere Filiere,
+    niveau Integer
 }
 entity SupportDeCours {
     titre String,
@@ -53,14 +56,16 @@ entity DemandeEtudiant {
     sujet SujetEtud,
     description TextBlob,
     statut Status,
-    dateCreation Instant
+    dateCreation Instant,
+    proprietaire String
 }
 
 entity DemandeEnseignant {
     sujet SujetEns,
     description TextBlob,
     statut Status,
-    dateCreation Instant
+    dateCreation Instant,
+    proprietaire String
 }
 enum SujetEtud {
     Stage, Bourse, Attestation_de_reussite
@@ -103,8 +108,7 @@ entity Evenement {
     description TextBlob,
     dateDebut Instant,
     dateFin Instant,
-    lieu String,
-    organisateur String
+    lieu String
 }
 
 relationship OneToOne {
@@ -114,10 +118,10 @@ relationship ManyToMany {
 	Enseignant{groupe(nomGroupe)} to Groupe{enseigant}
 }
 relationship OneToMany {
-	Groupe{etudiantName} to Etudiant{groupe}
+	Groupe to Etudiant{groupe(nomGroupe)}
 }
 relationship ManyToMany {
-    Partenaire{evenement} to Evenement
+    Evenement{partenaire(nom)} to Partenaire{evenement}
 }
 relationship ManyToOne {
     OffreStage{departement} to Departement

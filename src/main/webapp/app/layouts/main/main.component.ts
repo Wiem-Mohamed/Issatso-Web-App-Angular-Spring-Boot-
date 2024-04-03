@@ -34,4 +34,8 @@ export default class MainComponent implements OnInit {
       this.renderer.setAttribute(document.querySelector('html'), 'lang', langChangeEvent.lang);
     });
   }
+
+  isHomePage(): boolean {
+    return window.location.pathname === '/';
+  }
 }

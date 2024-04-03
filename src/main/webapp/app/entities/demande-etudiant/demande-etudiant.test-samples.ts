@@ -6,21 +6,22 @@ import { Status } from 'app/entities/enumerations/status.model';
 import { IDemandeEtudiant, NewDemandeEtudiant } from './demande-etudiant.model';
 
 export const sampleWithRequiredData: IDemandeEtudiant = {
-  id: 45155,
+  id: 56775,
 };
 
 export const sampleWithPartialData: IDemandeEtudiant = {
-  id: 71268,
-  sujet: 'Bourse',
-  statut: 'EnAttente',
+  id: 1487,
+  description: '../fake-data/blob/hipster.txt',
+  dateCreation: dayjs('2024-03-29T23:16'),
 };
 
 export const sampleWithFullData: IDemandeEtudiant = {
-  id: 71578,
-  sujet: 'Stage',
+  id: 23693,
+  sujet: 'Bourse',
   description: '../fake-data/blob/hipster.txt',
   statut: 'Terminee',
-  dateCreation: dayjs('2024-03-30T05:23'),
+  dateCreation: dayjs('2024-03-30T00:39'),
+  proprietaire: 'Sur',
 };
 
 export const sampleWithNewData: NewDemandeEtudiant = {

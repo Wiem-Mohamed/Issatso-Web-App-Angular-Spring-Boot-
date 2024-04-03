@@ -11,6 +11,10 @@
       "fieldName": "filiere",
       "fieldType": "Filiere",
       "fieldValues": "ING,LEEA,LEM,LGC,LGEnerg,LGM,LISI,LSI,MPGM,PREPA"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "Integer"
     }
   ],
   "name": "Groupe",
@@ -18,7 +22,7 @@
     {
       "otherEntityName": "etudiant",
       "otherEntityRelationshipName": "groupe",
-      "relationshipName": "etudiantName",
+      "relationshipName": "etudiant",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },

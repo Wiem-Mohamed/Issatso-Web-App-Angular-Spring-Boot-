@@ -34,10 +34,18 @@
         <dd>
           <span>{{ etudiant.dateAffectation | formatMediumDatetime }}</span>
         </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.filiere">Filiere</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'issatsoApp.Filiere.' + etudiant.filiere }}">{{ etudiant.filiere }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.etudiant.niveau">Niveau</span></dt>
+        <dd>
+          <span>{{ etudiant.niveau }}</span>
+        </dd>
         <dt><span jhiTranslate="issatsoApp.etudiant.groupe">Groupe</span></dt>
         <dd>
           <div *ngIf="etudiant.groupe">
-            <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']">{{ etudiant.groupe.id }}</a>
+            <a [routerLink]="['/groupe', etudiant.groupe.id, 'view']">{{ etudiant.groupe.nomGroupe }}</a>
           </div>
         </dd>
       </dl>

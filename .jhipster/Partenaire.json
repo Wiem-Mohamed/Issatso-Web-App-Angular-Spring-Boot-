@@ -29,8 +29,9 @@
   "relationships": [
     {
       "otherEntityName": "evenement",
+      "otherEntityRelationshipName": "partenaire",
       "relationshipName": "evenement",
-      "relationshipSide": "left",
+      "relationshipSide": "right",
       "relationshipType": "many-to-many"
     }
   ],

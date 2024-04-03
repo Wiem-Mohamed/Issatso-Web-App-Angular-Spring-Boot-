@@ -2,22 +2,31 @@ package com.mycompany.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Etudiant;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import com.mycompany.myapp.repository.EtudiantRepository;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link EtudiantResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class EtudiantResourceIT {
@@ -46,6 +56,12 @@ class EtudiantResourceIT {
     private static final Instant DEFAULT_DATE_AFFECTATION = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_AFFECTATION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Filiere DEFAULT_FILIERE = Filiere.ING;
+    private static final Filiere UPDATED_FILIERE = Filiere.LEEA;
+
+    private static final Integer DEFAULT_NIVEAU = 1;
+    private static final Integer UPDATED_NIVEAU = 2;
+
     private static final String ENTITY_API_URL = "/api/etudiants";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -54,6 +70,9 @@ class EtudiantResourceIT {
 
     @Autowired
     private EtudiantRepository etudiantRepository;
+
+    @Mock
+    private EtudiantRepository etudiantRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -75,7 +94,9 @@ class EtudiantResourceIT {
             .prenom(DEFAULT_PRENOM)
             .email(DEFAULT_EMAIL)
             .numInscription(DEFAULT_NUM_INSCRIPTION)
-            .dateAffectation(DEFAULT_DATE_AFFECTATION);
+            .dateAffectation(DEFAULT_DATE_AFFECTATION)
+            .filiere(DEFAULT_FILIERE)
+            .niveau(DEFAULT_NIVEAU);
         return etudiant;
     }
 
@@ -91,7 +112,9 @@ class EtudiantResourceIT {
             .prenom(UPDATED_PRENOM)
             .email(UPDATED_EMAIL)
             .numInscription(UPDATED_NUM_INSCRIPTION)
-            .dateAffectation(UPDATED_DATE_AFFECTATION);
+            .dateAffectation(UPDATED_DATE_AFFECTATION)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
         return etudiant;
     }
 
@@ -118,6 +141,8 @@ class EtudiantResourceIT {
         assertThat(testEtudiant.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testEtudiant.getNumInscription()).isEqualTo(DEFAULT_NUM_INSCRIPTION);
         assertThat(testEtudiant.getDateAffectation()).isEqualTo(DEFAULT_DATE_AFFECTATION);
+        assertThat(testEtudiant.getFiliere()).isEqualTo(DEFAULT_FILIERE);
+        assertThat(testEtudiant.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
     }
 
     @Test
@@ -154,7 +179,26 @@ class EtudiantResourceIT {
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].numInscription").value(hasItem(DEFAULT_NUM_INSCRIPTION)))
-            .andExpect(jsonPath("$.[*].dateAffectation").value(hasItem(DEFAULT_DATE_AFFECTATION.toString())));
+            .andExpect(jsonPath("$.[*].dateAffectation").value(hasItem(DEFAULT_DATE_AFFECTATION.toString())))
+            .andExpect(jsonPath("$.[*].filiere").value(hasItem(DEFAULT_FILIERE.toString())))
+            .andExpect(jsonPath("$.[*].niveau").value(hasItem(DEFAULT_NIVEAU)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllEtudiantsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(etudiantRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restEtudiantMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(etudiantRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllEtudiantsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(etudiantRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restEtudiantMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(etudiantRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -173,7 +217,9 @@ class EtudiantResourceIT {
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.numInscription").value(DEFAULT_NUM_INSCRIPTION))
-            .andExpect(jsonPath("$.dateAffectation").value(DEFAULT_DATE_AFFECTATION.toString()));
+            .andExpect(jsonPath("$.dateAffectation").value(DEFAULT_DATE_AFFECTATION.toString()))
+            .andExpect(jsonPath("$.filiere").value(DEFAULT_FILIERE.toString()))
+            .andExpect(jsonPath("$.niveau").value(DEFAULT_NIVEAU));
     }
 
     @Test
@@ -200,7 +246,9 @@ class EtudiantResourceIT {
             .prenom(UPDATED_PRENOM)
             .email(UPDATED_EMAIL)
             .numInscription(UPDATED_NUM_INSCRIPTION)
-            .dateAffectation(UPDATED_DATE_AFFECTATION);
+            .dateAffectation(UPDATED_DATE_AFFECTATION)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
 
         restEtudiantMockMvc
             .perform(
@@ -219,6 +267,8 @@ class EtudiantResourceIT {
         assertThat(testEtudiant.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testEtudiant.getNumInscription()).isEqualTo(UPDATED_NUM_INSCRIPTION);
         assertThat(testEtudiant.getDateAffectation()).isEqualTo(UPDATED_DATE_AFFECTATION);
+        assertThat(testEtudiant.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testEtudiant.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test
@@ -293,7 +343,9 @@ class EtudiantResourceIT {
             .prenom(UPDATED_PRENOM)
             .email(UPDATED_EMAIL)
             .numInscription(UPDATED_NUM_INSCRIPTION)
-            .dateAffectation(UPDATED_DATE_AFFECTATION);
+            .dateAffectation(UPDATED_DATE_AFFECTATION)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
 
         restEtudiantMockMvc
             .perform(
@@ -312,6 +364,8 @@ class EtudiantResourceIT {
         assertThat(testEtudiant.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testEtudiant.getNumInscription()).isEqualTo(UPDATED_NUM_INSCRIPTION);
         assertThat(testEtudiant.getDateAffectation()).isEqualTo(UPDATED_DATE_AFFECTATION);
+        assertThat(testEtudiant.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testEtudiant.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test
@@ -331,7 +385,9 @@ class EtudiantResourceIT {
             .prenom(UPDATED_PRENOM)
             .email(UPDATED_EMAIL)
             .numInscription(UPDATED_NUM_INSCRIPTION)
-            .dateAffectation(UPDATED_DATE_AFFECTATION);
+            .dateAffectation(UPDATED_DATE_AFFECTATION)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
 
         restEtudiantMockMvc
             .perform(
@@ -350,6 +406,8 @@ class EtudiantResourceIT {
         assertThat(testEtudiant.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testEtudiant.getNumInscription()).isEqualTo(UPDATED_NUM_INSCRIPTION);
         assertThat(testEtudiant.getDateAffectation()).isEqualTo(UPDATED_DATE_AFFECTATION);
+        assertThat(testEtudiant.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testEtudiant.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test

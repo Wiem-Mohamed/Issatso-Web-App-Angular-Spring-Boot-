@@ -32,6 +32,7 @@
     <include file="config/liquibase/changelog/20240330162657_added_entity_constraints_OffreStage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240330162658_added_entity_constraints_Partenaire.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240330162659_added_entity_constraints_SupportDeCours.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240330162654_added_entity_constraints_Evenement.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

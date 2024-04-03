@@ -136,6 +136,9 @@ public class DemandeEnseignantResource {
                 if (demandeEnseignant.getDateCreation() != null) {
                     existingDemandeEnseignant.setDateCreation(demandeEnseignant.getDateCreation());
                 }
+                if (demandeEnseignant.getProprietaire() != null) {
+                    existingDemandeEnseignant.setProprietaire(demandeEnseignant.getProprietaire());
+                }
 
                 return existingDemandeEnseignant;
             })

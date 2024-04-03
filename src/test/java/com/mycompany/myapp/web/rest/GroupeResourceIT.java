@@ -36,6 +36,9 @@ class GroupeResourceIT {
     private static final Filiere DEFAULT_FILIERE = Filiere.ING;
     private static final Filiere UPDATED_FILIERE = Filiere.LEEA;
 
+    private static final Integer DEFAULT_NIVEAU = 1;
+    private static final Integer UPDATED_NIVEAU = 2;
+
     private static final String ENTITY_API_URL = "/api/groupes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -60,7 +63,7 @@ class GroupeResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Groupe createEntity(EntityManager em) {
-        Groupe groupe = new Groupe().nomGroupe(DEFAULT_NOM_GROUPE).filiere(DEFAULT_FILIERE);
+        Groupe groupe = new Groupe().nomGroupe(DEFAULT_NOM_GROUPE).filiere(DEFAULT_FILIERE).niveau(DEFAULT_NIVEAU);
         return groupe;
     }
 
@@ -71,7 +74,7 @@ class GroupeResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Groupe createUpdatedEntity(EntityManager em) {
-        Groupe groupe = new Groupe().nomGroupe(UPDATED_NOM_GROUPE).filiere(UPDATED_FILIERE);
+        Groupe groupe = new Groupe().nomGroupe(UPDATED_NOM_GROUPE).filiere(UPDATED_FILIERE).niveau(UPDATED_NIVEAU);
         return groupe;
     }
 
@@ -95,6 +98,7 @@ class GroupeResourceIT {
         Groupe testGroupe = groupeList.get(groupeList.size() - 1);
         assertThat(testGroupe.getNomGroupe()).isEqualTo(DEFAULT_NOM_GROUPE);
         assertThat(testGroupe.getFiliere()).isEqualTo(DEFAULT_FILIERE);
+        assertThat(testGroupe.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
     }
 
     @Test
@@ -128,7 +132,8 @@ class GroupeResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupe.getId().intValue())))
             .andExpect(jsonPath("$.[*].nomGroupe").value(hasItem(DEFAULT_NOM_GROUPE)))
-            .andExpect(jsonPath("$.[*].filiere").value(hasItem(DEFAULT_FILIERE.toString())));
+            .andExpect(jsonPath("$.[*].filiere").value(hasItem(DEFAULT_FILIERE.toString())))
+            .andExpect(jsonPath("$.[*].niveau").value(hasItem(DEFAULT_NIVEAU)));
     }
 
     @Test
@@ -144,7 +149,8 @@ class GroupeResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(groupe.getId().intValue()))
             .andExpect(jsonPath("$.nomGroupe").value(DEFAULT_NOM_GROUPE))
-            .andExpect(jsonPath("$.filiere").value(DEFAULT_FILIERE.toString()));
+            .andExpect(jsonPath("$.filiere").value(DEFAULT_FILIERE.toString()))
+            .andExpect(jsonPath("$.niveau").value(DEFAULT_NIVEAU));
     }
 
     @Test
@@ -166,7 +172,7 @@ class GroupeResourceIT {
         Groupe updatedGroupe = groupeRepository.findById(groupe.getId()).get();
         // Disconnect from session so that the updates on updatedGroupe are not directly saved in db
         em.detach(updatedGroupe);
-        updatedGroupe.nomGroupe(UPDATED_NOM_GROUPE).filiere(UPDATED_FILIERE);
+        updatedGroupe.nomGroupe(UPDATED_NOM_GROUPE).filiere(UPDATED_FILIERE).niveau(UPDATED_NIVEAU);
 
         restGroupeMockMvc
             .perform(
@@ -182,6 +188,7 @@ class GroupeResourceIT {
         Groupe testGroupe = groupeList.get(groupeList.size() - 1);
         assertThat(testGroupe.getNomGroupe()).isEqualTo(UPDATED_NOM_GROUPE);
         assertThat(testGroupe.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testGroupe.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test
@@ -268,6 +275,7 @@ class GroupeResourceIT {
         Groupe testGroupe = groupeList.get(groupeList.size() - 1);
         assertThat(testGroupe.getNomGroupe()).isEqualTo(DEFAULT_NOM_GROUPE);
         assertThat(testGroupe.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testGroupe.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
     }
 
     @Test
@@ -282,7 +290,7 @@ class GroupeResourceIT {
         Groupe partialUpdatedGroupe = new Groupe();
         partialUpdatedGroupe.setId(groupe.getId());
 
-        partialUpdatedGroupe.nomGroupe(UPDATED_NOM_GROUPE).filiere(UPDATED_FILIERE);
+        partialUpdatedGroupe.nomGroupe(UPDATED_NOM_GROUPE).filiere(UPDATED_FILIERE).niveau(UPDATED_NIVEAU);
 
         restGroupeMockMvc
             .perform(
@@ -298,6 +306,7 @@ class GroupeResourceIT {
         Groupe testGroupe = groupeList.get(groupeList.size() - 1);
         assertThat(testGroupe.getNomGroupe()).isEqualTo(UPDATED_NOM_GROUPE);
         assertThat(testGroupe.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testGroupe.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test

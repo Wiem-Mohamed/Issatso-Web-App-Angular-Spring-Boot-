@@ -29,12 +29,15 @@ public class Groupe implements Serializable {
     @Column(name = "filiere")
     private Filiere filiere;
 
+    @Column(name = "niveau")
+    private Integer niveau;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "groupe")
     @JsonIgnoreProperties(value = { "groupe" }, allowSetters = true)
-    private Set<Etudiant> etudiantNames = new HashSet<>();
+    private Set<Etudiant> etudiants = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "groupes")
-    @JsonIgnoreProperties(value = { "matieres", "chefDepartement", "groupes", "departement" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "matieres", "groupes", "departement" }, allowSetters = true)
     private Set<Enseignant> enseigants = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -78,33 +81,46 @@ public class Groupe implements Serializable {
         this.filiere = filiere;
     }
 
-    public Set<Etudiant> getEtudiantNames() {
-        return this.etudiantNames;
+    public Integer getNiveau() {
+        return this.niveau;
     }
 
-    public void setEtudiantNames(Set<Etudiant> etudiants) {
-        if (this.etudiantNames != null) {
-            this.etudiantNames.forEach(i -> i.setGroupe(null));
+    public Groupe niveau(Integer niveau) {
+        this.setNiveau(niveau);
+        return this;
+    }
+
+    public void setNiveau(Integer niveau) {
+        this.niveau = niveau;
+    }
+
+    public Set<Etudiant> getEtudiants() {
+        return this.etudiants;
+    }
+
+    public void setEtudiants(Set<Etudiant> etudiants) {
+        if (this.etudiants != null) {
+            this.etudiants.forEach(i -> i.setGroupe(null));
         }
         if (etudiants != null) {
             etudiants.forEach(i -> i.setGroupe(this));
         }
-        this.etudiantNames = etudiants;
+        this.etudiants = etudiants;
     }
 
-    public Groupe etudiantNames(Set<Etudiant> etudiants) {
-        this.setEtudiantNames(etudiants);
+    public Groupe etudiants(Set<Etudiant> etudiants) {
+        this.setEtudiants(etudiants);
         return this;
     }
 
-    public Groupe addEtudiantName(Etudiant etudiant) {
-        this.etudiantNames.add(etudiant);
+    public Groupe addEtudiant(Etudiant etudiant) {
+        this.etudiants.add(etudiant);
         etudiant.setGroupe(this);
         return this;
     }
 
-    public Groupe removeEtudiantName(Etudiant etudiant) {
-        this.etudiantNames.remove(etudiant);
+    public Groupe removeEtudiant(Etudiant etudiant) {
+        this.etudiants.remove(etudiant);
         etudiant.setGroupe(null);
         return this;
     }
@@ -166,6 +182,7 @@ public class Groupe implements Serializable {
             "id=" + getId() +
             ", nomGroupe='" + getNomGroupe() + "'" +
             ", filiere='" + getFiliere() + "'" +
+            ", niveau=" + getNiveau() +
             "}";
     }
 }

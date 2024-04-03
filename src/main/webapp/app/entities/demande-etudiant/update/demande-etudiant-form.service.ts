@@ -35,6 +35,7 @@ type DemandeEtudiantFormGroupContent = {
   description: FormControl<DemandeEtudiantFormRawValue['description']>;
   statut: FormControl<DemandeEtudiantFormRawValue['statut']>;
   dateCreation: FormControl<DemandeEtudiantFormRawValue['dateCreation']>;
+  proprietaire: FormControl<DemandeEtudiantFormRawValue['proprietaire']>;
 };
 
 export type DemandeEtudiantFormGroup = FormGroup<DemandeEtudiantFormGroupContent>;
@@ -58,6 +59,7 @@ export class DemandeEtudiantFormService {
       description: new FormControl(demandeEtudiantRawValue.description),
       statut: new FormControl(demandeEtudiantRawValue.statut),
       dateCreation: new FormControl(demandeEtudiantRawValue.dateCreation),
+      proprietaire: new FormControl(demandeEtudiantRawValue.proprietaire),
     });
   }
 

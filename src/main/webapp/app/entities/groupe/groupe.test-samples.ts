@@ -3,17 +3,18 @@ import { Filiere } from 'app/entities/enumerations/filiere.model';
 import { IGroupe, NewGroupe } from './groupe.model';
 
 export const sampleWithRequiredData: IGroupe = {
-  id: 29288,
+  id: 11961,
 };
 
 export const sampleWithPartialData: IGroupe = {
-  id: 41754,
+  id: 67220,
 };
 
 export const sampleWithFullData: IGroupe = {
-  id: 35246,
-  nomGroupe: 'b ocre generate',
-  filiere: 'LEEA',
+  id: 66252,
+  nomGroupe: 'a a',
+  filiere: 'MPGM',
+  niveau: 17328,
 };
 
 export const sampleWithNewData: NewGroupe = {

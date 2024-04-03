@@ -22,13 +22,22 @@
     {
       "fieldName": "dateAffectation",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "filiere",
+      "fieldType": "Filiere",
+      "fieldValues": "ING,LEEA,LEM,LGC,LGEnerg,LGM,LISI,LSI,MPGM,PREPA"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "Integer"
     }
   ],
   "name": "Etudiant",
   "relationships": [
     {
+      "otherEntityField": "nomGroupe",
       "otherEntityName": "groupe",
-      "otherEntityRelationshipName": "etudiantName",
       "relationshipName": "groupe",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"

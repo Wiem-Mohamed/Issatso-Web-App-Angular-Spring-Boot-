@@ -152,17 +152,12 @@ public class PartenaireResource {
     /**
      * {@code GET  /partenaires} : get all the partenaires.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of partenaires in body.
      */
     @GetMapping("/partenaires")
-    public List<Partenaire> getAllPartenaires(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Partenaire> getAllPartenaires() {
         log.debug("REST request to get all Partenaires");
-        if (eagerload) {
-            return partenaireRepository.findAllWithEagerRelationships();
-        } else {
-            return partenaireRepository.findAll();
-        }
+        return partenaireRepository.findAll();
     }
 
     /**
@@ -174,7 +169,7 @@ public class PartenaireResource {
     @GetMapping("/partenaires/{id}")
     public ResponseEntity<Partenaire> getPartenaire(@PathVariable Long id) {
         log.debug("REST request to get Partenaire : {}", id);
-        Optional<Partenaire> partenaire = partenaireRepository.findOneWithEagerRelationships(id);
+        Optional<Partenaire> partenaire = partenaireRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(partenaire);
     }
 

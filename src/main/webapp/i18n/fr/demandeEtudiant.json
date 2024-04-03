@@ -21,7 +21,8 @@
       "sujet": "Sujet",
       "description": "Description",
       "statut": "Statut",
-      "dateCreation": "Date Creation"
+      "dateCreation": "Date Creation",
+      "proprietaire": "Proprietaire"
     }
   }
 }

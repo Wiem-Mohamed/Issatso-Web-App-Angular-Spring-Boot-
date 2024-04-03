@@ -62,6 +62,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="proprietaire">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.demandeEnseignant.proprietaire">Proprietaire</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -74,6 +80,7 @@
           <td>{{ demandeEnseignant.description }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Status.' + demandeEnseignant.statut }}">{{ demandeEnseignant.statut }}</td>
           <td>{{ demandeEnseignant.dateCreation | formatMediumDatetime }}</td>
+          <td>{{ demandeEnseignant.proprietaire }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

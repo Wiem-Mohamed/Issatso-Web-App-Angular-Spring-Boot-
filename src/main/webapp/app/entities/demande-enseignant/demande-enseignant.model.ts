@@ -8,6 +8,7 @@ export interface IDemandeEnseignant {
   description?: string | null;
   statut?: keyof typeof Status | null;
   dateCreation?: dayjs.Dayjs | null;
+  proprietaire?: string | null;
 }
 
 export type NewDemandeEnseignant = Omit<IDemandeEnseignant, 'id'> & { id: null };

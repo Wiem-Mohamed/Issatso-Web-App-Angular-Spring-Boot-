@@ -138,9 +138,6 @@ public class EvenementResource {
                 if (evenement.getLieu() != null) {
                     existingEvenement.setLieu(evenement.getLieu());
                 }
-                if (evenement.getOrganisateur() != null) {
-                    existingEvenement.setOrganisateur(evenement.getOrganisateur());
-                }
 
                 return existingEvenement;
             })
@@ -155,12 +152,17 @@ public class EvenementResource {
     /**
      * {@code GET  /evenements} : get all the evenements.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of evenements in body.
      */
     @GetMapping("/evenements")
-    public List<Evenement> getAllEvenements() {
+    public List<Evenement> getAllEvenements(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Evenements");
-        return evenementRepository.findAll();
+        if (eagerload) {
+            return evenementRepository.findAllWithEagerRelationships();
+        } else {
+            return evenementRepository.findAll();
+        }
     }
 
     /**
@@ -172,7 +174,7 @@ public class EvenementResource {
     @GetMapping("/evenements/{id}")
     public ResponseEntity<Evenement> getEvenement(@PathVariable Long id) {
         log.debug("REST request to get Evenement : {}", id);
-        Optional<Evenement> evenement = evenementRepository.findById(id);
+        Optional<Evenement> evenement = evenementRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(evenement);
     }
 

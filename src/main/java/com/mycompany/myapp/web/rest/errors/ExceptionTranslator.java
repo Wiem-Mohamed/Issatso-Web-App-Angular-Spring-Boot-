@@ -97,6 +97,9 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
             ex instanceof com.mycompany.myapp.service.InvalidPasswordException
         ) return (ProblemDetailWithCause) new InvalidPasswordException().getBody();
 
+        if (ex instanceof com.mycompany.myapp.service.CinAlreadyUsedException) return (ProblemDetailWithCause) new CinAlreadyUsedException()
+            .getBody();
+
         if (
             ex instanceof ErrorResponseException exp && exp.getBody() instanceof ProblemDetailWithCause
         ) return (ProblemDetailWithCause) exp.getBody();

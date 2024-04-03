@@ -30,6 +30,10 @@
         <dd>
           <span>{{ demandeEtudiant.dateCreation | formatMediumDatetime }}</span>
         </dd>
+        <dt><span jhiTranslate="issatsoApp.demandeEtudiant.proprietaire">Proprietaire</span></dt>
+        <dd>
+          <span>{{ demandeEtudiant.proprietaire }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

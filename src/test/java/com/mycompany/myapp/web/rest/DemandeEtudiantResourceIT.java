@@ -46,6 +46,9 @@ class DemandeEtudiantResourceIT {
     private static final Instant DEFAULT_DATE_CREATION = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_CREATION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final String DEFAULT_PROPRIETAIRE = "AAAAAAAAAA";
+    private static final String UPDATED_PROPRIETAIRE = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/demande-etudiants";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -74,7 +77,8 @@ class DemandeEtudiantResourceIT {
             .sujet(DEFAULT_SUJET)
             .description(DEFAULT_DESCRIPTION)
             .statut(DEFAULT_STATUT)
-            .dateCreation(DEFAULT_DATE_CREATION);
+            .dateCreation(DEFAULT_DATE_CREATION)
+            .proprietaire(DEFAULT_PROPRIETAIRE);
         return demandeEtudiant;
     }
 
@@ -89,7 +93,8 @@ class DemandeEtudiantResourceIT {
             .sujet(UPDATED_SUJET)
             .description(UPDATED_DESCRIPTION)
             .statut(UPDATED_STATUT)
-            .dateCreation(UPDATED_DATE_CREATION);
+            .dateCreation(UPDATED_DATE_CREATION)
+            .proprietaire(UPDATED_PROPRIETAIRE);
         return demandeEtudiant;
     }
 
@@ -117,6 +122,7 @@ class DemandeEtudiantResourceIT {
         assertThat(testDemandeEtudiant.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testDemandeEtudiant.getStatut()).isEqualTo(DEFAULT_STATUT);
         assertThat(testDemandeEtudiant.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testDemandeEtudiant.getProprietaire()).isEqualTo(DEFAULT_PROPRIETAIRE);
     }
 
     @Test
@@ -154,7 +160,8 @@ class DemandeEtudiantResourceIT {
             .andExpect(jsonPath("$.[*].sujet").value(hasItem(DEFAULT_SUJET.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].proprietaire").value(hasItem(DEFAULT_PROPRIETAIRE)));
     }
 
     @Test
@@ -172,7 +179,8 @@ class DemandeEtudiantResourceIT {
             .andExpect(jsonPath("$.sujet").value(DEFAULT_SUJET.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()));
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
+            .andExpect(jsonPath("$.proprietaire").value(DEFAULT_PROPRIETAIRE));
     }
 
     @Test
@@ -198,7 +206,8 @@ class DemandeEtudiantResourceIT {
             .sujet(UPDATED_SUJET)
             .description(UPDATED_DESCRIPTION)
             .statut(UPDATED_STATUT)
-            .dateCreation(UPDATED_DATE_CREATION);
+            .dateCreation(UPDATED_DATE_CREATION)
+            .proprietaire(UPDATED_PROPRIETAIRE);
 
         restDemandeEtudiantMockMvc
             .perform(
@@ -216,6 +225,7 @@ class DemandeEtudiantResourceIT {
         assertThat(testDemandeEtudiant.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testDemandeEtudiant.getStatut()).isEqualTo(UPDATED_STATUT);
         assertThat(testDemandeEtudiant.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testDemandeEtudiant.getProprietaire()).isEqualTo(UPDATED_PROPRIETAIRE);
     }
 
     @Test
@@ -306,6 +316,7 @@ class DemandeEtudiantResourceIT {
         assertThat(testDemandeEtudiant.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testDemandeEtudiant.getStatut()).isEqualTo(UPDATED_STATUT);
         assertThat(testDemandeEtudiant.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testDemandeEtudiant.getProprietaire()).isEqualTo(DEFAULT_PROPRIETAIRE);
     }
 
     @Test
@@ -324,7 +335,8 @@ class DemandeEtudiantResourceIT {
             .sujet(UPDATED_SUJET)
             .description(UPDATED_DESCRIPTION)
             .statut(UPDATED_STATUT)
-            .dateCreation(UPDATED_DATE_CREATION);
+            .dateCreation(UPDATED_DATE_CREATION)
+            .proprietaire(UPDATED_PROPRIETAIRE);
 
         restDemandeEtudiantMockMvc
             .perform(
@@ -342,6 +354,7 @@ class DemandeEtudiantResourceIT {
         assertThat(testDemandeEtudiant.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testDemandeEtudiant.getStatut()).isEqualTo(UPDATED_STATUT);
         assertThat(testDemandeEtudiant.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testDemandeEtudiant.getProprietaire()).isEqualTo(UPDATED_PROPRIETAIRE);
     }
 
     @Test

@@ -25,6 +25,11 @@
             <option *ngFor="let filiere of filiereValues" [value]="filiere">{{ 'issatsoApp.Filiere.' + filiere | translate }}</option>
           </select>
         </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.groupe.niveau" for="field_niveau">Niveau</label>
+          <input type="number" class="form-control" name="niveau" id="field_niveau" data-cy="niveau" formControlName="niveau" />
+        </div>
       </div>
 
       <div>

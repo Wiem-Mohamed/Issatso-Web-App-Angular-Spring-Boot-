@@ -127,6 +127,9 @@ public class GroupeResource {
                 if (groupe.getFiliere() != null) {
                     existingGroupe.setFiliere(groupe.getFiliere());
                 }
+                if (groupe.getNiveau() != null) {
+                    existingGroupe.setNiveau(groupe.getNiveau());
+                }
 
                 return existingGroupe;
             })

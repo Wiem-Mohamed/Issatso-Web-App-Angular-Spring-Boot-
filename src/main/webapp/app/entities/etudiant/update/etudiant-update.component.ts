@@ -12,6 +12,7 @@ import { IEtudiant } from '../etudiant.model';
 import { EtudiantService } from '../service/etudiant.service';
 import { IGroupe } from 'app/entities/groupe/groupe.model';
 import { GroupeService } from 'app/entities/groupe/service/groupe.service';
+import { Filiere } from 'app/entities/enumerations/filiere.model';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ import { GroupeService } from 'app/entities/groupe/service/groupe.service';
 export class EtudiantUpdateComponent implements OnInit {
   isSaving = false;
   etudiant: IEtudiant | null = null;
+  filiereValues = Object.keys(Filiere);
 
   groupesSharedCollection: IGroupe[] = [];
 

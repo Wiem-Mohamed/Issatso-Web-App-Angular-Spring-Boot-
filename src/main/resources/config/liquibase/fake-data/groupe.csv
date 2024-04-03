@@ -1,11 +1,11 @@
-id;nom_groupe;filiere
-1;communities Avon;MPGM
-2;Mazda;PREPA
-3;c Fiat Nouveau;LGM
-4;Carte;LGC
-5;citrouille;PREPA
-6;Account;ING
-7;Dalasi Ouest orchestrate;MPGM
-8;portal;PREPA
-9;Sud Nord;LSI
-10;c;LISI
+id;nom_groupe;filiere;niveau
+1;communities Avon;MPGM;20286
+2;c lumen découper;LGC;42091
+3;Industrie Administrateur Diesel;LGC;21273
+4;steradian;LGC;98058
+5;Account;ING;75716
+6;Femme Berlines;MPGM;28431
+7;Honda;LSI;94522
+8;Sud Nord;LSI;1392
+9;conseil c;LGEnerg;78656
+10;SMS actuating driver;LSI;27811

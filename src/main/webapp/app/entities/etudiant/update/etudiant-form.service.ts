@@ -36,6 +36,8 @@ type EtudiantFormGroupContent = {
   email: FormControl<EtudiantFormRawValue['email']>;
   numInscription: FormControl<EtudiantFormRawValue['numInscription']>;
   dateAffectation: FormControl<EtudiantFormRawValue['dateAffectation']>;
+  filiere: FormControl<EtudiantFormRawValue['filiere']>;
+  niveau: FormControl<EtudiantFormRawValue['niveau']>;
   groupe: FormControl<EtudiantFormRawValue['groupe']>;
 };
 
@@ -61,6 +63,8 @@ export class EtudiantFormService {
       email: new FormControl(etudiantRawValue.email),
       numInscription: new FormControl(etudiantRawValue.numInscription),
       dateAffectation: new FormControl(etudiantRawValue.dateAffectation),
+      filiere: new FormControl(etudiantRawValue.filiere),
+      niveau: new FormControl(etudiantRawValue.niveau),
       groupe: new FormControl(etudiantRawValue.groupe),
     });
   }

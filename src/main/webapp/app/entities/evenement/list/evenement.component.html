@@ -68,9 +68,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="organisateur">
+          <th scope="col" jhiSortBy="partenaire.nom">
             <div class="d-flex">
-              <span jhiTranslate="issatsoApp.evenement.organisateur">Organisateur</span>
+              <span jhiTranslate="issatsoApp.evenement.partenaire">Partenaire</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -87,7 +87,12 @@
           <td>{{ evenement.dateDebut | formatMediumDatetime }}</td>
           <td>{{ evenement.dateFin | formatMediumDatetime }}</td>
           <td>{{ evenement.lieu }}</td>
-          <td>{{ evenement.organisateur }}</td>
+          <td>
+            <span *ngFor="let partenaire of evenement.partenaires; let last = last">
+              <a class="form-control-static" [routerLink]="['/partenaire', partenaire.id, 'view']">{{ partenaire.nom }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
           <td class="text-end">
             <div class="btn-group">
               <button

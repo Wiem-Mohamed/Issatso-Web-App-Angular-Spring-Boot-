@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="EnseignantHeading">
-    <span jhiTranslate="issatsoApp.enseignant.home.title">Enseignants</span>
+    <span jhiTranslate="issatsoApp.enseignant.home.title" class="titre">Enseignants</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.enseignant.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-enseignant"
+        class="btn btn-outline-primary jh-create-entity create-enseignant"
         [routerLink]="['/enseignant/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -92,7 +93,7 @@
       <tbody>
         <tr *ngFor="let enseignant of enseignants; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/enseignant', enseignant.id, 'view']">{{ enseignant.id }}</a>
+            <a [routerLink]="['/enseignant', enseignant.id, 'view']" style="text-decoration: none; color: red">{{ enseignant.id }}</a>
           </td>
           <td>{{ enseignant.nom }}</td>
           <td>{{ enseignant.prenom }}</td>
@@ -103,16 +104,19 @@
           <td jhiTranslate="{{ 'issatsoApp.Grade.' + enseignant.grade }}">{{ enseignant.grade }}</td>
           <td>
             <span *ngFor="let groupe of enseignant.groupes; let last = last">
-              <a class="form-control-static" [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.nomGroupe }}</a
+              <a class="form-control-static" [routerLink]="['/groupe', groupe.id, 'view']" style="text-decoration: none; color: green">{{
+                groupe.nomGroupe
+              }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button
+                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
                 type="submit"
                 [routerLink]="['/enseignant', enseignant.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -120,6 +124,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
                 type="submit"
                 [routerLink]="['/enseignant', enseignant.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -129,7 +134,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(enseignant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
+                type="submit"
+                (click)="delete(enseignant)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

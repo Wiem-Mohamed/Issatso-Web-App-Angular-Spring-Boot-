@@ -23,6 +23,8 @@
       "email": "Email",
       "numInscription": "Num Inscription",
       "dateAffectation": "Date Affectation",
+      "filiere": "Filiere",
+      "niveau": "Niveau",
       "groupe": "Groupe"
     }
   }
