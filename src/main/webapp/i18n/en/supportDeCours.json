@@ -22,7 +22,9 @@
       "description": "Description",
       "contenu": "Contenu",
       "dateDepot": "Date Depot",
-      "nomMatiere": "Nom Matiere"
+      "filiere": "Filiere",
+      "niveau": "Niveau",
+      "matiere": "Matiere"
     }
   }
 }

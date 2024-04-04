@@ -158,12 +158,17 @@ public class OffreStageResource {
     /**
      * {@code GET  /offre-stages} : get all the offreStages.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of offreStages in body.
      */
     @GetMapping("/offre-stages")
-    public List<OffreStage> getAllOffreStages() {
+    public List<OffreStage> getAllOffreStages(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all OffreStages");
-        return offreStageRepository.findAll();
+        if (eagerload) {
+            return offreStageRepository.findAllWithEagerRelationships();
+        } else {
+            return offreStageRepository.findAll();
+        }
     }
 
     /**
@@ -175,7 +180,7 @@ public class OffreStageResource {
     @GetMapping("/offre-stages/{id}")
     public ResponseEntity<OffreStage> getOffreStage(@PathVariable Long id) {
         log.debug("REST request to get OffreStage : {}", id);
-        Optional<OffreStage> offreStage = offreStageRepository.findById(id);
+        Optional<OffreStage> offreStage = offreStageRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(offreStage);
     }
 

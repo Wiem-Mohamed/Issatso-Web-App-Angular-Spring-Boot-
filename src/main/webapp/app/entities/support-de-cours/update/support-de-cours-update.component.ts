@@ -12,6 +12,7 @@ import { ISupportDeCours } from '../support-de-cours.model';
 import { SupportDeCoursService } from '../service/support-de-cours.service';
 import { IMatiere } from 'app/entities/matiere/matiere.model';
 import { MatiereService } from 'app/entities/matiere/service/matiere.service';
+import { Filiere } from 'app/entities/enumerations/filiere.model';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ import { MatiereService } from 'app/entities/matiere/service/matiere.service';
 export class SupportDeCoursUpdateComponent implements OnInit {
   isSaving = false;
   supportDeCours: ISupportDeCours | null = null;
+  filiereValues = Object.keys(Filiere);
 
   matieresSharedCollection: IMatiere[] = [];
 
@@ -86,7 +88,7 @@ export class SupportDeCoursUpdateComponent implements OnInit {
 
     this.matieresSharedCollection = this.matiereService.addMatiereToCollectionIfMissing<IMatiere>(
       this.matieresSharedCollection,
-      supportDeCours.nomMatiere
+      supportDeCours.matiere
     );
   }
 
@@ -95,9 +97,7 @@ export class SupportDeCoursUpdateComponent implements OnInit {
       .query()
       .pipe(map((res: HttpResponse<IMatiere[]>) => res.body ?? []))
       .pipe(
-        map((matieres: IMatiere[]) =>
-          this.matiereService.addMatiereToCollectionIfMissing<IMatiere>(matieres, this.supportDeCours?.nomMatiere)
-        )
+        map((matieres: IMatiere[]) => this.matiereService.addMatiereToCollectionIfMissing<IMatiere>(matieres, this.supportDeCours?.matiere))
       )
       .subscribe((matieres: IMatiere[]) => (this.matieresSharedCollection = matieres));
   }

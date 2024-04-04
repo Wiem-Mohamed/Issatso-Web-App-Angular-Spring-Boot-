@@ -20,7 +20,7 @@
       "id": "ID",
       "matiereName": "Matiere Name",
       "supportDeCours": "Support De Cours",
-      "nomEnseigant": "Nom Enseigant"
+      "enseignant": "Enseignant"
     }
   }
 }

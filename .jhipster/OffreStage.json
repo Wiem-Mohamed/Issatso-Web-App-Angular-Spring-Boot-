@@ -37,6 +37,7 @@
   "name": "OffreStage",
   "relationships": [
     {
+      "otherEntityField": "departmentName",
       "otherEntityName": "departement",
       "relationshipName": "departement",
       "relationshipSide": "left",

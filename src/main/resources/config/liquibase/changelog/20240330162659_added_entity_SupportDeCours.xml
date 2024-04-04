@@ -23,10 +23,16 @@
             <column name="contenu" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_depot" type="DATETIME">
+            <column name="date_depot" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="nom_matiere_id" type="bigint">
+            <column name="filiere" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="niveau" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="matiere_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -55,6 +61,8 @@
             <column name="description" type="string"/>
             <column name="contenu" type="string"/>
             <column name="date_depot" type="date"/>
+            <column name="filiere" type="string"/>
+            <column name="niveau" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

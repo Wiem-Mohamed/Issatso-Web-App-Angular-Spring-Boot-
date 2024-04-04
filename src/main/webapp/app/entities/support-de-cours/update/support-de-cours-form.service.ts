@@ -35,7 +35,9 @@ type SupportDeCoursFormGroupContent = {
   description: FormControl<SupportDeCoursFormRawValue['description']>;
   contenu: FormControl<SupportDeCoursFormRawValue['contenu']>;
   dateDepot: FormControl<SupportDeCoursFormRawValue['dateDepot']>;
-  nomMatiere: FormControl<SupportDeCoursFormRawValue['nomMatiere']>;
+  filiere: FormControl<SupportDeCoursFormRawValue['filiere']>;
+  niveau: FormControl<SupportDeCoursFormRawValue['niveau']>;
+  matiere: FormControl<SupportDeCoursFormRawValue['matiere']>;
 };
 
 export type SupportDeCoursFormGroup = FormGroup<SupportDeCoursFormGroupContent>;
@@ -59,7 +61,9 @@ export class SupportDeCoursFormService {
       description: new FormControl(supportDeCoursRawValue.description),
       contenu: new FormControl(supportDeCoursRawValue.contenu),
       dateDepot: new FormControl(supportDeCoursRawValue.dateDepot),
-      nomMatiere: new FormControl(supportDeCoursRawValue.nomMatiere),
+      filiere: new FormControl(supportDeCoursRawValue.filiere),
+      niveau: new FormControl(supportDeCoursRawValue.niveau),
+      matiere: new FormControl(supportDeCoursRawValue.matiere),
     });
   }
 

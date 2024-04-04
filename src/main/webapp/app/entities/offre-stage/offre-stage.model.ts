@@ -11,7 +11,7 @@ export interface IOffreStage {
   dateFin?: dayjs.Dayjs | null;
   entreprise?: string | null;
   lieu?: string | null;
-  departement?: Pick<IDepartement, 'id'> | null;
+  departement?: Pick<IDepartement, 'id' | 'departmentName'> | null;
 }
 
 export type NewOffreStage = Omit<IOffreStage, 'id'> & { id: null };

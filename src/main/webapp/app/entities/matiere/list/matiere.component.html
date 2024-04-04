@@ -44,9 +44,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="nomEnseigant.id">
+          <th scope="col" jhiSortBy="enseignant.nom">
             <div class="d-flex">
-              <span jhiTranslate="issatsoApp.matiere.nomEnseigant">Nom Enseigant</span>
+              <span jhiTranslate="issatsoApp.matiere.enseignant">Enseignant</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -60,8 +60,8 @@
           </td>
           <td>{{ matiere.matiereName }}</td>
           <td>
-            <div *ngIf="matiere.nomEnseigant">
-              <a [routerLink]="['/enseignant', matiere.nomEnseigant.id, 'view']">{{ matiere.nomEnseigant.id }}</a>
+            <div *ngIf="matiere.enseignant">
+              <a [routerLink]="['/enseignant', matiere.enseignant.id, 'view']">{{ matiere.enseignant.nom }}</a>
             </div>
           </td>
           <td class="text-end">

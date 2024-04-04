@@ -29,7 +29,7 @@ public class Enseignant implements Serializable {
     @Column(name = "prenom")
     private String prenom;
 
-    @Column(name = "cin", unique = true)
+    @Column(name = "cin")
     private String cin;
 
     @Column(name = "email")
@@ -45,8 +45,8 @@ public class Enseignant implements Serializable {
     @Column(name = "grade")
     private Grade grade;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nomEnseigant")
-    @JsonIgnoreProperties(value = { "supportDeCours", "nomEnseigant" }, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enseignant")
+    @JsonIgnoreProperties(value = { "supportDeCours", "enseignant" }, allowSetters = true)
     private Set<Matiere> matieres = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -55,12 +55,14 @@ public class Enseignant implements Serializable {
         joinColumns = @JoinColumn(name = "enseignant_id"),
         inverseJoinColumns = @JoinColumn(name = "groupe_id")
     )
-    @JsonIgnoreProperties(value = { "etudiantNames", "enseigants" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "etudiants", "enseigants" }, allowSetters = true)
     private Set<Groupe> groupes = new HashSet<>();
 
     @JsonIgnoreProperties(value = { "chefDepartement" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "chefDepartement")
     private Departement departement;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
         return this.id;
@@ -172,10 +174,10 @@ public class Enseignant implements Serializable {
 
     public void setMatieres(Set<Matiere> matieres) {
         if (this.matieres != null) {
-            this.matieres.forEach(i -> i.setNomEnseigant(null));
+            this.matieres.forEach(i -> i.setEnseignant(null));
         }
         if (matieres != null) {
-            matieres.forEach(i -> i.setNomEnseigant(this));
+            matieres.forEach(i -> i.setEnseignant(this));
         }
         this.matieres = matieres;
     }
@@ -187,13 +189,13 @@ public class Enseignant implements Serializable {
 
     public Enseignant addMatiere(Matiere matiere) {
         this.matieres.add(matiere);
-        matiere.setNomEnseigant(this);
+        matiere.setEnseignant(this);
         return this;
     }
 
     public Enseignant removeMatiere(Matiere matiere) {
         this.matieres.remove(matiere);
-        matiere.setNomEnseigant(null);
+        matiere.setEnseignant(null);
         return this;
     }
 
@@ -240,6 +242,8 @@ public class Enseignant implements Serializable {
         this.setDepartement(departement);
         return this;
     }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {

@@ -135,6 +135,12 @@ public class SupportDeCoursResource {
                 if (supportDeCours.getDateDepot() != null) {
                     existingSupportDeCours.setDateDepot(supportDeCours.getDateDepot());
                 }
+                if (supportDeCours.getFiliere() != null) {
+                    existingSupportDeCours.setFiliere(supportDeCours.getFiliere());
+                }
+                if (supportDeCours.getNiveau() != null) {
+                    existingSupportDeCours.setNiveau(supportDeCours.getNiveau());
+                }
 
                 return existingSupportDeCours;
             })
@@ -149,12 +155,17 @@ public class SupportDeCoursResource {
     /**
      * {@code GET  /support-de-cours} : get all the supportDeCours.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of supportDeCours in body.
      */
     @GetMapping("/support-de-cours")
-    public List<SupportDeCours> getAllSupportDeCours() {
+    public List<SupportDeCours> getAllSupportDeCours(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all SupportDeCours");
-        return supportDeCoursRepository.findAll();
+        if (eagerload) {
+            return supportDeCoursRepository.findAllWithEagerRelationships();
+        } else {
+            return supportDeCoursRepository.findAll();
+        }
     }
 
     /**
@@ -166,7 +177,7 @@ public class SupportDeCoursResource {
     @GetMapping("/support-de-cours/{id}")
     public ResponseEntity<SupportDeCours> getSupportDeCours(@PathVariable Long id) {
         log.debug("REST request to get SupportDeCours : {}", id);
-        Optional<SupportDeCours> supportDeCours = supportDeCoursRepository.findById(id);
+        Optional<SupportDeCours> supportDeCours = supportDeCoursRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(supportDeCours);
     }
 

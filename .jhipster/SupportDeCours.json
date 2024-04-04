@@ -18,13 +18,23 @@
     {
       "fieldName": "dateDepot",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "filiere",
+      "fieldType": "Filiere",
+      "fieldValues": "ING,LEEA,LEM,LGC,LGEnerg,LGM,LISI,LSI,MPGM,PREPA"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "Integer"
     }
   ],
   "name": "SupportDeCours",
   "relationships": [
     {
+      "otherEntityField": "matiereName",
       "otherEntityName": "matiere",
-      "relationshipName": "nomMatiere",
+      "relationshipName": "matiere",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

@@ -80,7 +80,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="departement.id">
+          <th scope="col" jhiSortBy="departement.departmentName">
             <div class="d-flex">
               <span jhiTranslate="issatsoApp.offreStage.departement">Departement</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -103,7 +103,7 @@
           <td>{{ offreStage.lieu }}</td>
           <td>
             <div *ngIf="offreStage.departement">
-              <a [routerLink]="['/departement', offreStage.departement.id, 'view']">{{ offreStage.departement.id }}</a>
+              <a [routerLink]="['/departement', offreStage.departement.id, 'view']">{{ offreStage.departement.departmentName }}</a>
             </div>
           </td>
           <td class="text-end">

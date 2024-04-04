@@ -30,10 +30,18 @@
         <dd>
           <span>{{ supportDeCours.dateDepot | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="issatsoApp.supportDeCours.nomMatiere">Nom Matiere</span></dt>
+        <dt><span jhiTranslate="issatsoApp.supportDeCours.filiere">Filiere</span></dt>
         <dd>
-          <div *ngIf="supportDeCours.nomMatiere">
-            <a [routerLink]="['/matiere', supportDeCours.nomMatiere.id, 'view']">{{ supportDeCours.nomMatiere.id }}</a>
+          <span jhiTranslate="{{ 'issatsoApp.Filiere.' + supportDeCours.filiere }}">{{ supportDeCours.filiere }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.supportDeCours.niveau">Niveau</span></dt>
+        <dd>
+          <span>{{ supportDeCours.niveau }}</span>
+        </dd>
+        <dt><span jhiTranslate="issatsoApp.supportDeCours.matiere">Matiere</span></dt>
+        <dd>
+          <div *ngIf="supportDeCours.matiere">
+            <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']">{{ supportDeCours.matiere.matiereName }}</a>
           </div>
         </dd>
       </dl>

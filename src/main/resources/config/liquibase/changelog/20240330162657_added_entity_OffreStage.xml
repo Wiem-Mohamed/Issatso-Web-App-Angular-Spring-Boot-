@@ -17,16 +17,16 @@
             <column name="titre" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="TEXT">
+            <column name="description" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="domaine" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_debut" type="DATETIME">
+            <column name="date_debut" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="date_fin" type="DATETIME">
+            <column name="date_fin" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="entreprise" type="varchar(255)">

@@ -21,7 +21,7 @@ describe('Matiere Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             matiereName: expect.any(Object),
-            nomEnseigant: expect.any(Object),
+            enseignant: expect.any(Object),
           })
         );
       });
@@ -33,7 +33,7 @@ describe('Matiere Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             matiereName: expect.any(Object),
-            nomEnseigant: expect.any(Object),
+            enseignant: expect.any(Object),
           })
         );
       });

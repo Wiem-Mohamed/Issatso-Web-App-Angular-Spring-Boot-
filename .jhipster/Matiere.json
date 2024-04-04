@@ -12,14 +12,15 @@
   "relationships": [
     {
       "otherEntityName": "supportDeCours",
-      "otherEntityRelationshipName": "nomMatiere",
+      "otherEntityRelationshipName": "matiere",
       "relationshipName": "supportDeCours",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityField": "nom",
       "otherEntityName": "enseignant",
-      "relationshipName": "nomEnseigant",
+      "relationshipName": "enseignant",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

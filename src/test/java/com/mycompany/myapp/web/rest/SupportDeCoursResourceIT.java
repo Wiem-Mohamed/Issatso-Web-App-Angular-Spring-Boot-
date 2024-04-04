@@ -2,22 +2,31 @@ package com.mycompany.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.SupportDeCours;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import com.mycompany.myapp.repository.SupportDeCoursRepository;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link SupportDeCoursResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class SupportDeCoursResourceIT {
@@ -43,6 +53,12 @@ class SupportDeCoursResourceIT {
     private static final Instant DEFAULT_DATE_DEPOT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_DEPOT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Filiere DEFAULT_FILIERE = Filiere.ING;
+    private static final Filiere UPDATED_FILIERE = Filiere.LEEA;
+
+    private static final Integer DEFAULT_NIVEAU = 1;
+    private static final Integer UPDATED_NIVEAU = 2;
+
     private static final String ENTITY_API_URL = "/api/support-de-cours";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -51,6 +67,9 @@ class SupportDeCoursResourceIT {
 
     @Autowired
     private SupportDeCoursRepository supportDeCoursRepository;
+
+    @Mock
+    private SupportDeCoursRepository supportDeCoursRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -71,7 +90,9 @@ class SupportDeCoursResourceIT {
             .titre(DEFAULT_TITRE)
             .description(DEFAULT_DESCRIPTION)
             .contenu(DEFAULT_CONTENU)
-            .dateDepot(DEFAULT_DATE_DEPOT);
+            .dateDepot(DEFAULT_DATE_DEPOT)
+            .filiere(DEFAULT_FILIERE)
+            .niveau(DEFAULT_NIVEAU);
         return supportDeCours;
     }
 
@@ -86,7 +107,9 @@ class SupportDeCoursResourceIT {
             .titre(UPDATED_TITRE)
             .description(UPDATED_DESCRIPTION)
             .contenu(UPDATED_CONTENU)
-            .dateDepot(UPDATED_DATE_DEPOT);
+            .dateDepot(UPDATED_DATE_DEPOT)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
         return supportDeCours;
     }
 
@@ -114,6 +137,8 @@ class SupportDeCoursResourceIT {
         assertThat(testSupportDeCours.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(DEFAULT_CONTENU);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(DEFAULT_DATE_DEPOT);
+        assertThat(testSupportDeCours.getFiliere()).isEqualTo(DEFAULT_FILIERE);
+        assertThat(testSupportDeCours.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
     }
 
     @Test
@@ -151,7 +176,26 @@ class SupportDeCoursResourceIT {
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].contenu").value(hasItem(DEFAULT_CONTENU)))
-            .andExpect(jsonPath("$.[*].dateDepot").value(hasItem(DEFAULT_DATE_DEPOT.toString())));
+            .andExpect(jsonPath("$.[*].dateDepot").value(hasItem(DEFAULT_DATE_DEPOT.toString())))
+            .andExpect(jsonPath("$.[*].filiere").value(hasItem(DEFAULT_FILIERE.toString())))
+            .andExpect(jsonPath("$.[*].niveau").value(hasItem(DEFAULT_NIVEAU)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllSupportDeCoursWithEagerRelationshipsIsEnabled() throws Exception {
+        when(supportDeCoursRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restSupportDeCoursMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(supportDeCoursRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllSupportDeCoursWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(supportDeCoursRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restSupportDeCoursMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(supportDeCoursRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -169,7 +213,9 @@ class SupportDeCoursResourceIT {
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.contenu").value(DEFAULT_CONTENU))
-            .andExpect(jsonPath("$.dateDepot").value(DEFAULT_DATE_DEPOT.toString()));
+            .andExpect(jsonPath("$.dateDepot").value(DEFAULT_DATE_DEPOT.toString()))
+            .andExpect(jsonPath("$.filiere").value(DEFAULT_FILIERE.toString()))
+            .andExpect(jsonPath("$.niveau").value(DEFAULT_NIVEAU));
     }
 
     @Test
@@ -191,7 +237,13 @@ class SupportDeCoursResourceIT {
         SupportDeCours updatedSupportDeCours = supportDeCoursRepository.findById(supportDeCours.getId()).get();
         // Disconnect from session so that the updates on updatedSupportDeCours are not directly saved in db
         em.detach(updatedSupportDeCours);
-        updatedSupportDeCours.titre(UPDATED_TITRE).description(UPDATED_DESCRIPTION).contenu(UPDATED_CONTENU).dateDepot(UPDATED_DATE_DEPOT);
+        updatedSupportDeCours
+            .titre(UPDATED_TITRE)
+            .description(UPDATED_DESCRIPTION)
+            .contenu(UPDATED_CONTENU)
+            .dateDepot(UPDATED_DATE_DEPOT)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
 
         restSupportDeCoursMockMvc
             .perform(
@@ -209,6 +261,8 @@ class SupportDeCoursResourceIT {
         assertThat(testSupportDeCours.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(UPDATED_CONTENU);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(UPDATED_DATE_DEPOT);
+        assertThat(testSupportDeCours.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testSupportDeCours.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test
@@ -279,6 +333,12 @@ class SupportDeCoursResourceIT {
         SupportDeCours partialUpdatedSupportDeCours = new SupportDeCours();
         partialUpdatedSupportDeCours.setId(supportDeCours.getId());
 
+        partialUpdatedSupportDeCours
+            .titre(UPDATED_TITRE)
+            .description(UPDATED_DESCRIPTION)
+            .dateDepot(UPDATED_DATE_DEPOT)
+            .niveau(UPDATED_NIVEAU);
+
         restSupportDeCoursMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedSupportDeCours.getId())
@@ -291,10 +351,12 @@ class SupportDeCoursResourceIT {
         List<SupportDeCours> supportDeCoursList = supportDeCoursRepository.findAll();
         assertThat(supportDeCoursList).hasSize(databaseSizeBeforeUpdate);
         SupportDeCours testSupportDeCours = supportDeCoursList.get(supportDeCoursList.size() - 1);
-        assertThat(testSupportDeCours.getTitre()).isEqualTo(DEFAULT_TITRE);
-        assertThat(testSupportDeCours.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testSupportDeCours.getTitre()).isEqualTo(UPDATED_TITRE);
+        assertThat(testSupportDeCours.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(DEFAULT_CONTENU);
-        assertThat(testSupportDeCours.getDateDepot()).isEqualTo(DEFAULT_DATE_DEPOT);
+        assertThat(testSupportDeCours.getDateDepot()).isEqualTo(UPDATED_DATE_DEPOT);
+        assertThat(testSupportDeCours.getFiliere()).isEqualTo(DEFAULT_FILIERE);
+        assertThat(testSupportDeCours.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test
@@ -313,7 +375,9 @@ class SupportDeCoursResourceIT {
             .titre(UPDATED_TITRE)
             .description(UPDATED_DESCRIPTION)
             .contenu(UPDATED_CONTENU)
-            .dateDepot(UPDATED_DATE_DEPOT);
+            .dateDepot(UPDATED_DATE_DEPOT)
+            .filiere(UPDATED_FILIERE)
+            .niveau(UPDATED_NIVEAU);
 
         restSupportDeCoursMockMvc
             .perform(
@@ -331,6 +395,8 @@ class SupportDeCoursResourceIT {
         assertThat(testSupportDeCours.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(UPDATED_CONTENU);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(UPDATED_DATE_DEPOT);
+        assertThat(testSupportDeCours.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testSupportDeCours.getNiveau()).isEqualTo(UPDATED_NIVEAU);
     }
 
     @Test

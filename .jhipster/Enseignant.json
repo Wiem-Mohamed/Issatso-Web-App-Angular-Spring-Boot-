@@ -37,7 +37,7 @@
   "relationships": [
     {
       "otherEntityName": "matiere",
-      "otherEntityRelationshipName": "nomEnseigant",
+      "otherEntityRelationshipName": "enseignant",
       "relationshipName": "matiere",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"

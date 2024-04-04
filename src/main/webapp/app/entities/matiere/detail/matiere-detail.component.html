@@ -18,10 +18,10 @@
         <dd>
           <span>{{ matiere.matiereName }}</span>
         </dd>
-        <dt><span jhiTranslate="issatsoApp.matiere.nomEnseigant">Nom Enseigant</span></dt>
+        <dt><span jhiTranslate="issatsoApp.matiere.enseignant">Enseignant</span></dt>
         <dd>
-          <div *ngIf="matiere.nomEnseigant">
-            <a [routerLink]="['/enseignant', matiere.nomEnseigant.id, 'view']">{{ matiere.nomEnseigant.id }}</a>
+          <div *ngIf="matiere.enseignant">
+            <a [routerLink]="['/enseignant', matiere.enseignant.id, 'view']">{{ matiere.enseignant.nom }}</a>
           </div>
         </dd>
       </dl>

@@ -50,12 +50,12 @@ describe('SupportDeCours Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Matiere query and add missing value', () => {
       const supportDeCours: ISupportDeCours = { id: 456 };
-      const nomMatiere: IMatiere = { id: 68707 };
-      supportDeCours.nomMatiere = nomMatiere;
+      const matiere: IMatiere = { id: 68707 };
+      supportDeCours.matiere = matiere;
 
       const matiereCollection: IMatiere[] = [{ id: 77022 }];
       jest.spyOn(matiereService, 'query').mockReturnValue(of(new HttpResponse({ body: matiereCollection })));
-      const additionalMatieres = [nomMatiere];
+      const additionalMatieres = [matiere];
       const expectedCollection: IMatiere[] = [...additionalMatieres, ...matiereCollection];
       jest.spyOn(matiereService, 'addMatiereToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -72,13 +72,13 @@ describe('SupportDeCours Management Update Component', () => {
 
     it('Should update editForm', () => {
       const supportDeCours: ISupportDeCours = { id: 456 };
-      const nomMatiere: IMatiere = { id: 897 };
-      supportDeCours.nomMatiere = nomMatiere;
+      const matiere: IMatiere = { id: 897 };
+      supportDeCours.matiere = matiere;
 
       activatedRoute.data = of({ supportDeCours });
       comp.ngOnInit();
 
-      expect(comp.matieresSharedCollection).toContain(nomMatiere);
+      expect(comp.matieresSharedCollection).toContain(matiere);
       expect(comp.supportDeCours).toEqual(supportDeCours);
     });
   });

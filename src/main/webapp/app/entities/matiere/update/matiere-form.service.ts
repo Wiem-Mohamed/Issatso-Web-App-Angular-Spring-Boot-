@@ -19,7 +19,7 @@ type MatiereFormDefaults = Pick<NewMatiere, 'id'>;
 type MatiereFormGroupContent = {
   id: FormControl<IMatiere['id'] | NewMatiere['id']>;
   matiereName: FormControl<IMatiere['matiereName']>;
-  nomEnseigant: FormControl<IMatiere['nomEnseigant']>;
+  enseignant: FormControl<IMatiere['enseignant']>;
 };
 
 export type MatiereFormGroup = FormGroup<MatiereFormGroupContent>;
@@ -40,7 +40,7 @@ export class MatiereFormService {
         }
       ),
       matiereName: new FormControl(matiereRawValue.matiereName),
-      nomEnseigant: new FormControl(matiereRawValue.nomEnseigant),
+      enseignant: new FormControl(matiereRawValue.enseignant),
     });
   }
 

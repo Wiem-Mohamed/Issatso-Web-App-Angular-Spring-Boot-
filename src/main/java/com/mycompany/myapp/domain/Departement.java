@@ -24,7 +24,7 @@ public class Departement implements Serializable {
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
-    @JsonIgnoreProperties(value = { "matieres", "chefDepartement", "groupes", "departement" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "matieres", "groupes", "departement" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Enseignant chefDepartement;

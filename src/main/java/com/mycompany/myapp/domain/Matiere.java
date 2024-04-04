@@ -24,13 +24,13 @@ public class Matiere implements Serializable {
     @Column(name = "matiere_name")
     private String matiereName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nomMatiere")
-    @JsonIgnoreProperties(value = { "nomMatiere" }, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "matiere")
+    @JsonIgnoreProperties(value = { "matiere" }, allowSetters = true)
     private Set<SupportDeCours> supportDeCours = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "matieres", "chefDepartement", "groupes", "departement" }, allowSetters = true)
-    private Enseignant nomEnseigant;
+    @JsonIgnoreProperties(value = { "matieres", "groupes", "departement" }, allowSetters = true)
+    private Enseignant enseignant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -66,10 +66,10 @@ public class Matiere implements Serializable {
 
     public void setSupportDeCours(Set<SupportDeCours> supportDeCours) {
         if (this.supportDeCours != null) {
-            this.supportDeCours.forEach(i -> i.setNomMatiere(null));
+            this.supportDeCours.forEach(i -> i.setMatiere(null));
         }
         if (supportDeCours != null) {
-            supportDeCours.forEach(i -> i.setNomMatiere(this));
+            supportDeCours.forEach(i -> i.setMatiere(this));
         }
         this.supportDeCours = supportDeCours;
     }
@@ -81,26 +81,26 @@ public class Matiere implements Serializable {
 
     public Matiere addSupportDeCours(SupportDeCours supportDeCours) {
         this.supportDeCours.add(supportDeCours);
-        supportDeCours.setNomMatiere(this);
+        supportDeCours.setMatiere(this);
         return this;
     }
 
     public Matiere removeSupportDeCours(SupportDeCours supportDeCours) {
         this.supportDeCours.remove(supportDeCours);
-        supportDeCours.setNomMatiere(null);
+        supportDeCours.setMatiere(null);
         return this;
     }
 
-    public Enseignant getNomEnseigant() {
-        return this.nomEnseigant;
+    public Enseignant getEnseignant() {
+        return this.enseignant;
     }
 
-    public void setNomEnseigant(Enseignant enseignant) {
-        this.nomEnseigant = enseignant;
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
     }
 
-    public Matiere nomEnseigant(Enseignant enseignant) {
-        this.setNomEnseigant(enseignant);
+    public Matiere enseignant(Enseignant enseignant) {
+        this.setEnseignant(enseignant);
         return this;
     }
 

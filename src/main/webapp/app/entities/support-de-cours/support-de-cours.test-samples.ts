@@ -1,24 +1,28 @@
 import dayjs from 'dayjs/esm';
 
+import { Filiere } from 'app/entities/enumerations/filiere.model';
+
 import { ISupportDeCours, NewSupportDeCours } from './support-de-cours.model';
 
 export const sampleWithRequiredData: ISupportDeCours = {
-  id: 97087,
+  id: 84336,
 };
 
 export const sampleWithPartialData: ISupportDeCours = {
-  id: 7575,
-  titre: 'bientôt',
-  contenu: 'Einsteinium Poulet b',
-  dateDepot: dayjs('2024-03-30T01:17'),
+  id: 86804,
+  titre: 'retrait',
+  description: 'Femme Folk',
+  niveau: 34808,
 };
 
 export const sampleWithFullData: ISupportDeCours = {
-  id: 18316,
-  titre: 'Dodge',
-  description: 'Account bypass a',
-  contenu: 'solitaire override',
-  dateDepot: dayjs('2024-03-30T16:06'),
+  id: 80340,
+  titre: 'protocol Chrysler ding',
+  description: 'c Vélocar',
+  contenu: 'aïe',
+  dateDepot: dayjs('2024-03-30T03:57'),
+  filiere: 'PREPA',
+  niveau: 20963,
 };
 
 export const sampleWithNewData: NewSupportDeCours = {

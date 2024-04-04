@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -9,13 +10,20 @@ import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Matiere;
 import com.mycompany.myapp.repository.MatiereRepository;
 import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link MatiereResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class MatiereResourceIT {
@@ -40,6 +49,9 @@ class MatiereResourceIT {
 
     @Autowired
     private MatiereRepository matiereRepository;
+
+    @Mock
+    private MatiereRepository matiereRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -123,6 +135,23 @@ class MatiereResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(matiere.getId().intValue())))
             .andExpect(jsonPath("$.[*].matiereName").value(hasItem(DEFAULT_MATIERE_NAME)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllMatieresWithEagerRelationshipsIsEnabled() throws Exception {
+        when(matiereRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restMatiereMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(matiereRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllMatieresWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(matiereRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restMatiereMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(matiereRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

@@ -86,7 +86,7 @@ export class MatiereUpdateComponent implements OnInit {
 
     this.enseignantsSharedCollection = this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(
       this.enseignantsSharedCollection,
-      matiere.nomEnseigant
+      matiere.enseignant
     );
   }
 
@@ -96,7 +96,7 @@ export class MatiereUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEnseignant[]>) => res.body ?? []))
       .pipe(
         map((enseignants: IEnseignant[]) =>
-          this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(enseignants, this.matiere?.nomEnseigant)
+          this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(enseignants, this.matiere?.enseignant)
         )
       )
       .subscribe((enseignants: IEnseignant[]) => (this.enseignantsSharedCollection = enseignants));

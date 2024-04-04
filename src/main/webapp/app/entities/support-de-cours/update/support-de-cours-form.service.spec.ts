@@ -24,7 +24,9 @@ describe('SupportDeCours Form Service', () => {
             description: expect.any(Object),
             contenu: expect.any(Object),
             dateDepot: expect.any(Object),
-            nomMatiere: expect.any(Object),
+            filiere: expect.any(Object),
+            niveau: expect.any(Object),
+            matiere: expect.any(Object),
           })
         );
       });
@@ -39,7 +41,9 @@ describe('SupportDeCours Form Service', () => {
             description: expect.any(Object),
             contenu: expect.any(Object),
             dateDepot: expect.any(Object),
-            nomMatiere: expect.any(Object),
+            filiere: expect.any(Object),
+            niveau: expect.any(Object),
+            matiere: expect.any(Object),
           })
         );
       });

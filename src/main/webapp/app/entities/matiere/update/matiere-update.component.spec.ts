@@ -50,12 +50,12 @@ describe('Matiere Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Enseignant query and add missing value', () => {
       const matiere: IMatiere = { id: 456 };
-      const nomEnseigant: IEnseignant = { id: 86706 };
-      matiere.nomEnseigant = nomEnseigant;
+      const enseignant: IEnseignant = { id: 88859 };
+      matiere.enseignant = enseignant;
 
-      const enseignantCollection: IEnseignant[] = [{ id: 20456 }];
+      const enseignantCollection: IEnseignant[] = [{ id: 57333 }];
       jest.spyOn(enseignantService, 'query').mockReturnValue(of(new HttpResponse({ body: enseignantCollection })));
-      const additionalEnseignants = [nomEnseigant];
+      const additionalEnseignants = [enseignant];
       const expectedCollection: IEnseignant[] = [...additionalEnseignants, ...enseignantCollection];
       jest.spyOn(enseignantService, 'addEnseignantToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -72,13 +72,13 @@ describe('Matiere Management Update Component', () => {
 
     it('Should update editForm', () => {
       const matiere: IMatiere = { id: 456 };
-      const nomEnseigant: IEnseignant = { id: 37448 };
-      matiere.nomEnseigant = nomEnseigant;
+      const enseignant: IEnseignant = { id: 96520 };
+      matiere.enseignant = enseignant;
 
       activatedRoute.data = of({ matiere });
       comp.ngOnInit();
 
-      expect(comp.enseignantsSharedCollection).toContain(nomEnseigant);
+      expect(comp.enseignantsSharedCollection).toContain(enseignant);
       expect(comp.matiere).toEqual(matiere);
     });
   });

@@ -17,7 +17,9 @@ entity SupportDeCours {
     titre String,
     description String,
     contenu String,
-    dateDepot Instant
+    dateDepot Instant,
+    filiere Filiere,
+    niveau Integer
 }
 
 entity Matiere {
@@ -124,12 +126,12 @@ relationship ManyToMany {
     Evenement{partenaire(nom)} to Partenaire{evenement}
 }
 relationship ManyToOne {
-    OffreStage{departement} to Departement
+    OffreStage{departement(departmentName)} to Departement
 }
 relationship OneToMany {
-	Matiere to SupportDeCours{nomMatiere}
+	Matiere to SupportDeCours{matiere(matiereName)}
 }
 relationship OneToMany {
-	Enseignant to Matiere{nomEnseigant}
+	Enseignant to Matiere{enseignant(nom)}
 }
 

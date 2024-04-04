@@ -45,7 +45,7 @@
         <dt><span jhiTranslate="issatsoApp.offreStage.departement">Departement</span></dt>
         <dd>
           <div *ngIf="offreStage.departement">
-            <a [routerLink]="['/departement', offreStage.departement.id, 'view']">{{ offreStage.departement.id }}</a>
+            <a [routerLink]="['/departement', offreStage.departement.id, 'view']">{{ offreStage.departement.departmentName }}</a>
           </div>
         </dd>
       </dl>

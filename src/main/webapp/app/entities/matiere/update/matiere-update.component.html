@@ -26,18 +26,18 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="issatsoApp.matiere.nomEnseigant" for="field_nomEnseigant">Nom Enseigant</label>
+          <label class="form-label" jhiTranslate="issatsoApp.matiere.enseignant" for="field_enseignant">Enseignant</label>
           <select
             class="form-control"
-            id="field_nomEnseigant"
-            data-cy="nomEnseigant"
-            name="nomEnseigant"
-            formControlName="nomEnseigant"
+            id="field_enseignant"
+            data-cy="enseignant"
+            name="enseignant"
+            formControlName="enseignant"
             [compareWith]="compareEnseignant"
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="enseignantOption" *ngFor="let enseignantOption of enseignantsSharedCollection">
-              {{ enseignantOption.id }}
+              {{ enseignantOption.nom }}
             </option>
           </select>
         </div>

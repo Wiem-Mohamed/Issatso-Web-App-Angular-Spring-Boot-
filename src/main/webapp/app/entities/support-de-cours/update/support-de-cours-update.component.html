@@ -55,17 +55,32 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="issatsoApp.supportDeCours.nomMatiere" for="field_nomMatiere">Nom Matiere</label>
+          <label class="form-label" jhiTranslate="issatsoApp.supportDeCours.filiere" for="field_filiere">Filiere</label>
+          <select class="form-control" name="filiere" formControlName="filiere" id="field_filiere" data-cy="filiere">
+            <option [ngValue]="null">{{ 'issatsoApp.Filiere.null' | translate }}</option>
+            <option *ngFor="let filiere of filiereValues" [value]="filiere">{{ 'issatsoApp.Filiere.' + filiere | translate }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.supportDeCours.niveau" for="field_niveau">Niveau</label>
+          <input type="number" class="form-control" name="niveau" id="field_niveau" data-cy="niveau" formControlName="niveau" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="issatsoApp.supportDeCours.matiere" for="field_matiere">Matiere</label>
           <select
             class="form-control"
-            id="field_nomMatiere"
-            data-cy="nomMatiere"
-            name="nomMatiere"
-            formControlName="nomMatiere"
+            id="field_matiere"
+            data-cy="matiere"
+            name="matiere"
+            formControlName="matiere"
             [compareWith]="compareMatiere"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="matiereOption" *ngFor="let matiereOption of matieresSharedCollection">{{ matiereOption.id }}</option>
+            <option [ngValue]="matiereOption" *ngFor="let matiereOption of matieresSharedCollection">
+              {{ matiereOption.matiereName }}
+            </option>
           </select>
         </div>
       </div>

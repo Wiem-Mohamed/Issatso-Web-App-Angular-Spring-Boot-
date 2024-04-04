@@ -1,6 +1,7 @@
 package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -32,9 +33,16 @@ public class SupportDeCours implements Serializable {
     @Column(name = "date_depot")
     private Instant dateDepot;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "filiere")
+    private Filiere filiere;
+
+    @Column(name = "niveau")
+    private Integer niveau;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "supportDeCours", "nomEnseigant" }, allowSetters = true)
-    private Matiere nomMatiere;
+    @JsonIgnoreProperties(value = { "supportDeCours", "enseignant" }, allowSetters = true)
+    private Matiere matiere;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -103,16 +111,42 @@ public class SupportDeCours implements Serializable {
         this.dateDepot = dateDepot;
     }
 
-    public Matiere getNomMatiere() {
-        return this.nomMatiere;
+    public Filiere getFiliere() {
+        return this.filiere;
     }
 
-    public void setNomMatiere(Matiere matiere) {
-        this.nomMatiere = matiere;
+    public SupportDeCours filiere(Filiere filiere) {
+        this.setFiliere(filiere);
+        return this;
     }
 
-    public SupportDeCours nomMatiere(Matiere matiere) {
-        this.setNomMatiere(matiere);
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
+    }
+
+    public Integer getNiveau() {
+        return this.niveau;
+    }
+
+    public SupportDeCours niveau(Integer niveau) {
+        this.setNiveau(niveau);
+        return this;
+    }
+
+    public void setNiveau(Integer niveau) {
+        this.niveau = niveau;
+    }
+
+    public Matiere getMatiere() {
+        return this.matiere;
+    }
+
+    public void setMatiere(Matiere matiere) {
+        this.matiere = matiere;
+    }
+
+    public SupportDeCours matiere(Matiere matiere) {
+        this.setMatiere(matiere);
         return this;
     }
 
@@ -144,6 +178,8 @@ public class SupportDeCours implements Serializable {
             ", description='" + getDescription() + "'" +
             ", contenu='" + getContenu() + "'" +
             ", dateDepot='" + getDateDepot() + "'" +
+            ", filiere='" + getFiliere() + "'" +
+            ", niveau=" + getNiveau() +
             "}";
     }
 }

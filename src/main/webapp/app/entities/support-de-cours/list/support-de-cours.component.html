@@ -62,9 +62,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="nomMatiere.id">
+          <th scope="col" jhiSortBy="filiere">
             <div class="d-flex">
-              <span jhiTranslate="issatsoApp.supportDeCours.nomMatiere">Nom Matiere</span>
+              <span jhiTranslate="issatsoApp.supportDeCours.filiere">Filiere</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="niveau">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.supportDeCours.niveau">Niveau</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="matiere.matiereName">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.supportDeCours.matiere">Matiere</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -80,9 +92,11 @@
           <td>{{ supportDeCours.description }}</td>
           <td>{{ supportDeCours.contenu }}</td>
           <td>{{ supportDeCours.dateDepot | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'issatsoApp.Filiere.' + supportDeCours.filiere }}">{{ supportDeCours.filiere }}</td>
+          <td>{{ supportDeCours.niveau }}</td>
           <td>
-            <div *ngIf="supportDeCours.nomMatiere">
-              <a [routerLink]="['/matiere', supportDeCours.nomMatiere.id, 'view']">{{ supportDeCours.nomMatiere.id }}</a>
+            <div *ngIf="supportDeCours.matiere">
+              <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']">{{ supportDeCours.matiere.matiereName }}</a>
             </div>
           </td>
           <td class="text-end">
