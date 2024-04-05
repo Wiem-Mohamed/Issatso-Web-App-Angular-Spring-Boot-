@@ -2,25 +2,25 @@
   "issatsoApp": {
     "matiere": {
       "home": {
-        "title": "Matieres",
+        "title": "University subjects",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Matiere",
-        "createOrEditLabel": "Create or edit a Matiere",
+        "createLabel": "Create a new University subject",
+        "createOrEditLabel": "Create or edit a University subjects",
         "notFound": "No Matieres found"
       },
-      "created": "A new Matiere is created with identifier {{ param }}",
-      "updated": "A Matiere is updated with identifier {{ param }}",
-      "deleted": "A Matiere is deleted with identifier {{ param }}",
+      "created": "A new University subjects is created with identifier {{ param }}",
+      "updated": "A University subjects is updated with identifier {{ param }}",
+      "deleted": "A University subjects is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Matiere {{ id }}?"
+        "question": "Are you sure you want to delete University subjects {{ id }}?"
       },
       "detail": {
-        "title": "Matiere"
+        "title": "University subject"
       },
       "id": "ID",
-      "matiereName": "Matiere Name",
-      "supportDeCours": "Support De Cours",
-      "enseignant": "Enseignant"
+      "matiereName": "University subject Name",
+      "supportDeCours": "Course Materials",
+      "enseignant": "Teacher"
     }
   }
 }

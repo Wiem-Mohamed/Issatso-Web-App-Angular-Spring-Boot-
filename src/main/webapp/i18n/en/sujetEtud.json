@@ -2,9 +2,9 @@
   "issatsoApp": {
     "SujetEtud": {
       "null": "",
-      "Stage": "Stage",
-      "Bourse": "Bourse",
-      "Attestation_de_reussite": "Attestation_de_reussite"
+      "Stage": "Internship",
+      "Bourse": "Scholarship",
+      "Attestation_de_reussite": "Certificate_of_achievement"
     }
   }
 }

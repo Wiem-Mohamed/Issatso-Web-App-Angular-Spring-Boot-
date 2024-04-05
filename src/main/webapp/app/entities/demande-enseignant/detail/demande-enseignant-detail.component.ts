@@ -6,11 +6,13 @@ import { DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe } from 'ap
 import { IDemandeEnseignant } from '../demande-enseignant.model';
 import { DataUtils } from 'app/core/util/data-util.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-demande-enseignant-detail',
   templateUrl: './demande-enseignant-detail.component.html',
-  imports: [SharedModule, RouterModule, DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe],
+  imports: [SharedModule, RouterModule, DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe, HasAnyAuthorityDirective],
 })
 export class DemandeEnseignantDetailComponent {
   @Input() demandeEnseignant: IDemandeEnseignant | null = null;

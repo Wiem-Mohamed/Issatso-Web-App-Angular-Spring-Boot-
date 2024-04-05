@@ -2,8 +2,8 @@
   "issatsoApp": {
     "SujetEns": {
       "null": "",
-      "Conge": "Conge",
-      "Rattrapage": "Rattrapage"
+      "Conge": "Holiday",
+      "Rattrapage": "Catching-up"
     }
   }
 }

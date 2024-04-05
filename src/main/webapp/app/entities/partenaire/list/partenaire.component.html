@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="PartenaireHeading">
-    <span jhiTranslate="issatsoApp.partenaire.home.title">Partenaires</span>
+    <span jhiTranslate="issatsoApp.partenaire.home.title" class="titre">Partenaires</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.partenaire.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-partenaire"
+        class="btn btn-outline-primary jh-create-entity create-partenaire"
         [routerLink]="['/partenaire/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -74,7 +75,7 @@
       <tbody>
         <tr *ngFor="let partenaire of partenaires; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/partenaire', partenaire.id, 'view']">{{ partenaire.id }}</a>
+            <a [routerLink]="['/partenaire', partenaire.id, 'view']" style="text-decoration: none; color: red">{{ partenaire.id }}</a>
           </td>
           <td>{{ partenaire.nom }}</td>
           <td>{{ partenaire.description }}</td>
@@ -84,9 +85,10 @@
           <td class="text-end">
             <div class="btn-group">
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
                 type="submit"
                 [routerLink]="['/partenaire', partenaire.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -94,6 +96,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
                 type="submit"
                 [routerLink]="['/partenaire', partenaire.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -103,7 +106,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(partenaire)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
+                type="submit"
+                (click)="delete(partenaire)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

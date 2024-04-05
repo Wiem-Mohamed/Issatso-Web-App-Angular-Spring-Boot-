@@ -1,8 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Enseignant;
+import com.mycompany.myapp.domain.Etudiant;
 import com.mycompany.myapp.repository.EnseignantRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import com.mycompany.myapp.web.rest.errors.CinAlreadyUsedException;
+import com.mycompany.myapp.web.rest.errors.NumInscriptionAlreadyUsedException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,6 +53,13 @@ public class EnseignantResource {
     @PostMapping("/enseignants")
     public ResponseEntity<Enseignant> createEnseignant(@RequestBody Enseignant enseignant) throws URISyntaxException {
         log.debug("REST request to save Enseignant : {}", enseignant);
+
+        // Vérifier si un enseignant avec le même cin existe déjà
+        Optional<Enseignant> existingEnseignant = enseignantRepository.findByCin(enseignant.getCin());
+        if (existingEnseignant.isPresent()) {
+            throw new CinAlreadyUsedException();
+        }
+
         if (enseignant.getId() != null) {
             throw new BadRequestAlertException("A new enseignant cannot already have an ID", ENTITY_NAME, "idexists");
         }

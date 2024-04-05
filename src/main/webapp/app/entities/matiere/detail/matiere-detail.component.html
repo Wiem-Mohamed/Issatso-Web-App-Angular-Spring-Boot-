@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="matiere">
-      <h2 data-cy="matiereDetailsHeading"><span jhiTranslate="issatsoApp.matiere.detail.title">Matiere</span></h2>
+      <h2 data-cy="matiereDetailsHeading"><span jhiTranslate="issatsoApp.matiere.detail.title" class="titre">Matiere</span></h2>
 
       <hr />
 
@@ -11,26 +11,31 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ matiere.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.matiere.matiereName">Matiere Name</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ matiere.matiereName }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.matiere.enseignant">Enseignant</span></dt>
-        <dd>
+        <dd class="element">
           <div *ngIf="matiere.enseignant">
-            <a [routerLink]="['/enseignant', matiere.enseignant.id, 'view']">{{ matiere.enseignant.nom }}</a>
+            <a [routerLink]="['/enseignant', matiere.enseignant.id, 'view']" class="nomg">{{ matiere.enseignant.nom }}</a>
           </div>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/matiere', matiere.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
+        type="button"
+        [routerLink]="['/matiere', matiere.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

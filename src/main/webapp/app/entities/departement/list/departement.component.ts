@@ -13,6 +13,8 @@ import { EntityArrayResponseType, DepartementService } from '../service/departem
 import { DepartementDeleteDialogComponent } from '../delete/departement-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-departement',
@@ -26,6 +28,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class DepartementComponent implements OnInit {
@@ -106,6 +109,7 @@ export class DepartementComponent implements OnInit {
   protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
     this.isLoading = true;
     const queryObject: any = {
+      eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
     };
     return this.departementService.query(queryObject).pipe(tap(() => (this.isLoading = false)));

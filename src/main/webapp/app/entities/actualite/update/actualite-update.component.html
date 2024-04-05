@@ -1,7 +1,12 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-actualite-heading" data-cy="ActualiteCreateUpdateHeading" jhiTranslate="issatsoApp.actualite.home.createOrEditLabel">
+      <h2
+        id="jhi-actualite-heading"
+        data-cy="ActualiteCreateUpdateHeading"
+        jhiTranslate="issatsoApp.actualite.home.createOrEditLabel"
+        class="titre"
+      >
         Créer ou éditer un Actualite
       </h2>
 
@@ -87,7 +92,7 @@
           id="save-entity"
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
+          class="btn btn-info"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
         </button>

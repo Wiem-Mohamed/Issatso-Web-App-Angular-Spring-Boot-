@@ -3,7 +3,6 @@
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
       <span jhiTranslate="global.title" class="navbar-title">ISSATSO</span>
-      <span class="navbar-version">{{ version }}</span>
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -51,7 +50,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.actualite">Actualite</span>
               </a>
             </li>
@@ -63,7 +62,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.avis">Avis</span>
               </a>
             </li>
@@ -75,7 +74,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.demandeEnseignant">Demande Enseignant</span>
               </a>
             </li>
@@ -87,7 +86,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.demandeEtudiant">Demande Etudiant</span>
               </a>
             </li>
@@ -99,7 +98,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.departement">Departement</span>
               </a>
             </li>
@@ -111,7 +110,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.enseignant">Enseignant</span>
               </a>
             </li>
@@ -123,11 +122,11 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.etudiant">Etudiant</span>
               </a>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'">
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_COORDINATION', 'ROLE_ETUDIANT']">
               <a
                 class="dropdown-item"
                 routerLink="/evenement"
@@ -135,7 +134,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.evenement">Evenement</span>
               </a>
             </li>
@@ -147,7 +146,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.groupe">Groupe</span>
               </a>
             </li>
@@ -159,7 +158,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.matiere">Matiere</span>
               </a>
             </li>
@@ -171,7 +170,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.offreStage">Offre Stage</span>
               </a>
             </li>
@@ -183,7 +182,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.partenaire">Partenaire</span>
               </a>
             </li>
@@ -195,7 +194,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <fa-icon icon="plus" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.supportDeCours">Support De Cours</span>
               </a>
             </li>
@@ -223,7 +222,7 @@
                 <span jhiTranslate="global.menu.admin.userManagement">Gestion des utilisateurs</span>
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a class="dropdown-item" routerLink="/admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.metrics">Métriques</span>
@@ -252,7 +251,7 @@
                 <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.apidocs">API</span>
               </a>
-            </li>
+            </li>-->
             <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
           </ul>
         </li>

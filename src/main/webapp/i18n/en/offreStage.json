@@ -2,29 +2,29 @@
   "issatsoApp": {
     "offreStage": {
       "home": {
-        "title": "Offre Stages",
+        "title": "Internship Offers",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Offre Stage",
-        "createOrEditLabel": "Create or edit a Offre Stage",
+        "createLabel": "Create a new Internship Offer",
+        "createOrEditLabel": "Create or edit an Internship Offer",
         "notFound": "No Offre Stages found"
       },
-      "created": "A new Offre Stage is created with identifier {{ param }}",
-      "updated": "A Offre Stage is updated with identifier {{ param }}",
-      "deleted": "A Offre Stage is deleted with identifier {{ param }}",
+      "created": "A new Internship Offer is created with identifier {{ param }}",
+      "updated": "An Internship Offer is updated with identifier {{ param }}",
+      "deleted": "An Internship Offer is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Offre Stage {{ id }}?"
+        "question": "Are you sure you want to delete Internship Offer {{ id }}?"
       },
       "detail": {
-        "title": "Offre Stage"
+        "title": "Internship Offer"
       },
       "id": "ID",
-      "titre": "Titre",
+      "titre": "Title",
       "description": "Description",
-      "domaine": "Domaine",
-      "dateDebut": "Date Debut",
-      "dateFin": "Date Fin",
-      "entreprise": "Entreprise",
-      "lieu": "Lieu",
+      "domaine": "Domain",
+      "dateDebut": "Start Date",
+      "dateFin": "End Date",
+      "entreprise": "Company",
+      "lieu": "Place",
       "departement": "Departement"
     }
   }

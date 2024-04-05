@@ -58,8 +58,8 @@ public class Enseignant implements Serializable {
     @JsonIgnoreProperties(value = { "etudiants", "enseigants" }, allowSetters = true)
     private Set<Groupe> groupes = new HashSet<>();
 
-    @JsonIgnoreProperties(value = { "chefDepartement" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "chefDepartement")
+    @JsonIgnoreProperties(value = { "enseignant" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "enseignant")
     private Departement departement;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -230,10 +230,10 @@ public class Enseignant implements Serializable {
 
     public void setDepartement(Departement departement) {
         if (this.departement != null) {
-            this.departement.setChefDepartement(null);
+            this.departement.setEnseignant(null);
         }
         if (departement != null) {
-            departement.setChefDepartement(this);
+            departement.setEnseignant(this);
         }
         this.departement = departement;
     }

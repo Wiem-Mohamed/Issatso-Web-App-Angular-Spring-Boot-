@@ -1,13 +1,15 @@
 <div>
   <h2>
-    <span id="user-management-page-heading" jhiTranslate="userManagement.home.title" data-cy="userManagementPageHeading">Utilisateurs</span>
+    <span id="user-management-page-heading" jhiTranslate="userManagement.home.title" data-cy="userManagementPageHeading" class="titre"
+      >Utilisateurs</span
+    >
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="userManagement.home.refreshListLabel">Actualiser la liste</span>
       </button>
-      <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
+      <button class="btn btn-outline-primary jh-create-entity" [routerLink]="['./new']">
         <fa-icon icon="plus"></fa-icon> <span jhiTranslate="userManagement.home.createLabel">Créer un nouvel utilisateur</span>
       </button>
     </div>
@@ -42,7 +44,7 @@
       <tbody *ngIf="users">
         <tr *ngFor="let user of users; trackBy: trackIdentity">
           <td>
-            <a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a>
+            <a [routerLink]="['./', user.login, 'view']" style="text-decoration: none; color: red">{{ user.id }}</a>
           </td>
           <td>{{ user.login }}</td>
           <td>{{ user.email }}</td>
@@ -68,7 +70,7 @@
           <td>{{ user.langKey }}</td>
           <td>
             <div *ngFor="let authority of user.authorities">
-              <span class="badge bg-info">{{ authority }}</span>
+              <span class="badge" style="background-color: #0c31da">{{ authority }}</span>
             </div>
           </td>
           <td>{{ user.createdDate | date : 'dd/MM/yy HH:mm' }}</td>
@@ -76,7 +78,7 @@
           <td>{{ user.lastModifiedDate | date : 'dd/MM/yy HH:mm' }}</td>
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-dark btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
               </button>

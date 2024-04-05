@@ -2,7 +2,7 @@
   <div class="col-8">
     <div *ngIf="demandeEnseignant">
       <h2 data-cy="demandeEnseignantDetailsHeading">
-        <span jhiTranslate="issatsoApp.demandeEnseignant.detail.title">Demande Enseignant</span>
+        <span jhiTranslate="issatsoApp.demandeEnseignant.detail.title" class="titre">Demande Enseignant</span>
       </h2>
 
       <hr />
@@ -13,36 +13,43 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ demandeEnseignant.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEnseignant.sujet">Sujet</span></dt>
-        <dd>
+        <dd class="element">
           <span jhiTranslate="{{ 'issatsoApp.SujetEns.' + demandeEnseignant.sujet }}">{{ demandeEnseignant.sujet }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEnseignant.description">Description</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ demandeEnseignant.description }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEnseignant.statut">Statut</span></dt>
-        <dd>
+        <dd class="element">
           <span jhiTranslate="{{ 'issatsoApp.Status.' + demandeEnseignant.statut }}">{{ demandeEnseignant.statut }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEnseignant.dateCreation">Date Creation</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ demandeEnseignant.dateCreation | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="issatsoApp.demandeEnseignant.proprietaire">Proprietaire</span></dt>
-        <dd>
+        <dt *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">
+          <span jhiTranslate="issatsoApp.demandeEnseignant.proprietaire">Proprietaire</span>
+        </dt>
+        <dd *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'" class="element">
           <span>{{ demandeEnseignant.proprietaire }}</span>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/demande-enseignant', demandeEnseignant.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
+        type="button"
+        [routerLink]="['/demande-enseignant', demandeEnseignant.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

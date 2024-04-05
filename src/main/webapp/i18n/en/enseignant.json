@@ -2,32 +2,32 @@
   "issatsoApp": {
     "enseignant": {
       "home": {
-        "title": "Enseignants",
+        "title": "Teachers",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Enseignant",
-        "createOrEditLabel": "Create or edit a Enseignant",
-        "notFound": "No Enseignants found"
+        "createLabel": "Create a new Teacher",
+        "createOrEditLabel": "Create or edit a Teacher",
+        "notFound": "No Teachers found"
       },
       "error": "cin exists",
-      "created": "A new Enseignant is created with identifier {{ param }}",
-      "updated": "A Enseignant is updated with identifier {{ param }}",
-      "deleted": "A Enseignant is deleted with identifier {{ param }}",
+      "created": "A new Teacher is created with identifier {{ param }}",
+      "updated": "A Teacher is updated with identifier {{ param }}",
+      "deleted": "A Teacher is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Enseignant {{ id }}?"
+        "question": "Are you sure you want to delete Teacher {{ id }}?"
       },
       "detail": {
-        "title": "Enseignant"
+        "title": "Teacher"
       },
       "id": "ID",
-      "nom": "Nom",
-      "prenom": "Prenom",
+      "nom": "first Name",
+      "prenom": "last Name",
       "cin": "Cin",
       "email": "Email",
-      "numTel": "Num Tel",
-      "dateEmbauche": "Date Embauche",
+      "numTel": "Phone Number",
+      "dateEmbauche": "HireDate",
       "grade": "Grade",
-      "matiere": "Matiere",
-      "groupe": "Groupe",
+      "matiere": "Subject",
+      "groupe": "Group",
       "departement": "Departement"
     }
   }

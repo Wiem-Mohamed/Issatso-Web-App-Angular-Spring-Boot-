@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="AvisHeading">
-    <span jhiTranslate="issatsoApp.avis.home.title">Avis</span>
+    <span jhiTranslate="issatsoApp.avis.home.title" class="titre">Avis</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.avis.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ETUDIANT'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-avis"
+        class="btn btn-outline-primary jh-create-entity create-avis"
         [routerLink]="['/avis/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -62,24 +63,36 @@
       <tbody>
         <tr *ngFor="let avis of avis; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/avis', avis.id, 'view']">{{ avis.id }}</a>
+            <a [routerLink]="['/avis', avis.id, 'view']" style="text-decoration: none; color: red">{{ avis.id }}</a>
           </td>
           <td>{{ avis.sujet }}</td>
           <td>{{ avis.description }}</td>
           <td>{{ avis.dateCreation | formatMediumDatetime }}</td>
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/avis', avis.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
+                type="submit"
+                [routerLink]="['/avis', avis.id, 'view']"
+                class="btn btn-dark btn-sm"
+                data-cy="entityDetailsButton"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
               </button>
 
-              <button type="submit" [routerLink]="['/avis', avis.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <!--<button type="submit" [routerLink]="['/avis', avis.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
-              </button>
+              </button>-->
 
-              <button type="submit" (click)="delete(avis)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
+                type="submit"
+                (click)="delete(avis)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

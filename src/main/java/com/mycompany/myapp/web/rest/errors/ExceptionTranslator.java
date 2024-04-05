@@ -105,6 +105,10 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
         ) return (ProblemDetailWithCause) new NumInscriptionAlreadyUsedException().getBody();
 
         if (
+            ex instanceof com.mycompany.myapp.service.DepartementNameAlreadyUsedException
+        ) return (ProblemDetailWithCause) new DepartementNameAlreadyUsedException().getBody();
+
+        if (
             ex instanceof ErrorResponseException exp && exp.getBody() instanceof ProblemDetailWithCause
         ) return (ProblemDetailWithCause) exp.getBody();
         return ProblemDetailWithCauseBuilder.instance().withStatus(toStatus(ex).value()).build();

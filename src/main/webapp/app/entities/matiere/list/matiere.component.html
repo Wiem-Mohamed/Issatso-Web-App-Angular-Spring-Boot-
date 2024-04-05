@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="MatiereHeading">
-    <span jhiTranslate="issatsoApp.matiere.home.title">Matieres</span>
+    <span jhiTranslate="issatsoApp.matiere.home.title" class="titre">Matieres</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.matiere.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-matiere"
+        class="btn btn-outline-primary jh-create-entity create-matiere"
         [routerLink]="['/matiere/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -56,20 +57,23 @@
       <tbody>
         <tr *ngFor="let matiere of matieres; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/matiere', matiere.id, 'view']">{{ matiere.id }}</a>
+            <a [routerLink]="['/matiere', matiere.id, 'view']" style="text-decoration: none; color: red">{{ matiere.id }}</a>
           </td>
           <td>{{ matiere.matiereName }}</td>
           <td>
             <div *ngIf="matiere.enseignant">
-              <a [routerLink]="['/enseignant', matiere.enseignant.id, 'view']">{{ matiere.enseignant.nom }}</a>
+              <a [routerLink]="['/enseignant', matiere.enseignant.id, 'view']" style="text-decoration: none; color: green">{{
+                matiere.enseignant.nom
+              }}</a>
             </div>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button
+                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
                 type="submit"
                 [routerLink]="['/matiere', matiere.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -77,6 +81,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
                 type="submit"
                 [routerLink]="['/matiere', matiere.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -86,7 +91,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(matiere)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
+                type="submit"
+                (click)="delete(matiere)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

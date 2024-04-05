@@ -48,33 +48,33 @@ describe('Departement Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call chefDepartement query and add missing value', () => {
+    it('Should call enseignant query and add missing value', () => {
       const departement: IDepartement = { id: 456 };
-      const chefDepartement: IEnseignant = { id: 73273 };
-      departement.chefDepartement = chefDepartement;
+      const enseignant: IEnseignant = { id: 73273 };
+      departement.enseignant = enseignant;
 
-      const chefDepartementCollection: IEnseignant[] = [{ id: 18543 }];
-      jest.spyOn(enseignantService, 'query').mockReturnValue(of(new HttpResponse({ body: chefDepartementCollection })));
-      const expectedCollection: IEnseignant[] = [chefDepartement, ...chefDepartementCollection];
+      const enseignantCollection: IEnseignant[] = [{ id: 18543 }];
+      jest.spyOn(enseignantService, 'query').mockReturnValue(of(new HttpResponse({ body: enseignantCollection })));
+      const expectedCollection: IEnseignant[] = [enseignant, ...enseignantCollection];
       jest.spyOn(enseignantService, 'addEnseignantToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ departement });
       comp.ngOnInit();
 
       expect(enseignantService.query).toHaveBeenCalled();
-      expect(enseignantService.addEnseignantToCollectionIfMissing).toHaveBeenCalledWith(chefDepartementCollection, chefDepartement);
-      expect(comp.chefDepartementsCollection).toEqual(expectedCollection);
+      expect(enseignantService.addEnseignantToCollectionIfMissing).toHaveBeenCalledWith(enseignantCollection, enseignant);
+      expect(comp.enseignantsCollection).toEqual(expectedCollection);
     });
 
     it('Should update editForm', () => {
       const departement: IDepartement = { id: 456 };
-      const chefDepartement: IEnseignant = { id: 32058 };
-      departement.chefDepartement = chefDepartement;
+      const enseignant: IEnseignant = { id: 32058 };
+      departement.enseignant = enseignant;
 
       activatedRoute.data = of({ departement });
       comp.ngOnInit();
 
-      expect(comp.chefDepartementsCollection).toContain(chefDepartement);
+      expect(comp.enseignantsCollection).toContain(enseignant);
       expect(comp.departement).toEqual(departement);
     });
   });

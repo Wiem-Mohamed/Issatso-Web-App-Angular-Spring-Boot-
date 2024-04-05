@@ -15,6 +15,7 @@ public final class ErrorConstants {
 
     public static final URI CIN_ALREADY_USED_TYPE = URI.create(PROBLEM_BASE_URL + "/cin-already-used");
     public static final URI NUMINSCRIPTION_ALREADY_USED_TYPE = URI.create(PROBLEM_BASE_URL + "/numinscription-already-used");
+    public static final URI NOM_DEPARTEMENT_ALREADY_USED_TYPE = URI.create(PROBLEM_BASE_URL + "/nom-already-used");
 
     private ErrorConstants() {}
 }

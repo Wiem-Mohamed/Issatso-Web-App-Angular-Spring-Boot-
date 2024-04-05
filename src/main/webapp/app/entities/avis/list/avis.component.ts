@@ -14,6 +14,8 @@ import { AvisDeleteDialogComponent } from '../delete/avis-delete-dialog.componen
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-avis',
@@ -27,6 +29,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class AvisComponent implements OnInit {

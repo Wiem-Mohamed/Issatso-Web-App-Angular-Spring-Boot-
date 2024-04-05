@@ -4,12 +4,58 @@ Main page styles
 
 .hipster {
   display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('/content/images/jhipster_family_member_0.svg') no-repeat center top;
+  width: 395px;
+  height: 490px;
+  background: url('/content/images/image_accueil.avif') no-repeat center left;
   background-size: contain;
 }
+//titre
+.display-4 {
+  color: #1a237e;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 50px auto;
+}
 
+.col-md-9 {
+  text-align: center;
+}
+.btn_conn {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #1a237e;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid #1a237e;
+  margin: 100px 10px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.conn {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.btn_creer {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid #1a237e;
+  margin: 100px 10px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.creer {
+  text-decoration: none;
+  color: #1a237e;
+}
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (-moz-min-device-pixel-ratio: 2),
@@ -17,7 +63,7 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('/content/images/jhipster_family_member_0.svg') no-repeat center top;
+    background: url('/content/images/image_accueil.avif') no-repeat center top;
     background-size: contain;
   }
 }

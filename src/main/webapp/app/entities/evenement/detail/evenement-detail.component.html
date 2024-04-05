@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="evenement">
-      <h2 data-cy="evenementDetailsHeading"><span jhiTranslate="issatsoApp.evenement.detail.title">Evenement</span></h2>
+      <h2 data-cy="evenementDetailsHeading"><span jhiTranslate="issatsoApp.evenement.detail.title" class="titre">Evenement</span></h2>
 
       <hr />
 
@@ -11,43 +11,48 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ evenement.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.evenement.titre">Titre</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ evenement.titre }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.evenement.description">Description</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ evenement.description }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.evenement.dateDebut">Date Debut</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ evenement.dateDebut | formatMediumDatetime }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.evenement.dateFin">Date Fin</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ evenement.dateFin | formatMediumDatetime }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.evenement.lieu">Lieu</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ evenement.lieu }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.evenement.partenaire">Partenaire</span></dt>
-        <dd>
+        <dd class="element">
           <span *ngFor="let partenaire of evenement.partenaires; let last = last">
-            <a [routerLink]="['/partenaire', partenaire.id, 'view']">{{ partenaire.nom }}</a
+            <a [routerLink]="['/partenaire', partenaire.id, 'view']" class="nomg">{{ partenaire.nom }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/evenement', evenement.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
+        type="button"
+        [routerLink]="['/evenement', evenement.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

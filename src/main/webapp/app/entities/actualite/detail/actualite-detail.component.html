@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="actualite">
-      <h2 data-cy="actualiteDetailsHeading"><span jhiTranslate="issatsoApp.actualite.detail.title">Actualite</span></h2>
+      <h2 data-cy="actualiteDetailsHeading"><span jhiTranslate="issatsoApp.actualite.detail.title" class="titre">Actualite</span></h2>
 
       <hr />
 
@@ -11,15 +11,15 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ actualite.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.actualite.titre">Titre</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ actualite.titre }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.actualite.image">Image</span></dt>
-        <dd>
+        <dd class="element">
           <div *ngIf="actualite.image">
             <a (click)="openFile(actualite.image, actualite.imageContentType)">
               <img
@@ -28,24 +28,28 @@
                 alt="actualite image"
               />
             </a>
-            {{ actualite.imageContentType }}, {{ byteSize(actualite.image) }}
           </div>
         </dd>
         <dt><span jhiTranslate="issatsoApp.actualite.contenu">Contenu</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ actualite.contenu }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.actualite.datePublication">Date Publication</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ actualite.datePublication | formatMediumDatetime }}</span>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/actualite', actualite.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
+        type="button"
+        [routerLink]="['/actualite', actualite.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

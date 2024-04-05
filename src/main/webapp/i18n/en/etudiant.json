@@ -2,31 +2,31 @@
   "issatsoApp": {
     "etudiant": {
       "home": {
-        "title": "Etudiants",
+        "title": "Students",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Etudiant",
-        "createOrEditLabel": "Create or edit a Etudiant",
+        "createLabel": "Create a new Student",
+        "createOrEditLabel": "Create or edit a Student",
         "notFound": "No Etudiants found"
       },
       "error": "inscription number exists",
-      "created": "A new Etudiant is created with identifier {{ param }}",
-      "updated": "A Etudiant is updated with identifier {{ param }}",
-      "deleted": "A Etudiant is deleted with identifier {{ param }}",
+      "created": "A new Student is created with identifier {{ param }}",
+      "updated": "A Student is updated with identifier {{ param }}",
+      "deleted": "A Student is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Etudiant {{ id }}?"
+        "question": "Are you sure you want to delete Student {{ id }}?"
       },
       "detail": {
-        "title": "Etudiant"
+        "title": "Student"
       },
       "id": "ID",
-      "nom": "Nom",
-      "prenom": "Prenom",
+      "nom": "First Name",
+      "prenom": "Second Name",
       "email": "Email",
-      "numInscription": "Num Inscription",
-      "dateAffectation": "Date Affectation",
-      "filiere": "Filiere",
-      "niveau": "Niveau",
-      "groupe": "Groupe"
+      "numInscription": "Inscription Number",
+      "dateAffectation": "Affectation Date",
+      "filiere": "Sector",
+      "niveau": "level",
+      "groupe": "Group"
     }
   }
 }

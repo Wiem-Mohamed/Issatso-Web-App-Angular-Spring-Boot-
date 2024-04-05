@@ -1,6 +1,7 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Enseignant;
+import com.mycompany.myapp.domain.Etudiant;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -28,4 +29,6 @@ public interface EnseignantRepository extends EnseignantRepositoryWithBagRelatio
     default Page<Enseignant> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    Optional<Enseignant> findByCin(String cin);
 }

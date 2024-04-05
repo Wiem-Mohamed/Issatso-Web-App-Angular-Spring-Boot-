@@ -14,6 +14,7 @@ import { DemandeEnseignantDeleteDialogComponent } from '../delete/demande-enseig
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 @Component({
   standalone: true,
   selector: 'jhi-demande-enseignant',
@@ -27,6 +28,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class DemandeEnseignantComponent implements OnInit {

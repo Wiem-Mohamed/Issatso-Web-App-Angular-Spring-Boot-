@@ -60,7 +60,7 @@ export class EnseignantFormService {
       ),
       nom: new FormControl(enseignantRawValue.nom),
       prenom: new FormControl(enseignantRawValue.prenom),
-      cin: new FormControl(enseignantRawValue.cin),
+      cin: new FormControl(enseignantRawValue.cin, { validators: [Validators.required] }),
       email: new FormControl(enseignantRawValue.email),
       numTel: new FormControl(enseignantRawValue.numTel),
       dateEmbauche: new FormControl(enseignantRawValue.dateEmbauche),

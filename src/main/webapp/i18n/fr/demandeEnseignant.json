@@ -4,15 +4,15 @@
       "home": {
         "title": "DemandeEnseignants",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Demande Enseignant",
-        "createOrEditLabel": "Créer ou éditer un Demande Enseignant",
-        "notFound": "Aucun Demande Enseignant trouvé"
+        "createLabel": "Créer une nouvelle Demande",
+        "createOrEditLabel": "Créer ou éditer une Demande",
+        "notFound": "Aucune Demande trouvée"
       },
-      "created": "Un nouveau Demande Enseignant a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Demande Enseignant avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Demande Enseignant avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Demande a été créé avec l'identifiant {{ param }}",
+      "updated": "La Demande avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Demande avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Demande Enseignant {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Demande {{ id }} ?"
       },
       "detail": {
         "title": "Demande Enseignant"

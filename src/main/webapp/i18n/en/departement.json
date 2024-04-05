@@ -8,6 +8,7 @@
         "createOrEditLabel": "Create or edit a Departement",
         "notFound": "No Departements found"
       },
+      "error": "name exists",
       "created": "A new Departement is created with identifier {{ param }}",
       "updated": "A Departement is updated with identifier {{ param }}",
       "deleted": "A Departement is deleted with identifier {{ param }}",
@@ -19,7 +20,7 @@
       },
       "id": "ID",
       "departmentName": "Department Name",
-      "chefDepartement": "Chef Departement"
+      "enseignant": "Departement chef cin"
     }
   }
 }

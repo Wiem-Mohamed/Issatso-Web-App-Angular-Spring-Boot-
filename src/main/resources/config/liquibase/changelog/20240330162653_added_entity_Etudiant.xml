@@ -26,7 +26,7 @@
             <column name="num_inscription" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_affectation" type="${datetimeType}">
+            <column name="date_affectation" type="DATETIME">
                 <constraints nullable="true" />
             </column>
             <column name="filiere" type="varchar(255)">

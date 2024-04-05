@@ -12,8 +12,9 @@
   "name": "Departement",
   "relationships": [
     {
+      "otherEntityField": "cin",
       "otherEntityName": "enseignant",
-      "relationshipName": "chefDepartement",
+      "relationshipName": "enseignant",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
     }

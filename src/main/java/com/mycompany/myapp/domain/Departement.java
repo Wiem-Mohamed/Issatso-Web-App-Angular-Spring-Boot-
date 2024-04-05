@@ -27,7 +27,7 @@ public class Departement implements Serializable {
     @JsonIgnoreProperties(value = { "matieres", "groupes", "departement" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
-    private Enseignant chefDepartement;
+    private Enseignant enseignant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -57,16 +57,16 @@ public class Departement implements Serializable {
         this.departmentName = departmentName;
     }
 
-    public Enseignant getChefDepartement() {
-        return this.chefDepartement;
+    public Enseignant getEnseignant() {
+        return this.enseignant;
     }
 
-    public void setChefDepartement(Enseignant enseignant) {
-        this.chefDepartement = enseignant;
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
     }
 
-    public Departement chefDepartement(Enseignant enseignant) {
-        this.setChefDepartement(enseignant);
+    public Departement enseignant(Enseignant enseignant) {
+        this.setEnseignant(enseignant);
         return this;
     }
 

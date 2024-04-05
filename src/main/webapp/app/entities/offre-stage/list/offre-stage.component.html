@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="OffreStageHeading">
-    <span jhiTranslate="issatsoApp.offreStage.home.title">OffreStages</span>
+    <span jhiTranslate="issatsoApp.offreStage.home.title" class="titre">OffreStages</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.offreStage.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-offre-stage"
+        class="btn btn-outline-primary jh-create-entity create-offre-stage"
         [routerLink]="['/offre-stage/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -92,7 +93,7 @@
       <tbody>
         <tr *ngFor="let offreStage of offreStages; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/offre-stage', offreStage.id, 'view']">{{ offreStage.id }}</a>
+            <a [routerLink]="['/offre-stage', offreStage.id, 'view']" style="text-decoration: none; color: red">{{ offreStage.id }}</a>
           </td>
           <td>{{ offreStage.titre }}</td>
           <td>{{ offreStage.description }}</td>
@@ -103,15 +104,18 @@
           <td>{{ offreStage.lieu }}</td>
           <td>
             <div *ngIf="offreStage.departement">
-              <a [routerLink]="['/departement', offreStage.departement.id, 'view']">{{ offreStage.departement.departmentName }}</a>
+              <a [routerLink]="['/departement', offreStage.departement.id, 'view']" style="text-decoration: none; color: green">{{
+                offreStage.departement.departmentName
+              }}</a>
             </div>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
                 type="submit"
                 [routerLink]="['/offre-stage', offreStage.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -119,6 +123,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
                 type="submit"
                 [routerLink]="['/offre-stage', offreStage.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -128,7 +133,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(offreStage)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
+                type="submit"
+                (click)="delete(offreStage)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

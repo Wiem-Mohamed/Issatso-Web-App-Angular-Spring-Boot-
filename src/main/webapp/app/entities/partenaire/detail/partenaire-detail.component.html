@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="partenaire">
-      <h2 data-cy="partenaireDetailsHeading"><span jhiTranslate="issatsoApp.partenaire.detail.title">Partenaire</span></h2>
+      <h2 data-cy="partenaireDetailsHeading"><span jhiTranslate="issatsoApp.partenaire.detail.title" class="titre">Partenaire</span></h2>
 
       <hr />
 
@@ -11,36 +11,41 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ partenaire.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.partenaire.nom">Nom</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ partenaire.nom }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.partenaire.description">Description</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ partenaire.description }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.partenaire.domaineActivite">Domaine Activite</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ partenaire.domaineActivite }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.partenaire.adresse">Adresse</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ partenaire.adresse }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.partenaire.contact">Contact</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ partenaire.contact }}</span>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/partenaire', partenaire.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_RELATION_PUBLIQUE'"
+        type="button"
+        [routerLink]="['/partenaire', partenaire.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

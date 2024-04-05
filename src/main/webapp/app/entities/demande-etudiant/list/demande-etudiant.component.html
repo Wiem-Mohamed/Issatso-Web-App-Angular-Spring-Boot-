@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="DemandeEtudiantHeading">
-    <span jhiTranslate="issatsoApp.demandeEtudiant.home.title">DemandeEtudiants</span>
+    <span jhiTranslate="issatsoApp.demandeEtudiant.home.title" class="titre">DemandeEtudiants</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.demandeEtudiant.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ETUDIANT'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-demande-etudiant"
+        class="btn btn-outline-primary jh-create-entity create-demande-etudiant"
         [routerLink]="['/demande-etudiant/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -62,7 +63,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="proprietaire">
+          <th scope="col" jhiSortBy="proprietaire" *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'">
             <div class="d-flex">
               <span jhiTranslate="issatsoApp.demandeEtudiant.proprietaire">Proprietaire</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -74,19 +75,21 @@
       <tbody>
         <tr *ngFor="let demandeEtudiant of demandeEtudiants; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'view']">{{ demandeEtudiant.id }}</a>
+            <a [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'view']" style="text-decoration: none; color: red">{{
+              demandeEtudiant.id
+            }}</a>
           </td>
           <td jhiTranslate="{{ 'issatsoApp.SujetEtud.' + demandeEtudiant.sujet }}">{{ demandeEtudiant.sujet }}</td>
           <td>{{ demandeEtudiant.description }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Status.' + demandeEtudiant.statut }}">{{ demandeEtudiant.statut }}</td>
           <td>{{ demandeEtudiant.dateCreation | formatMediumDatetime }}</td>
-          <td>{{ demandeEtudiant.proprietaire }}</td>
+          <td *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'">{{ demandeEtudiant.proprietaire }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button
                 type="submit"
                 [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -94,6 +97,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
                 type="submit"
                 [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'edit']"
                 class="btn btn-primary btn-sm"

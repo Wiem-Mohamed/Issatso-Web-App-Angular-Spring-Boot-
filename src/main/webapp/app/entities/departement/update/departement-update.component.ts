@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -13,6 +13,8 @@ import { DepartementService } from '../service/departement.service';
 import { IEnseignant } from 'app/entities/enseignant/enseignant.model';
 import { EnseignantService } from 'app/entities/enseignant/service/enseignant.service';
 
+import { NOM_DEPARTEMENT_ALREADY_USED_TYPE } from 'app/config/error.constants';
+
 @Component({
   standalone: true,
   selector: 'jhi-departement-update',
@@ -22,8 +24,9 @@ import { EnseignantService } from 'app/entities/enseignant/service/enseignant.se
 export class DepartementUpdateComponent implements OnInit {
   isSaving = false;
   departement: IDepartement | null = null;
+  errorNomExists = false;
 
-  chefDepartementsCollection: IEnseignant[] = [];
+  enseignantsCollection: IEnseignant[] = [];
 
   editForm: DepartementFormGroup = this.departementFormService.createDepartementFormGroup();
 
@@ -52,6 +55,7 @@ export class DepartementUpdateComponent implements OnInit {
   }
 
   save(): void {
+    this.errorNomExists = false;
     this.isSaving = true;
     const departement = this.departementFormService.getDepartement(this.editForm);
     if (departement.id !== null) {
@@ -62,10 +66,20 @@ export class DepartementUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDepartement>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
-    });
+    result.subscribe(
+      (res: HttpResponse<IDepartement>) => {
+        this.onSaveSuccess();
+      },
+      (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.status === 400 && errorResponse.error.type === NOM_DEPARTEMENT_ALREADY_USED_TYPE) {
+          // nom existe déjà
+          this.errorNomExists = true;
+        } else {
+          this.onSaveError();
+        }
+        this.onSaveFinalize();
+      }
+    );
   }
 
   protected onSaveSuccess(): void {
@@ -84,9 +98,9 @@ export class DepartementUpdateComponent implements OnInit {
     this.departement = departement;
     this.departementFormService.resetForm(this.editForm, departement);
 
-    this.chefDepartementsCollection = this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(
-      this.chefDepartementsCollection,
-      departement.chefDepartement
+    this.enseignantsCollection = this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(
+      this.enseignantsCollection,
+      departement.enseignant
     );
   }
 
@@ -96,9 +110,9 @@ export class DepartementUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEnseignant[]>) => res.body ?? []))
       .pipe(
         map((enseignants: IEnseignant[]) =>
-          this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(enseignants, this.departement?.chefDepartement)
+          this.enseignantService.addEnseignantToCollectionIfMissing<IEnseignant>(enseignants, this.departement?.enseignant)
         )
       )
-      .subscribe((enseignants: IEnseignant[]) => (this.chefDepartementsCollection = enseignants));
+      .subscribe((enseignants: IEnseignant[]) => (this.enseignantsCollection = enseignants));
   }
 }

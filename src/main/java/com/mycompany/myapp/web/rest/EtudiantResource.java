@@ -50,7 +50,7 @@ public class EtudiantResource {
     public ResponseEntity<Etudiant> createEtudiant(@RequestBody Etudiant etudiant) throws URISyntaxException {
         log.debug("REST request to save Etudiant : {}", etudiant);
 
-        // Vérifier si un article avec le même Codebarres existe déjà
+        // Vérifier si un etudiant avec le même num inscription existe déjà
         Optional<Etudiant> existingEtudiant = etudiantRepository.findByNumInscription(etudiant.getNumInscription());
         if (existingEtudiant.isPresent()) {
             throw new NumInscriptionAlreadyUsedException();

@@ -13,6 +13,8 @@ import { EntityArrayResponseType, SupportDeCoursService } from '../service/suppo
 import { SupportDeCoursDeleteDialogComponent } from '../delete/support-de-cours-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-support-de-cours',
@@ -26,6 +28,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class SupportDeCoursComponent implements OnInit {

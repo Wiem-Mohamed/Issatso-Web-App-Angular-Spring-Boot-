@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="GroupeHeading">
-    <span jhiTranslate="issatsoApp.groupe.home.title">Groupes</span>
+    <span jhiTranslate="issatsoApp.groupe.home.title" class="titre">Groupes</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.groupe.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-groupe"
+        class="btn btn-outline-primary jh-create-entity create-groupe"
         [routerLink]="['/groupe/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -62,24 +63,42 @@
       <tbody>
         <tr *ngFor="let groupe of groupes; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/groupe', groupe.id, 'view']">{{ groupe.id }}</a>
+            <a [routerLink]="['/groupe', groupe.id, 'view']" style="text-decoration: none; color: red">{{ groupe.id }}</a>
           </td>
           <td>{{ groupe.nomGroupe }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Filiere.' + groupe.filiere }}">{{ groupe.filiere }}</td>
           <td>{{ groupe.niveau }}</td>
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/groupe', groupe.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
+                type="submit"
+                [routerLink]="['/groupe', groupe.id, 'view']"
+                class="btn btn-dark btn-sm"
+                data-cy="entityDetailsButton"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
               </button>
 
-              <button type="submit" [routerLink]="['/groupe', groupe.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
+                type="submit"
+                [routerLink]="['/groupe', groupe.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(groupe)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
+                type="submit"
+                (click)="delete(groupe)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

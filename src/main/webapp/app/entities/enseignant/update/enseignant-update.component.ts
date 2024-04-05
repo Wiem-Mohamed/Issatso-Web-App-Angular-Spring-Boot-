@@ -74,7 +74,7 @@ export class EnseignantUpdateComponent implements OnInit {
       },
       (errorResponse: HttpErrorResponse) => {
         if (errorResponse.status === 400 && errorResponse.error.type === CIN_ALREADY_USED_TYPE) {
-          // Le code-barres existe déjà
+          // Le cin existe déjà
           this.errorCinExists = true;
         } else {
           this.onSaveError();
@@ -108,7 +108,7 @@ export class EnseignantUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.groupeService
-      .query()
+      .query({ filter: 'enseignant-is-null' })
       .pipe(map((res: HttpResponse<IGroupe[]>) => res.body ?? []))
       .pipe(
         map((groupes: IGroupe[]) =>

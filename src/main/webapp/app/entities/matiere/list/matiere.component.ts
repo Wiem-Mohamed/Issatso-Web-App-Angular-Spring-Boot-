@@ -13,6 +13,8 @@ import { EntityArrayResponseType, MatiereService } from '../service/matiere.serv
 import { MatiereDeleteDialogComponent } from '../delete/matiere-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-matiere',
@@ -26,6 +28,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class MatiereComponent implements OnInit {

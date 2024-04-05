@@ -2,20 +2,20 @@
   "issatsoApp": {
     "actualite": {
       "home": {
-        "title": "Actualites",
+        "title": "Actualités",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Actualite",
-        "createOrEditLabel": "Créer ou éditer un Actualite",
-        "notFound": "Aucun Actualite trouvé"
+        "createLabel": "Créer une nouvelle Actualité",
+        "createOrEditLabel": "Créer ou éditer une Actualité",
+        "notFound": "Aucune Actualité trouvée"
       },
-      "created": "Un nouveau Actualite a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Actualite avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Actualite avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Actualité a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Actualité avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "L'Actualité avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Actualite {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'Actualité {{ id }} ?"
       },
       "detail": {
-        "title": "Actualite"
+        "title": "Actualité"
       },
       "id": "ID",
       "titre": "Titre",

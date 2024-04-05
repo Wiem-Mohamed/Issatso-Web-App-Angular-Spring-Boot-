@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="EvenementHeading">
-    <span jhiTranslate="issatsoApp.evenement.home.title">Evenements</span>
+    <span jhiTranslate="issatsoApp.evenement.home.title" class="titre">Evenements</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.evenement.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-evenement"
+        class="btn btn-outline-primary jh-create-entity create-evenement"
         [routerLink]="['/evenement/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -80,7 +81,7 @@
       <tbody>
         <tr *ngFor="let evenement of evenements; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/evenement', evenement.id, 'view']">{{ evenement.id }}</a>
+            <a [routerLink]="['/evenement', evenement.id, 'view']" style="text-decoration: none; color: red">{{ evenement.id }}</a>
           </td>
           <td>{{ evenement.titre }}</td>
           <td>{{ evenement.description }}</td>
@@ -89,16 +90,21 @@
           <td>{{ evenement.lieu }}</td>
           <td>
             <span *ngFor="let partenaire of evenement.partenaires; let last = last">
-              <a class="form-control-static" [routerLink]="['/partenaire', partenaire.id, 'view']">{{ partenaire.nom }}</a
+              <a
+                class="form-control-static"
+                [routerLink]="['/partenaire', partenaire.id, 'view']"
+                style="text-decoration: none; color: green"
+                >{{ partenaire.nom }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
                 type="submit"
                 [routerLink]="['/evenement', evenement.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -106,6 +112,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
                 type="submit"
                 [routerLink]="['/evenement', evenement.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -115,7 +122,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(evenement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
+                type="submit"
+                (click)="delete(evenement)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

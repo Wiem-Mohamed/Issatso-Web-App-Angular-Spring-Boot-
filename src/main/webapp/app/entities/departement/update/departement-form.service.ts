@@ -19,7 +19,7 @@ type DepartementFormDefaults = Pick<NewDepartement, 'id'>;
 type DepartementFormGroupContent = {
   id: FormControl<IDepartement['id'] | NewDepartement['id']>;
   departmentName: FormControl<IDepartement['departmentName']>;
-  chefDepartement: FormControl<IDepartement['chefDepartement']>;
+  enseignant: FormControl<IDepartement['enseignant']>;
 };
 
 export type DepartementFormGroup = FormGroup<DepartementFormGroupContent>;
@@ -42,7 +42,7 @@ export class DepartementFormService {
       departmentName: new FormControl(departementRawValue.departmentName, {
         validators: [Validators.required],
       }),
-      chefDepartement: new FormControl(departementRawValue.chefDepartement),
+      enseignant: new FormControl(departementRawValue.enseignant),
     });
   }
 

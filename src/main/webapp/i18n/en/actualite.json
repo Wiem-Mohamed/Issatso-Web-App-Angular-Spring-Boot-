@@ -2,26 +2,26 @@
   "issatsoApp": {
     "actualite": {
       "home": {
-        "title": "Actualites",
+        "title": "News",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Actualite",
-        "createOrEditLabel": "Create or edit a Actualite",
-        "notFound": "No Actualites found"
+        "createLabel": "Create a new News",
+        "createOrEditLabel": "Create or edit a News",
+        "notFound": "No News found"
       },
-      "created": "A new Actualite is created with identifier {{ param }}",
-      "updated": "A Actualite is updated with identifier {{ param }}",
-      "deleted": "A Actualite is deleted with identifier {{ param }}",
+      "created": "A new News is created with identifier {{ param }}",
+      "updated": "A News is updated with identifier {{ param }}",
+      "deleted": "A News is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Actualite {{ id }}?"
+        "question": "Are you sure you want to delete News {{ id }}?"
       },
       "detail": {
-        "title": "Actualite"
+        "title": "News"
       },
       "id": "ID",
-      "titre": "Titre",
-      "image": "Image",
-      "contenu": "Contenu",
-      "datePublication": "Date Publication"
+      "titre": "Title",
+      "image": "Picture",
+      "contenu": "Content",
+      "datePublication": "Publication Date"
     }
   }
 }

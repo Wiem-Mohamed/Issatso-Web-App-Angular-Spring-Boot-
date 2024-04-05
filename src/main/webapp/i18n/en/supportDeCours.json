@@ -2,29 +2,29 @@
   "issatsoApp": {
     "supportDeCours": {
       "home": {
-        "title": "Support De Cours",
+        "title": "Course Materials",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Support De Cours",
-        "createOrEditLabel": "Create or edit a Support De Cours",
-        "notFound": "No Support De Cours found"
+        "createLabel": "Create a new Support De Course Material",
+        "createOrEditLabel": "Create or edit a Support De Course Material",
+        "notFound": "No Course Material found"
       },
-      "created": "A new Support De Cours is created with identifier {{ param }}",
-      "updated": "A Support De Cours is updated with identifier {{ param }}",
-      "deleted": "A Support De Cours is deleted with identifier {{ param }}",
+      "created": "A new Course Material is created with identifier {{ param }}",
+      "updated": "A Course Material is updated with identifier {{ param }}",
+      "deleted": "A Course Material is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Support De Cours {{ id }}?"
+        "question": "Are you sure you want to delete Course Material {{ id }}?"
       },
       "detail": {
-        "title": "Support De Cours"
+        "title": "Course Materials"
       },
       "id": "ID",
-      "titre": "Titre",
+      "titre": "Title",
       "description": "Description",
-      "contenu": "Contenu",
-      "dateDepot": "Date Depot",
+      "contenu": "Content",
+      "dateDepot": "Filling Date",
       "filiere": "Filiere",
-      "niveau": "Niveau",
-      "matiere": "Matiere"
+      "niveau": "Level",
+      "matiere": "University subject"
     }
   }
 }

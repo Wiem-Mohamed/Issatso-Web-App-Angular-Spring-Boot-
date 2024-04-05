@@ -1,21 +1,22 @@
 <div>
   <h2 id="page-heading" data-cy="ActualiteHeading">
-    <span jhiTranslate="issatsoApp.actualite.home.title">Actualites</span>
+    <span jhiTranslate="issatsoApp.actualite.home.title" class="titre">Actualites</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.actualite.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-actualite"
+        class="btn btn-outline-primary jh-create-entity create-actualite"
         [routerLink]="['/actualite/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="issatsoApp.actualite.home.createLabel"> Créer un nouveau Actualite </span>
+        <span jhiTranslate="issatsoApp.actualite.home.createLabel"> Créer une nouvelle Actualite </span>
       </button>
     </div>
   </h2>
@@ -68,7 +69,7 @@
       <tbody>
         <tr *ngFor="let actualite of actualites; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/actualite', actualite.id, 'view']">{{ actualite.id }}</a>
+            <a [routerLink]="['/actualite', actualite.id, 'view']" style="text-decoration: none; color: red">>{{ actualite.id }}</a>
           </td>
           <td>{{ actualite.titre }}</td>
           <td>
@@ -79,16 +80,17 @@
                 alt="actualite image"
               />
             </a>
-            <span *ngIf="actualite.image">{{ actualite.imageContentType }}, {{ byteSize(actualite.image) }}</span>
+            <span *ngIf="actualite.image"></span>
           </td>
           <td>{{ actualite.contenu }}</td>
           <td>{{ actualite.datePublication | formatMediumDatetime }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
                 type="submit"
                 [routerLink]="['/actualite', actualite.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -96,6 +98,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
                 type="submit"
                 [routerLink]="['/actualite', actualite.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -105,7 +108,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(actualite)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN_COORDINATION'"
+                type="submit"
+                (click)="delete(actualite)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

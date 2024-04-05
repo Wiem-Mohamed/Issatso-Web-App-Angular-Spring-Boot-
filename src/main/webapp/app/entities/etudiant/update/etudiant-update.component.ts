@@ -14,7 +14,7 @@ import { IGroupe } from 'app/entities/groupe/groupe.model';
 import { GroupeService } from 'app/entities/groupe/service/groupe.service';
 import { Filiere } from 'app/entities/enumerations/filiere.model';
 
-import { NumInscription_ALREADY_USED_TYPE } from 'app/config/error.constants';
+import { NUMINSCRIPTION_ALREADY_USED_TYPE } from 'app/config/error.constants';
 
 @Component({
   standalone: true,
@@ -73,7 +73,7 @@ export class EtudiantUpdateComponent implements OnInit {
         this.onSaveSuccess();
       },
       (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.status === 400 && errorResponse.error.type === NumInscription_ALREADY_USED_TYPE) {
+        if (errorResponse.status === 400 && errorResponse.error.type === NUMINSCRIPTION_ALREADY_USED_TYPE) {
           // num inscrit existe déjà
           this.errorNumInscritExists = true;
         } else {

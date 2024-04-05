@@ -7,6 +7,8 @@ import SharedModule from 'app/shared/shared.module';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 
+import { DatePipe } from '@angular/common';
+
 @Component({
   standalone: true,
   selector: 'jhi-home',
@@ -16,6 +18,8 @@ import { Account } from 'app/core/auth/account.model';
 })
 export default class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
+
+  currentDate: Date = new Date();
 
   private readonly destroy$ = new Subject<void>();
 

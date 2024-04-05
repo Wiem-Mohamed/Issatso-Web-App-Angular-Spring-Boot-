@@ -2,27 +2,27 @@
   "issatsoApp": {
     "demandeEnseignant": {
       "home": {
-        "title": "Demande Enseignants",
+        "title": "Teacher Request",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Demande Enseignant",
-        "createOrEditLabel": "Create or edit a Demande Enseignant",
-        "notFound": "No Demande Enseignants found"
+        "createLabel": "Create a new Teacher Request",
+        "createOrEditLabel": "Create or edit a Teacher Request",
+        "notFound": "No Teacher Request found"
       },
-      "created": "A new Demande Enseignant is created with identifier {{ param }}",
-      "updated": "A Demande Enseignant is updated with identifier {{ param }}",
-      "deleted": "A Demande Enseignant is deleted with identifier {{ param }}",
+      "created": "A new Teacher Request is created with identifier {{ param }}",
+      "updated": "A Teacher Request is updated with identifier {{ param }}",
+      "deleted": "A Teacher Request is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Demande Enseignant {{ id }}?"
+        "question": "Are you sure you want to delete Teacher Request {{ id }}?"
       },
       "detail": {
-        "title": "Demande Enseignant"
+        "title": "Teacher Request"
       },
       "id": "ID",
-      "sujet": "Sujet",
+      "sujet": "Subject",
       "description": "Description",
       "statut": "Statut",
-      "dateCreation": "Date Creation",
-      "proprietaire": "Proprietaire"
+      "dateCreation": "Creation Date",
+      "proprietaire": "Owner"
     }
   }
 }

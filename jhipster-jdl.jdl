@@ -114,7 +114,7 @@ entity Evenement {
 }
 
 relationship OneToOne {
-	Departement{chefDepartement} to Enseignant
+	Departement{enseignant(cin)} to Enseignant
 }
 relationship ManyToMany {
 	Enseignant{groupe(nomGroupe)} to Groupe{enseigant}

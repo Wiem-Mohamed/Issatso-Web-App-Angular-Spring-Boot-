@@ -4,18 +4,18 @@
       "home": {
         "title": "OffreStages",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Offre Stage",
-        "createOrEditLabel": "Créer ou éditer un Offre Stage",
-        "notFound": "Aucun Offre Stage trouvé"
+        "createLabel": "Créer une nouvelle Offre de Stage",
+        "createOrEditLabel": "Créer ou éditer une Offre de Stage",
+        "notFound": "Aucune Offre de Stage trouvée"
       },
-      "created": "Un nouveau Offre Stage a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Offre Stage avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Offre Stage avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Offre de Stage a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Offre de Stage avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Offre de Stage avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Offre Stage {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'Offre de Stage {{ id }} ?"
       },
       "detail": {
-        "title": "Offre Stage"
+        "title": "Offre de Stage"
       },
       "id": "ID",
       "titre": "Titre",

@@ -31,6 +31,11 @@
         <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.enseignant.cin" for="field_cin">Cin</label>
           <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
+          <div *ngIf="editForm.get('cin')!.invalid && (editForm.get('cin')!.dirty || editForm.get('cin')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cin')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+          </div>
           <div class="form-text text-danger" *ngIf="errorCinExists" jhiTranslate="issatsoApp.enseignant.error">
             <strong>Cette cin existe déjà !</strong>
           </div>
@@ -95,7 +100,7 @@
           id="save-entity"
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
+          class="btn btn-info"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
         </button>

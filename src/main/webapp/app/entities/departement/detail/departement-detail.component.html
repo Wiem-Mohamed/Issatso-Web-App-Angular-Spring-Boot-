@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="departement">
-      <h2 data-cy="departementDetailsHeading"><span jhiTranslate="issatsoApp.departement.detail.title">Departement</span></h2>
+      <h2 data-cy="departementDetailsHeading"><span jhiTranslate="issatsoApp.departement.detail.title" class="titre">Departement</span></h2>
 
       <hr />
 
@@ -11,26 +11,31 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ departement.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.departement.departmentName">Department Name</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ departement.departmentName }}</span>
         </dd>
-        <dt><span jhiTranslate="issatsoApp.departement.chefDepartement">Chef Departement</span></dt>
-        <dd>
-          <div *ngIf="departement.chefDepartement">
-            <a [routerLink]="['/enseignant', departement.chefDepartement.id, 'view']">{{ departement.chefDepartement.id }}</a>
+        <dt><span jhiTranslate="issatsoApp.departement.enseignant">Enseignant</span></dt>
+        <dd class="element">
+          <div *ngIf="departement.enseignant">
+            <a [routerLink]="['/enseignant', departement.enseignant.id, 'view']" class="nomg">{{ departement.enseignant.cin }}</a>
           </div>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/departement', departement.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
+        type="button"
+        [routerLink]="['/departement', departement.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

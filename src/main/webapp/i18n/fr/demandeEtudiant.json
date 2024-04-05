@@ -4,15 +4,15 @@
       "home": {
         "title": "DemandeEtudiants",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Demande Etudiant",
-        "createOrEditLabel": "Créer ou éditer un Demande Etudiant",
-        "notFound": "Aucun Demande Etudiant trouvé"
+        "createLabel": "Créer une nouvelle Demande",
+        "createOrEditLabel": "Créer ou éditer une Demande",
+        "notFound": "Aucune Demande trouvée"
       },
-      "created": "Un nouveau Demande Etudiant a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Demande Etudiant avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Demande Etudiant avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Demande a été créé avec l'identifiant {{ param }}",
+      "updated": "La Demande avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Demande avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Demande Etudiant {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Demande {{ id }} ?"
       },
       "detail": {
         "title": "Demande Etudiant"

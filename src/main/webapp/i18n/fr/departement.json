@@ -8,6 +8,7 @@
         "createOrEditLabel": "Créer ou éditer un Departement",
         "notFound": "Aucun Departement trouvé"
       },
+      "error": "nom existe",
       "created": "Un nouveau Departement a été créé avec l'identifiant {{ param }}",
       "updated": "Le Departement avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Departement avec l'identifiant {{ param }} a été supprimé",
@@ -18,8 +19,8 @@
         "title": "Departement"
       },
       "id": "ID",
-      "departmentName": "Department Name",
-      "chefDepartement": "Chef Departement"
+      "departmentName": "Nom Department",
+      "enseignant": "Cin chef département"
     }
   }
 }

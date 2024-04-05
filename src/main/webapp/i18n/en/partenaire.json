@@ -2,28 +2,28 @@
   "issatsoApp": {
     "partenaire": {
       "home": {
-        "title": "Partenaires",
+        "title": "Partner",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Partenaire",
-        "createOrEditLabel": "Create or edit a Partenaire",
+        "createLabel": "Create a new Partner",
+        "createOrEditLabel": "Create or edit a Partner",
         "notFound": "No Partenaires found"
       },
-      "created": "A new Partenaire is created with identifier {{ param }}",
-      "updated": "A Partenaire is updated with identifier {{ param }}",
-      "deleted": "A Partenaire is deleted with identifier {{ param }}",
+      "created": "A new Partner is created with identifier {{ param }}",
+      "updated": "A Partner is updated with identifier {{ param }}",
+      "deleted": "A Partner is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Partenaire {{ id }}?"
+        "question": "Are you sure you want to delete Partner {{ id }}?"
       },
       "detail": {
-        "title": "Partenaire"
+        "title": "Partner"
       },
       "id": "ID",
-      "nom": "Nom",
+      "nom": "Name",
       "description": "Description",
-      "domaineActivite": "Domaine Activite",
-      "adresse": "Adresse",
+      "domaineActivite": "Activity Domain",
+      "adresse": "Adress",
       "contact": "Contact",
-      "evenement": "Evenement"
+      "evenement": "Event"
     }
   }
 }

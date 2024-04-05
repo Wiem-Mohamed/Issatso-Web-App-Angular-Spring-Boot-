@@ -5,6 +5,7 @@
         id="jhi-demande-enseignant-heading"
         data-cy="DemandeEnseignantCreateUpdateHeading"
         jhiTranslate="issatsoApp.demandeEnseignant.home.createOrEditLabel"
+        class="titre"
       >
         Créer ou éditer un Demande Enseignant
       </h2>
@@ -33,6 +34,7 @@
             id="field_description"
             data-cy="description"
             formControlName="description"
+            [readonly]="true"
           ></textarea>
         </div>
 
@@ -55,6 +57,7 @@
               name="dateCreation"
               formControlName="dateCreation"
               placeholder="YYYY-MM-DD HH:mm"
+              [readonly]="true"
             />
           </div>
         </div>
@@ -68,6 +71,7 @@
             id="field_proprietaire"
             data-cy="proprietaire"
             formControlName="proprietaire"
+            [readonly]="true"
           />
         </div>
       </div>
@@ -82,7 +86,7 @@
           id="save-entity"
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
+          class="btn btn-info"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
         </button>

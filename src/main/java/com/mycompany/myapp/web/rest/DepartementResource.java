@@ -1,8 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Departement;
+import com.mycompany.myapp.domain.Etudiant;
 import com.mycompany.myapp.repository.DepartementRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import com.mycompany.myapp.web.rest.errors.DepartementNameAlreadyUsedException;
+import com.mycompany.myapp.web.rest.errors.NumInscriptionAlreadyUsedException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
@@ -50,6 +53,13 @@ public class DepartementResource {
     @PostMapping("/departements")
     public ResponseEntity<Departement> createDepartement(@Valid @RequestBody Departement departement) throws URISyntaxException {
         log.debug("REST request to save Departement : {}", departement);
+
+        // Vérifier si un departement avec le même nom existe déjà
+        Optional<Departement> existingDepart = departementRepository.findByDepartmentName(departement.getDepartmentName());
+        if (existingDepart.isPresent()) {
+            throw new DepartementNameAlreadyUsedException();
+        }
+
         if (departement.getId() != null) {
             throw new BadRequestAlertException("A new departement cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -142,12 +152,17 @@ public class DepartementResource {
     /**
      * {@code GET  /departements} : get all the departements.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departements in body.
      */
     @GetMapping("/departements")
-    public List<Departement> getAllDepartements() {
+    public List<Departement> getAllDepartements(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Departements");
-        return departementRepository.findAll();
+        if (eagerload) {
+            return departementRepository.findAllWithEagerRelationships();
+        } else {
+            return departementRepository.findAll();
+        }
     }
 
     /**
@@ -159,7 +174,7 @@ public class DepartementResource {
     @GetMapping("/departements/{id}")
     public ResponseEntity<Departement> getDepartement(@PathVariable Long id) {
         log.debug("REST request to get Departement : {}", id);
-        Optional<Departement> departement = departementRepository.findById(id);
+        Optional<Departement> departement = departementRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(departement);
     }
 

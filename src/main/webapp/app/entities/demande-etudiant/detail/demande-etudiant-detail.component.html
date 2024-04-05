@@ -1,7 +1,9 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="demandeEtudiant">
-      <h2 data-cy="demandeEtudiantDetailsHeading"><span jhiTranslate="issatsoApp.demandeEtudiant.detail.title">Demande Etudiant</span></h2>
+      <h2 data-cy="demandeEtudiantDetailsHeading">
+        <span jhiTranslate="issatsoApp.demandeEtudiant.detail.title" class="titre">Demande Etudiant</span>
+      </h2>
 
       <hr />
 
@@ -11,36 +13,43 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ demandeEtudiant.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEtudiant.sujet">Sujet</span></dt>
-        <dd>
+        <dd class="element">
           <span jhiTranslate="{{ 'issatsoApp.SujetEtud.' + demandeEtudiant.sujet }}">{{ demandeEtudiant.sujet }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEtudiant.description">Description</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ demandeEtudiant.description }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEtudiant.statut">Statut</span></dt>
-        <dd>
+        <dd class="element">
           <span jhiTranslate="{{ 'issatsoApp.Status.' + demandeEtudiant.statut }}">{{ demandeEtudiant.statut }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.demandeEtudiant.dateCreation">Date Creation</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ demandeEtudiant.dateCreation | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="issatsoApp.demandeEtudiant.proprietaire">Proprietaire</span></dt>
-        <dd>
+        <dt *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'">
+          <span jhiTranslate="issatsoApp.demandeEtudiant.proprietaire">Proprietaire</span>
+        </dt>
+        <dd *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'" class="element">
           <span>{{ demandeEtudiant.proprietaire }}</span>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'"
+        type="button"
+        [routerLink]="['/demande-etudiant', demandeEtudiant.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

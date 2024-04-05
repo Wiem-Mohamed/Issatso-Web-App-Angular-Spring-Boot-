@@ -61,7 +61,7 @@ export class EtudiantFormService {
       nom: new FormControl(etudiantRawValue.nom),
       prenom: new FormControl(etudiantRawValue.prenom),
       email: new FormControl(etudiantRawValue.email),
-      numInscription: new FormControl(etudiantRawValue.numInscription),
+      numInscription: new FormControl(etudiantRawValue.numInscription, { validators: [Validators.required] }),
       dateAffectation: new FormControl(etudiantRawValue.dateAffectation),
       filiere: new FormControl(etudiantRawValue.filiere),
       niveau: new FormControl(etudiantRawValue.niveau),

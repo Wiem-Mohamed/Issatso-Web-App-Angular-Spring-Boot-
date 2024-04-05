@@ -20,4 +20,7 @@ export default class UserManagementDetailComponent implements OnInit {
       this.user = user;
     });
   }
+  previousState(): void {
+    window.history.back();
+  }
 }

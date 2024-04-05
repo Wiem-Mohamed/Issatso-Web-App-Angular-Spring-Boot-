@@ -13,6 +13,8 @@ import { EntityArrayResponseType, GroupeService } from '../service/groupe.servic
 import { GroupeDeleteDialogComponent } from '../delete/groupe-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   standalone: true,
   selector: 'jhi-groupe',
@@ -26,6 +28,7 @@ import { SortService } from 'app/shared/sort/sort.service';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class GroupeComponent implements OnInit {

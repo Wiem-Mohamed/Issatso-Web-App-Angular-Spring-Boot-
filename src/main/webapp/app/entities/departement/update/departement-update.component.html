@@ -5,6 +5,7 @@
         id="jhi-departement-heading"
         data-cy="DepartementCreateUpdateHeading"
         jhiTranslate="issatsoApp.departement.home.createOrEditLabel"
+        class="titre"
       >
         Créer ou éditer un Departement
       </h2>
@@ -40,24 +41,23 @@
               Ce champ est obligatoire.
             </small>
           </div>
+          <div class="form-text text-danger" *ngIf="errorNomExists" jhiTranslate="issatsoApp.departement.error">
+            <strong>Nom est déjà utilisé !</strong>
+          </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="issatsoApp.departement.chefDepartement" for="field_chefDepartement"
-            >Chef Departement</label
-          >
+          <label class="form-label" jhiTranslate="issatsoApp.departement.enseignant" for="field_enseignant">Enseignant</label>
           <select
             class="form-control"
-            id="field_chefDepartement"
-            data-cy="chefDepartement"
-            name="chefDepartement"
-            formControlName="chefDepartement"
+            id="field_enseignant"
+            data-cy="enseignant"
+            name="enseignant"
+            formControlName="enseignant"
             [compareWith]="compareEnseignant"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="enseignantOption" *ngFor="let enseignantOption of chefDepartementsCollection">
-              {{ enseignantOption.id }}
-            </option>
+            <option [ngValue]="enseignantOption" *ngFor="let enseignantOption of enseignantsCollection">{{ enseignantOption.cin }}</option>
           </select>
         </div>
       </div>
@@ -72,7 +72,7 @@
           id="save-entity"
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
+          class="btn btn-info"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
         </button>
