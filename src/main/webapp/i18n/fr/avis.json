@@ -5,7 +5,7 @@
         "title": "Avis",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Avis",
-        "createOrEditLabel": "Créer ou éditer un Avis",
+        "createOrEditLabel": "Créer un Avis",
         "notFound": "Aucun Avis trouvé"
       },
       "created": "Un nouveau Avis a été créé avec l'identifiant {{ param }}",

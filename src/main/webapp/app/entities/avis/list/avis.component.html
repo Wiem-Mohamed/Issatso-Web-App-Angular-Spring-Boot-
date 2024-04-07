@@ -1,4 +1,9 @@
 <div>
+  <ng-container *jhiHasAnyAuthority="'ROLE_ETUDIANT'">
+    <ng-container>
+      {{ redirectToOtherPage() }}
+    </ng-container>
+  </ng-container>
   <h2 id="page-heading" data-cy="AvisHeading">
     <span jhiTranslate="issatsoApp.avis.home.title" class="titre">Avis</span>
 

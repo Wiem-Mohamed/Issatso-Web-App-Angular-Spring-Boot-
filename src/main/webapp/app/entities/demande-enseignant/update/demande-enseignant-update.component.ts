@@ -16,17 +16,27 @@ import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { SujetEns } from 'app/entities/enumerations/sujet-ens.model';
 import { Status } from 'app/entities/enumerations/status.model';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+
 @Component({
   standalone: true,
   selector: 'jhi-demande-enseignant-update',
   templateUrl: './demande-enseignant-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, HasAnyAuthorityDirective],
 })
 export class DemandeEnseignantUpdateComponent implements OnInit {
   isSaving = false;
   demandeEnseignant: IDemandeEnseignant | null = null;
   sujetEnsValues = Object.keys(SujetEns);
   statusValues = Object.keys(Status);
+  selectedSujet: any = null;
+  description: any = null;
+  currentAccount: Account | null = null;
+  prop: any = null;
+  stat = 'EnAttente';
 
   editForm: DemandeEnseignantFormGroup = this.demandeEnseignantFormService.createDemandeEnseignantFormGroup();
 
@@ -35,7 +45,8 @@ export class DemandeEnseignantUpdateComponent implements OnInit {
     protected eventManager: EventManager,
     protected demandeEnseignantService: DemandeEnseignantService,
     protected demandeEnseignantFormService: DemandeEnseignantFormService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +56,8 @@ export class DemandeEnseignantUpdateComponent implements OnInit {
         this.updateForm(demandeEnseignant);
       }
     });
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
+    this.prop = this.currentAccount?.email;
   }
 
   byteSize(base64String: string): string {
@@ -97,6 +110,8 @@ export class DemandeEnseignantUpdateComponent implements OnInit {
 
   protected updateForm(demandeEnseignant: IDemandeEnseignant): void {
     this.demandeEnseignant = demandeEnseignant;
+    this.selectedSujet = demandeEnseignant.sujet;
+    this.description = demandeEnseignant.description;
     this.demandeEnseignantFormService.resetForm(this.editForm, demandeEnseignant);
   }
 }

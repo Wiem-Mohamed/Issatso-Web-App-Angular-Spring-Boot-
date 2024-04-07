@@ -5,7 +5,7 @@
         "title": "Opinions",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Avis",
-        "createOrEditLabel": "Create or edit an Opinion",
+        "createOrEditLabel": "Create a new Opinion",
         "notFound": "No Avis found"
       },
       "created": "A new Opinion is created with identifier {{ param }}",

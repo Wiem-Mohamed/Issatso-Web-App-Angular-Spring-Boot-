@@ -14,6 +14,9 @@ import { DemandeEnseignantDeleteDialogComponent } from '../delete/demande-enseig
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
 
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+
 import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 @Component({
   standalone: true,
@@ -34,7 +37,7 @@ import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directiv
 export class DemandeEnseignantComponent implements OnInit {
   demandeEnseignants?: IDemandeEnseignant[];
   isLoading = false;
-
+  currentAccount: Account | null = null;
   predicate = 'id';
   ascending = true;
 
@@ -44,13 +47,15 @@ export class DemandeEnseignantComponent implements OnInit {
     public router: Router,
     protected sortService: SortService,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackId = (_index: number, item: IDemandeEnseignant): number => this.demandeEnseignantService.getDemandeEnseignantIdentifier(item);
 
   ngOnInit(): void {
     this.load();
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
   }
 
   byteSize(base64String: string): string {

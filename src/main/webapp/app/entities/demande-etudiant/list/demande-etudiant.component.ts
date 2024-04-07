@@ -16,6 +16,9 @@ import { SortService } from 'app/shared/sort/sort.service';
 
 import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+
 @Component({
   standalone: true,
   selector: 'jhi-demande-etudiant',
@@ -35,7 +38,7 @@ import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directiv
 export class DemandeEtudiantComponent implements OnInit {
   demandeEtudiants?: IDemandeEtudiant[];
   isLoading = false;
-
+  currentAccount: Account | null = null;
   predicate = 'id';
   ascending = true;
 
@@ -45,13 +48,15 @@ export class DemandeEtudiantComponent implements OnInit {
     public router: Router,
     protected sortService: SortService,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackId = (_index: number, item: IDemandeEtudiant): number => this.demandeEtudiantService.getDemandeEtudiantIdentifier(item);
 
   ngOnInit(): void {
     this.load();
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
   }
 
   byteSize(base64String: string): string {

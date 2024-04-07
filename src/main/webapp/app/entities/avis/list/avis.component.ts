@@ -143,4 +143,7 @@ export class AvisComponent implements OnInit {
       return [predicate + ',' + ascendingQueryParam];
     }
   }
+  redirectToOtherPage(): void {
+    this.router.navigate(['/avis/new']);
+  }
 }

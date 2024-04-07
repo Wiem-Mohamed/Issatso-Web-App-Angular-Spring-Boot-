@@ -72,7 +72,7 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">
         <tr *ngFor="let demandeEnseignant of demandeEnseignants; trackBy: trackId" data-cy="entityTable">
           <td>
             <a [routerLink]="['/demande-enseignant', demandeEnseignant.id, 'view']" style="text-decoration: none; color: red">{{
@@ -83,7 +83,7 @@
           <td>{{ demandeEnseignant.description }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Status.' + demandeEnseignant.statut }}">{{ demandeEnseignant.statut }}</td>
           <td>{{ demandeEnseignant.dateCreation | formatMediumDatetime }}</td>
-          <td style="text-decoration: none; color: green" *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">
+          <td style="text-decoration: none; color: green">
             {{ demandeEnseignant.proprietaire }}
           </td>
           <td class="text-end">
@@ -99,7 +99,6 @@
               </button>
 
               <button
-                *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
                 type="submit"
                 [routerLink]="['/demande-enseignant', demandeEnseignant.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -115,6 +114,39 @@
               </button>
             </div>
           </td>
+        </tr>
+      </tbody>
+      <tbody *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'">
+        <tr *ngFor="let demandeEnseignant of demandeEnseignants; trackBy: trackId" data-cy="entityTable">
+          <ng-container *ngIf="demandeEnseignant.proprietaire === currentAccount?.email">
+            <td>
+              <a [routerLink]="['/demande-enseignant', demandeEnseignant.id, 'view']" style="text-decoration: none; color: red">{{
+                demandeEnseignant.id
+              }}</a>
+            </td>
+            <td jhiTranslate="{{ 'issatsoApp.SujetEns.' + demandeEnseignant.sujet }}">{{ demandeEnseignant.sujet }}</td>
+            <td>{{ demandeEnseignant.description }}</td>
+            <td jhiTranslate="{{ 'issatsoApp.Status.' + demandeEnseignant.statut }}">{{ demandeEnseignant.statut }}</td>
+            <td>{{ demandeEnseignant.dateCreation | formatMediumDatetime }}</td>
+            <td class="text-end">
+              <div class="btn-group">
+                <button
+                  type="submit"
+                  [routerLink]="['/demande-enseignant', demandeEnseignant.id, 'view']"
+                  class="btn btn-dark btn-sm"
+                  data-cy="entityDetailsButton"
+                >
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                </button>
+
+                <button type="submit" (click)="delete(demandeEnseignant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                </button>
+              </div>
+            </td>
+          </ng-container>
         </tr>
       </tbody>
     </table>

@@ -20,33 +20,60 @@
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.demandeEnseignant.sujet" for="field_sujet">Sujet</label>
-          <select class="form-control" name="sujet" formControlName="sujet" id="field_sujet" data-cy="sujet">
+          <select
+            *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
+            class="form-control"
+            name="sujet"
+            formControlName="sujet"
+            id="field_sujet"
+            data-cy="sujet"
+          >
             <option [ngValue]="null">{{ 'issatsoApp.SujetEns.null' | translate }}</option>
             <option *ngFor="let sujetEns of sujetEnsValues" [value]="sujetEns">{{ 'issatsoApp.SujetEns.' + sujetEns | translate }}</option>
           </select>
+          <p class="form-control" *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">{{ selectedSujet }}</p>
         </div>
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.demandeEnseignant.description" for="field_description">Description</label>
           <textarea
+            *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
             class="form-control"
             name="description"
             id="field_description"
             data-cy="description"
             formControlName="description"
-            [readonly]="true"
           ></textarea>
+          <p class="form-control" *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'">{{ description }}</p>
         </div>
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.demandeEnseignant.statut" for="field_statut">Statut</label>
-          <select class="form-control" name="statut" formControlName="statut" id="field_statut" data-cy="statut">
+          <select
+            *jhiHasAnyAuthority="'ROLE_RESPONSABLE_ADMINISTRATION'"
+            class="form-control"
+            name="statut"
+            formControlName="statut"
+            id="field_statut"
+            data-cy="statut"
+          >
             <option [ngValue]="null">{{ 'issatsoApp.Status.null' | translate }}</option>
             <option *ngFor="let status of statusValues" [value]="status">{{ 'issatsoApp.Status.' + status | translate }}</option>
           </select>
+          <input
+            *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
+            type="text"
+            class="form-control"
+            name="statut"
+            id="field_statu"
+            data-cy="statut"
+            formControlName="statut"
+            [(ngModel)]="stat"
+            [readonly]="true"
+          />
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'">
           <label class="form-label" jhiTranslate="issatsoApp.demandeEnseignant.dateCreation" for="field_dateCreation">Date Creation</label>
           <div class="d-flex">
             <input
@@ -62,7 +89,7 @@
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'">
           <label class="form-label" jhiTranslate="issatsoApp.demandeEnseignant.proprietaire" for="field_proprietaire">Proprietaire</label>
           <input
             type="text"
@@ -71,6 +98,7 @@
             id="field_proprietaire"
             data-cy="proprietaire"
             formControlName="proprietaire"
+            [(ngModel)]="prop"
             [readonly]="true"
           />
         </div>
