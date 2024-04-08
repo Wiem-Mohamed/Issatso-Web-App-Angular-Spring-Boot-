@@ -16,6 +16,7 @@ import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -221,5 +222,16 @@ public class EnseignantResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/mail/{email}")
+    public ResponseEntity<Long> getEnseignantIdByEmail(@PathVariable String email) {
+        log.debug("REST request to get Enseignant ID by email: {}", email);
+        Long enseignantId = enseignantRepository.findIdByEmail(email);
+        if (enseignantId != null) {
+            return ResponseEntity.ok().body(enseignantId);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

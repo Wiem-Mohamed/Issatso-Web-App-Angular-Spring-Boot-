@@ -29,6 +29,8 @@ export type EntityArrayResponseType = HttpResponse<IEtudiant[]>;
 @Injectable({ providedIn: 'root' })
 export class EtudiantService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/etudiants');
+  protected resourceUrl3 = this.applicationConfigService.getEndpointFor('api/mailetudiant');
+  protected baseUrl = this.applicationConfigService.getEndpointFor('api/listeg');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -122,5 +124,15 @@ export class EtudiantService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+  getIdEtudiantConnecte(mail: String): Observable<number> {
+    return this.http.get<number>(`${this.resourceUrl3}/${mail}`).pipe(
+      map((id: number) => {
+        return id;
+      })
+    );
+  }
+  getEtudiantsSameGroupe(etudiantId: number): Observable<IEtudiant[]> {
+    return this.http.get<IEtudiant[]>(`${this.baseUrl}/${etudiantId}`);
   }
 }

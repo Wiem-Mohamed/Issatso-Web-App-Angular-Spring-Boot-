@@ -138,7 +138,7 @@
                 <span jhiTranslate="global.menu.entities.evenement">Evenement</span>
               </a>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'">
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN_ACADEMIQUE', 'ROLE_ETUDIANT']">
               <a
                 class="dropdown-item"
                 routerLink="/groupe"
@@ -186,7 +186,7 @@
                 <span jhiTranslate="global.menu.entities.partenaire">Partenaire</span>
               </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_ETUDIANT', 'ROLE_ENSEIGNANT']">
+            <li *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'">
               <a
                 class="dropdown-item"
                 routerLink="/support-de-cours"

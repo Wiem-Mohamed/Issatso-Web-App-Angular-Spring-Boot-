@@ -179,4 +179,10 @@ public class MatiereResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/matieres/by-enseignant/{enseignantId}")
+    public List<Matiere> getMatieresByEnseignantId(@PathVariable Long enseignantId) {
+        log.debug("REST request to get Matieres by Enseignant ID : {}", enseignantId);
+        return matiereRepository.findByEnseignantId(enseignantId);
+    }
 }

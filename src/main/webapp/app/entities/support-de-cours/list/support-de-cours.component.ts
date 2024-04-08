@@ -14,6 +14,10 @@ import { SupportDeCoursDeleteDialogComponent } from '../delete/support-de-cours-
 import { SortService } from 'app/shared/sort/sort.service';
 
 import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+import { IMatiere } from '../../matiere/matiere.model';
+import { MatiereService } from '../../matiere/service/matiere.service';
+import { LoginService } from '../../../login/login.service';
+import { AccountService } from '../../../core/auth/account.service';
 
 @Component({
   standalone: true,
@@ -37,35 +41,48 @@ export class SupportDeCoursComponent implements OnInit {
 
   predicate = 'id';
   ascending = true;
+  idtest!: number;
+  matieresenseignant: IMatiere[] = [];
 
   constructor(
     protected supportDeCoursService: SupportDeCoursService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected matiereService: MatiereService,
+    protected loginService: LoginService,
+    protected accountService: AccountService
   ) {}
-
+  login!: String | undefined;
   trackId = (_index: number, item: ISupportDeCours): number => this.supportDeCoursService.getSupportDeCoursIdentifier(item);
 
   ngOnInit(): void {
     this.load();
-  }
-
-  delete(supportDeCours: ISupportDeCours): void {
-    const modalRef = this.modalService.open(SupportDeCoursDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.supportDeCours = supportDeCours;
-    // unsubscribe not needed because closed completes on modal close
-    modalRef.closed
-      .pipe(
-        filter(reason => reason === ITEM_DELETED_EVENT),
-        switchMap(() => this.loadFromBackendWithRouteInformations())
-      )
-      .subscribe({
-        next: (res: EntityArrayResponseType) => {
-          this.onResponseSuccess(res);
+    this.accountService.identity().subscribe(account => (this.login = account?.email));
+    if (this.login !== undefined) {
+      console.log('spcourst' + this.login);
+      this.supportDeCoursService.getIdEnseigantConnecte(this.login).subscribe(
+        (id: number) => {
+          this.idtest = id;
+          this.matiereService.findByEnseignantId(this.idtest).subscribe((matieres: IMatiere[]) => {
+            this.matieresenseignant = matieres;
+          });
+          console.log('spcourst' + this.idtest);
+          this.load();
         },
-      });
+        (error: any) => {
+          console.error("Une erreur s'est produite :", error);
+        }
+      );
+    } else {
+      console.error("Erreur : L'adresse e-mail n'est pas définie.");
+    }
+    this.matiereService.findByEnseignantId(this.idtest).subscribe((matieres: IMatiere[]) => {
+      this.matieresenseignant = matieres;
+    });
+
+    this.load();
   }
 
   load(): void {
@@ -95,11 +112,19 @@ export class SupportDeCoursComponent implements OnInit {
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.supportDeCours = this.refineData(dataFromBody);
+    this.supportDeCours = this.refineData(dataFromBody, this.matieresenseignant);
   }
 
-  protected refineData(data: ISupportDeCours[]): ISupportDeCours[] {
-    return data.sort(this.sortService.startSort(this.predicate, this.ascending ? 1 : -1));
+  protected refineData(data: ISupportDeCours[], matieresenseignant: IMatiere[]): ISupportDeCours[] {
+    // Obtenez les IDs des matières associées à l'enseignant connecté
+    const matiereIds = matieresenseignant.map(matiere => matiere.id);
+    // Filtrez les supports de cours en fonction des matières associées à l'enseignant connecté
+    return data.filter(supportDeCours => {
+      if (supportDeCours.matiere && supportDeCours.matiere.id !== undefined) {
+        return matiereIds.includes(supportDeCours.matiere.id);
+      }
+      return false;
+    });
   }
 
   protected fillComponentAttributesFromResponseBody(data: ISupportDeCours[] | null): ISupportDeCours[] {
@@ -133,5 +158,20 @@ export class SupportDeCoursComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+  delete(supportDeCours: ISupportDeCours): void {
+    const modalRef = this.modalService.open(SupportDeCoursDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.supportDeCours = supportDeCours;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed
+      .pipe(
+        filter(reason => reason === ITEM_DELETED_EVENT),
+        switchMap(() => this.loadFromBackendWithRouteInformations())
+      )
+      .subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        },
+      });
   }
 }

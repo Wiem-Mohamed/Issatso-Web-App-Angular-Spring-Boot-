@@ -37,4 +37,7 @@ public interface MatiereRepository extends JpaRepository<Matiere, Long> {
 
     @Query("select matiere from Matiere matiere left join fetch matiere.enseignant where matiere.id =:id")
     Optional<Matiere> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select matiere from Matiere matiere join fetch matiere.enseignant enseignant where enseignant.id = :enseignantId")
+    List<Matiere> findByEnseignantId(@Param("enseignantId") Long enseignantId);
 }

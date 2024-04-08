@@ -1,4 +1,4 @@
-<div>
+<div *jhiHasAnyAuthority="'ROLE_ADMIN_ACADEMIQUE'">
   <h2 id="page-heading" data-cy="GroupeHeading">
     <span jhiTranslate="issatsoApp.groupe.home.title" class="titre">Groupes</span>
 
@@ -104,6 +104,30 @@
               </button>
             </div>
           </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *jhiHasAnyAuthority="'ROLE_ETUDIANT'">
+  <h2 style="font-weight: bold">Liste de Groupes :</h2>
+
+  <div class="table-responsive table-entities">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col">Numéro d'inscription</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etudiant of groupesetud">
+          <td>{{ etudiant.numInscription }}</td>
+          <td>{{ etudiant.nom }}</td>
+          <td>{{ etudiant.prenom }}</td>
+          <td>{{ etudiant.email }}</td>
         </tr>
       </tbody>
     </table>

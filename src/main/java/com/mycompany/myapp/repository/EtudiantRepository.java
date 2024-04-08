@@ -39,4 +39,13 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     Optional<Etudiant> findOneWithToOneRelationships(@Param("id") Long id);
 
     Optional<Etudiant> findByNumInscription(String numInscription);
+
+    @Query("SELECT e.id FROM Etudiant e WHERE e.email = :email")
+    Long findIdByEmailEtudiant(@Param("email") String email);
+
+    @Query("SELECT e.groupe.id FROM Etudiant e WHERE e.id = :etudiantId")
+    Long findGroupIdByEtudiantId(@Param("etudiantId") Long etudiantId);
+
+    @Query("SELECT e FROM Etudiant e WHERE e.groupe.id = (SELECT e2.groupe.id FROM Etudiant e2 WHERE e2.id = :etudiantId)")
+    List<Etudiant> findEtudiantsBySameGroupe(@Param("etudiantId") Long etudiantId);
 }

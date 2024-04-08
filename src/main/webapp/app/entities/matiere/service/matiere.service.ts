@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IMatiere, NewMatiere } from '../matiere.model';
+import { map } from 'rxjs/operators';
 
 export type PartialUpdateMatiere = Partial<IMatiere> & Pick<IMatiere, 'id'>;
 
@@ -69,5 +70,10 @@ export class MatiereService {
       return [...matieresToAdd, ...matiereCollection];
     }
     return matiereCollection;
+  }
+  findByEnseignantId(enseignantId: number): Observable<IMatiere[]> {
+    return this.http.get<IMatiere[]>(`${this.resourceUrl}/by-enseignant/${enseignantId}`).pipe(
+      map((response: IMatiere[]) => response) // Utilisation de l'opérateur map pour extraire les données du corps de la réponse
+    );
   }
 }

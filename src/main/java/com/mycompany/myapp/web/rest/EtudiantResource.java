@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -206,5 +207,28 @@ public class EtudiantResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/mailetudiant/{email}")
+    public ResponseEntity<Long> getEtudiantIdByEmail(@PathVariable String email) {
+        log.debug("REST request to get Etudiant ID by email: {}", email);
+        Long etudiantId = etudiantRepository.findIdByEmailEtudiant(email);
+        if (etudiantId != null) {
+            return ResponseEntity.ok().body(etudiantId);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/idgroupe/{etudiantId}")
+    public ResponseEntity<Long> getGroupeIdByEtudiantId(@PathVariable Long etudiantId) {
+        Long groupeId = etudiantRepository.findGroupIdByEtudiantId(etudiantId);
+        return ResponseEntity.ok(groupeId);
+    }
+
+    @GetMapping("/listeg/{etudiantId}")
+    public ResponseEntity<List<Etudiant>> getEtudiantsSameGroupe(@PathVariable Long etudiantId) {
+        List<Etudiant> etudiantsMemeGroupe = etudiantRepository.findEtudiantsBySameGroupe(etudiantId);
+        return ResponseEntity.ok(etudiantsMemeGroupe);
     }
 }

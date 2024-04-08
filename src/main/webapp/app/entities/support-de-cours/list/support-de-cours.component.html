@@ -93,7 +93,9 @@
           </td>
           <td>{{ supportDeCours.titre }}</td>
           <td>{{ supportDeCours.description }}</td>
-          <td>{{ supportDeCours.contenu }}</td>
+          <td>
+            <a href="supportDeCours.contenu" target="_blank">Accéder au Support de Cours</a>
+          </td>
           <td>{{ supportDeCours.dateDepot | formatMediumDatetime }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Filiere.' + supportDeCours.filiere }}">{{ supportDeCours.filiere }}</td>
           <td>{{ supportDeCours.niveau }}</td>

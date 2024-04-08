@@ -26,6 +26,11 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           outlet: 'navbar',
         },
         {
+          path: '',
+          component: HomeComponent,
+          title: 'home.title',
+        },
+        {
           path: 'admin',
           data: {
             authorities: [Authority.ADMIN],

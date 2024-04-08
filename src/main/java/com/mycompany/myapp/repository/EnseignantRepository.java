@@ -31,4 +31,7 @@ public interface EnseignantRepository extends EnseignantRepositoryWithBagRelatio
     }
 
     Optional<Enseignant> findByCin(String cin);
+
+    @Query("SELECT e.id FROM Enseignant e WHERE e.email = :email")
+    Long findIdByEmail(@Param("email") String email);
 }
