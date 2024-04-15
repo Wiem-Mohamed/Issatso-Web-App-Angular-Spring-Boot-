@@ -22,6 +22,7 @@ import MainModule from './layouts/main/main.module';
 import { AppPageTitleStrategy } from './app-page-title-strategy';
 
 import { FormsModule } from '@angular/forms';
+import { TryComponent } from './try/try.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,7 @@ import { FormsModule } from '@angular/forms';
     { provide: TitleStrategy, useClass: AppPageTitleStrategy },
   ],
   bootstrap: [MainComponent],
-  declarations: [],
+  declarations: [TryComponent],
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {
