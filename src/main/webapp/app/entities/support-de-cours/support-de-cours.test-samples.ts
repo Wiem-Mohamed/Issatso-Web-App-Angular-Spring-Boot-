@@ -5,24 +5,24 @@ import { Filiere } from 'app/entities/enumerations/filiere.model';
 import { ISupportDeCours, NewSupportDeCours } from './support-de-cours.model';
 
 export const sampleWithRequiredData: ISupportDeCours = {
-  id: 84336,
+  id: 21394,
 };
 
 export const sampleWithPartialData: ISupportDeCours = {
-  id: 86804,
-  titre: 'retrait',
-  description: 'Femme Folk',
-  niveau: 34808,
+  id: 9915,
+  titre: 'au',
+  description: 'Cis bientôt sievert',
 };
 
 export const sampleWithFullData: ISupportDeCours = {
-  id: 80340,
-  titre: 'protocol Chrysler ding',
-  description: 'c Vélocar',
-  contenu: 'aïe',
-  dateDepot: dayjs('2024-03-30T03:57'),
-  filiere: 'PREPA',
-  niveau: 20963,
+  id: 83082,
+  titre: 'b',
+  description: 'Dodge',
+  contenu: '../fake-data/blob/hipster.png',
+  contenuContentType: 'unknown',
+  dateDepot: dayjs('2024-03-29T22:21'),
+  filiere: 'LGEnerg',
+  niveau: 56146,
 };
 
 export const sampleWithNewData: NewSupportDeCours = {

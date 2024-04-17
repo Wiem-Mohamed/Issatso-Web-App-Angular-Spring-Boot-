@@ -16,7 +16,7 @@ entity Groupe {
 entity SupportDeCours {
     titre String,
     description String,
-    contenu String,
+    contenu AnyBlob,
     dateDepot Instant,
     filiere Filiere,
     niveau Integer

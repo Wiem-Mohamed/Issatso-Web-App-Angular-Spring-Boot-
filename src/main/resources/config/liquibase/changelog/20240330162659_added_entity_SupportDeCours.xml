@@ -20,7 +20,10 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="contenu" type="varchar(255)">
+            <column name="contenu" type="LONGBLOB">
+                <constraints nullable="true" />
+            </column>
+            <column name="contenu_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="date_depot" type="DATETIME">
@@ -59,7 +62,8 @@
             <column name="id" type="numeric"/>
             <column name="titre" type="string"/>
             <column name="description" type="string"/>
-            <column name="contenu" type="string"/>
+            <column name="contenu" type="blob"/>
+            <column name="contenu_content_type" type="string"/>
             <column name="date_depot" type="date"/>
             <column name="filiere" type="string"/>
             <column name="niveau" type="numeric"/>

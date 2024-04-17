@@ -132,6 +132,9 @@ public class SupportDeCoursResource {
                 if (supportDeCours.getContenu() != null) {
                     existingSupportDeCours.setContenu(supportDeCours.getContenu());
                 }
+                if (supportDeCours.getContenuContentType() != null) {
+                    existingSupportDeCours.setContenuContentType(supportDeCours.getContenuContentType());
+                }
                 if (supportDeCours.getDateDepot() != null) {
                     existingSupportDeCours.setDateDepot(supportDeCours.getDateDepot());
                 }

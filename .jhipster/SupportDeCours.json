@@ -13,7 +13,8 @@
     },
     {
       "fieldName": "contenu",
-      "fieldType": "String"
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
     },
     {
       "fieldName": "dateDepot",

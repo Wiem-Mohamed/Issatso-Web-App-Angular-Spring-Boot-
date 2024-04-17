@@ -31,6 +31,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link SupportDeCoursResource} REST controller.
@@ -47,8 +48,10 @@ class SupportDeCoursResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CONTENU = "AAAAAAAAAA";
-    private static final String UPDATED_CONTENU = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_CONTENU = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_CONTENU = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_CONTENU_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_CONTENU_CONTENT_TYPE = "image/png";
 
     private static final Instant DEFAULT_DATE_DEPOT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_DEPOT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -90,6 +93,7 @@ class SupportDeCoursResourceIT {
             .titre(DEFAULT_TITRE)
             .description(DEFAULT_DESCRIPTION)
             .contenu(DEFAULT_CONTENU)
+            .contenuContentType(DEFAULT_CONTENU_CONTENT_TYPE)
             .dateDepot(DEFAULT_DATE_DEPOT)
             .filiere(DEFAULT_FILIERE)
             .niveau(DEFAULT_NIVEAU);
@@ -107,6 +111,7 @@ class SupportDeCoursResourceIT {
             .titre(UPDATED_TITRE)
             .description(UPDATED_DESCRIPTION)
             .contenu(UPDATED_CONTENU)
+            .contenuContentType(UPDATED_CONTENU_CONTENT_TYPE)
             .dateDepot(UPDATED_DATE_DEPOT)
             .filiere(UPDATED_FILIERE)
             .niveau(UPDATED_NIVEAU);
@@ -136,6 +141,7 @@ class SupportDeCoursResourceIT {
         assertThat(testSupportDeCours.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testSupportDeCours.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(DEFAULT_CONTENU);
+        assertThat(testSupportDeCours.getContenuContentType()).isEqualTo(DEFAULT_CONTENU_CONTENT_TYPE);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(DEFAULT_DATE_DEPOT);
         assertThat(testSupportDeCours.getFiliere()).isEqualTo(DEFAULT_FILIERE);
         assertThat(testSupportDeCours.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
@@ -175,7 +181,8 @@ class SupportDeCoursResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(supportDeCours.getId().intValue())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].contenu").value(hasItem(DEFAULT_CONTENU)))
+            .andExpect(jsonPath("$.[*].contenuContentType").value(hasItem(DEFAULT_CONTENU_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].contenu").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENU))))
             .andExpect(jsonPath("$.[*].dateDepot").value(hasItem(DEFAULT_DATE_DEPOT.toString())))
             .andExpect(jsonPath("$.[*].filiere").value(hasItem(DEFAULT_FILIERE.toString())))
             .andExpect(jsonPath("$.[*].niveau").value(hasItem(DEFAULT_NIVEAU)));
@@ -212,7 +219,8 @@ class SupportDeCoursResourceIT {
             .andExpect(jsonPath("$.id").value(supportDeCours.getId().intValue()))
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.contenu").value(DEFAULT_CONTENU))
+            .andExpect(jsonPath("$.contenuContentType").value(DEFAULT_CONTENU_CONTENT_TYPE))
+            .andExpect(jsonPath("$.contenu").value(Base64Utils.encodeToString(DEFAULT_CONTENU)))
             .andExpect(jsonPath("$.dateDepot").value(DEFAULT_DATE_DEPOT.toString()))
             .andExpect(jsonPath("$.filiere").value(DEFAULT_FILIERE.toString()))
             .andExpect(jsonPath("$.niveau").value(DEFAULT_NIVEAU));
@@ -241,6 +249,7 @@ class SupportDeCoursResourceIT {
             .titre(UPDATED_TITRE)
             .description(UPDATED_DESCRIPTION)
             .contenu(UPDATED_CONTENU)
+            .contenuContentType(UPDATED_CONTENU_CONTENT_TYPE)
             .dateDepot(UPDATED_DATE_DEPOT)
             .filiere(UPDATED_FILIERE)
             .niveau(UPDATED_NIVEAU);
@@ -260,6 +269,7 @@ class SupportDeCoursResourceIT {
         assertThat(testSupportDeCours.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testSupportDeCours.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(UPDATED_CONTENU);
+        assertThat(testSupportDeCours.getContenuContentType()).isEqualTo(UPDATED_CONTENU_CONTENT_TYPE);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(UPDATED_DATE_DEPOT);
         assertThat(testSupportDeCours.getFiliere()).isEqualTo(UPDATED_FILIERE);
         assertThat(testSupportDeCours.getNiveau()).isEqualTo(UPDATED_NIVEAU);
@@ -333,11 +343,7 @@ class SupportDeCoursResourceIT {
         SupportDeCours partialUpdatedSupportDeCours = new SupportDeCours();
         partialUpdatedSupportDeCours.setId(supportDeCours.getId());
 
-        partialUpdatedSupportDeCours
-            .titre(UPDATED_TITRE)
-            .description(UPDATED_DESCRIPTION)
-            .dateDepot(UPDATED_DATE_DEPOT)
-            .niveau(UPDATED_NIVEAU);
+        partialUpdatedSupportDeCours.description(UPDATED_DESCRIPTION).dateDepot(UPDATED_DATE_DEPOT).filiere(UPDATED_FILIERE);
 
         restSupportDeCoursMockMvc
             .perform(
@@ -351,12 +357,13 @@ class SupportDeCoursResourceIT {
         List<SupportDeCours> supportDeCoursList = supportDeCoursRepository.findAll();
         assertThat(supportDeCoursList).hasSize(databaseSizeBeforeUpdate);
         SupportDeCours testSupportDeCours = supportDeCoursList.get(supportDeCoursList.size() - 1);
-        assertThat(testSupportDeCours.getTitre()).isEqualTo(UPDATED_TITRE);
+        assertThat(testSupportDeCours.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testSupportDeCours.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(DEFAULT_CONTENU);
+        assertThat(testSupportDeCours.getContenuContentType()).isEqualTo(DEFAULT_CONTENU_CONTENT_TYPE);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(UPDATED_DATE_DEPOT);
-        assertThat(testSupportDeCours.getFiliere()).isEqualTo(DEFAULT_FILIERE);
-        assertThat(testSupportDeCours.getNiveau()).isEqualTo(UPDATED_NIVEAU);
+        assertThat(testSupportDeCours.getFiliere()).isEqualTo(UPDATED_FILIERE);
+        assertThat(testSupportDeCours.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
     }
 
     @Test
@@ -375,6 +382,7 @@ class SupportDeCoursResourceIT {
             .titre(UPDATED_TITRE)
             .description(UPDATED_DESCRIPTION)
             .contenu(UPDATED_CONTENU)
+            .contenuContentType(UPDATED_CONTENU_CONTENT_TYPE)
             .dateDepot(UPDATED_DATE_DEPOT)
             .filiere(UPDATED_FILIERE)
             .niveau(UPDATED_NIVEAU);
@@ -394,6 +402,7 @@ class SupportDeCoursResourceIT {
         assertThat(testSupportDeCours.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testSupportDeCours.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupportDeCours.getContenu()).isEqualTo(UPDATED_CONTENU);
+        assertThat(testSupportDeCours.getContenuContentType()).isEqualTo(UPDATED_CONTENU_CONTENT_TYPE);
         assertThat(testSupportDeCours.getDateDepot()).isEqualTo(UPDATED_DATE_DEPOT);
         assertThat(testSupportDeCours.getFiliere()).isEqualTo(UPDATED_FILIERE);
         assertThat(testSupportDeCours.getNiveau()).isEqualTo(UPDATED_NIVEAU);

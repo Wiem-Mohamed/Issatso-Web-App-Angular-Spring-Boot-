@@ -1,11 +1,11 @@
-id;titre;description;contenu;date_depot;filiere;niveau
-1;a facture;port;protocol;2024-03-30T15:56:46;LGC;69193
-2;woman support compactes;Thon Pompe sombre;Pop a;2024-03-30T11:54:45;LEEA;19963
-3;collègue retenir;Émirats impactful a;Kirghizistan;2024-03-30T04:29:22;MPGM;26973
-4;Bedfordshire Chèque;Femme Lard;enfant Cambridgeshire enim;2024-03-29T19:44:46;LEEA;68399
-5;c second;AGP Homme Homme;Lombards dedicated functionalities;2024-03-30T01:32:34;LEEA;35936
-6;crédit que;Impasse monitor;extrêmement programming Diesel;2024-03-30T12:58:52;PREPA;50643
-7;Serviettes Ingenieur;dépôt;bypassing Nord;2024-03-29T21:01:38;LGM;65216
-8;a prasin newton;Hip;Est;2024-03-30T14:04:11;LEM;97087
-9;Luxueux bientôt;Einsteinium Poulet b;Maison Dodge;2024-03-29T22:21:52;LGEnerg;56146
-10;bypass a optical;override Nord paille;disintermediate comme Berkshire;2024-03-30T13:05:27;LGEnerg;54357
+id;titre;description;contenu;contenu_content_type;date_depot;filiere;niveau
+1;a facture;port;../fake-data/blob/hipster.png;image/png;2024-03-30T13:00:50;ING;66429
+2;Avon visualize;woman support compactes;../fake-data/blob/hipster.png;image/png;2024-03-29T20:53:28;LEM;76541
+3;c Pompe;Rover Coton grandement;../fake-data/blob/hipster.png;image/png;2024-03-30T11:54:45;LEEA;19963
+4;collègue retenir;Émirats impactful a;../fake-data/blob/hipster.png;image/png;2024-03-30T16:17:15;ING;46940
+5;Citadines Bedfordshire;Djibouti SMTP;../fake-data/blob/hipster.png;image/png;2024-03-30T04:57:34;LEM;79182
+6;enfant Cambridgeshire enim;c second exiger;../fake-data/blob/hipster.png;image/png;2024-03-30T15:29:01;LSI;93598
+7;vide Lombards dedicated;ouf;../fake-data/blob/hipster.png;image/png;2024-03-30T12:12:34;LGC;50138
+8;que array;Impasse monitor;../fake-data/blob/hipster.png;image/png;2024-03-29T23:23:47;MPGM;27422
+9;aussitôt Place;éloigner;../fake-data/blob/hipster.png;image/png;2024-03-30T06:45:27;MPGM;56592
+10;Ingenieur Est bypassing;calculate;../fake-data/blob/hipster.png;image/png;2024-03-29T23:13:32;LISI;7264

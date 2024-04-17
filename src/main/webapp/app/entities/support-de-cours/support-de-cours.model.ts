@@ -7,6 +7,7 @@ export interface ISupportDeCours {
   titre?: string | null;
   description?: string | null;
   contenu?: string | null;
+  contenuContentType?: string | null;
   dateDepot?: dayjs.Dayjs | null;
   filiere?: keyof typeof Filiere | null;
   niveau?: number | null;

@@ -27,8 +27,12 @@ public class SupportDeCours implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Lob
     @Column(name = "contenu")
-    private String contenu;
+    private byte[] contenu;
+
+    @Column(name = "contenu_content_type")
+    private String contenuContentType;
 
     @Column(name = "date_depot")
     private Instant dateDepot;
@@ -85,17 +89,30 @@ public class SupportDeCours implements Serializable {
         this.description = description;
     }
 
-    public String getContenu() {
+    public byte[] getContenu() {
         return this.contenu;
     }
 
-    public SupportDeCours contenu(String contenu) {
+    public SupportDeCours contenu(byte[] contenu) {
         this.setContenu(contenu);
         return this;
     }
 
-    public void setContenu(String contenu) {
+    public void setContenu(byte[] contenu) {
         this.contenu = contenu;
+    }
+
+    public String getContenuContentType() {
+        return this.contenuContentType;
+    }
+
+    public SupportDeCours contenuContentType(String contenuContentType) {
+        this.contenuContentType = contenuContentType;
+        return this;
+    }
+
+    public void setContenuContentType(String contenuContentType) {
+        this.contenuContentType = contenuContentType;
     }
 
     public Instant getDateDepot() {
@@ -177,6 +194,7 @@ public class SupportDeCours implements Serializable {
             ", titre='" + getTitre() + "'" +
             ", description='" + getDescription() + "'" +
             ", contenu='" + getContenu() + "'" +
+            ", contenuContentType='" + getContenuContentType() + "'" +
             ", dateDepot='" + getDateDepot() + "'" +
             ", filiere='" + getFiliere() + "'" +
             ", niveau=" + getNiveau() +
