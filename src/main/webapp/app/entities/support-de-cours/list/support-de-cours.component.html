@@ -32,15 +32,9 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
+          <th scope="col" jhiSortBy="contenu">
             <div class="d-flex">
-              <span jhiTranslate="global.field.id">ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="titre">
-            <div class="d-flex">
-              <span jhiTranslate="issatsoApp.supportDeCours.titre">Titre</span>
+              <span jhiTranslate="issatsoApp.supportDeCours.contenu">Contenu</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -50,12 +44,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="contenu">
-            <div class="d-flex">
-              <span jhiTranslate="issatsoApp.supportDeCours.contenu">Contenu</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
+
           <th scope="col" jhiSortBy="dateDepot">
             <div class="d-flex">
               <span jhiTranslate="issatsoApp.supportDeCours.dateDepot">Date Depot</span>
@@ -86,19 +75,15 @@
       <tbody>
         <tr *ngFor="let supportDeCours of supportDeCours; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/support-de-cours', supportDeCours.id, 'view']">{{ supportDeCours.id }}</a>
-          </td>
-          <td>{{ supportDeCours.titre }}</td>
-          <td>{{ supportDeCours.description }}</td>
-          <td>
             <a
+              style="color: blue; text-decoration: underline"
               *ngIf="supportDeCours.contenu"
               (click)="openFile(supportDeCours.contenu, supportDeCours.contenuContentType)"
-              jhiTranslate="entity.action.open"
-              >Ouvrir</a
+              >{{ supportDeCours.titre }}</a
             >
-            <span *ngIf="supportDeCours.contenu">{{ supportDeCours.contenuContentType }}, {{ byteSize(supportDeCours.contenu) }}</span>
           </td>
+
+          <td>{{ supportDeCours.description }}</td>
           <td>{{ supportDeCours.dateDepot | formatMediumDatetime }}</td>
           <td jhiTranslate="{{ 'issatsoApp.Filiere.' + supportDeCours.filiere }}">{{ supportDeCours.filiere }}</td>
           <td>{{ supportDeCours.niveau }}</td>

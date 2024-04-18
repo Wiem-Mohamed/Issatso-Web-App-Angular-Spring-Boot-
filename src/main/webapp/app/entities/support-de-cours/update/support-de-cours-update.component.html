@@ -44,16 +44,6 @@
                 jhiTranslate="entity.action.open"
                 >Ouvrir</a
               ><br />
-              <span class="pull-start"
-                >{{ editForm.get('contenuContentType')!.value }}, {{ byteSize(editForm.get('contenu')!.value!) }}</span
-              >
-              <button
-                type="button"
-                (click)="editForm.patchValue({ contenu: undefined, contenuContentType: undefined })"
-                class="btn btn-secondary btn-xs pull-end"
-              >
-                <fa-icon icon="times"></fa-icon>
-              </button>
             </div>
             <input
               type="file"
@@ -62,6 +52,14 @@
               (change)="setFileData($event, 'contenu', false)"
               jhiTranslate="entity.action.addblob"
             />
+            <button
+              *ngIf="editForm.get('contenu')!.value"
+              type="button"
+              (click)="editForm.patchValue({ contenu: undefined, contenuContentType: undefined })"
+              class="btn btn-secondary btn-xs pull-end"
+            >
+              <fa-icon icon="times"></fa-icon>
+            </button>
           </div>
           <input type="hidden" class="form-control" name="contenu" id="field_contenu" data-cy="contenu" formControlName="contenu" />
           <input
@@ -98,7 +96,19 @@
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="issatsoApp.supportDeCours.niveau" for="field_niveau">Niveau</label>
-          <input type="number" class="form-control" name="niveau" id="field_niveau" data-cy="niveau" formControlName="niveau" />
+          <input
+            type="number"
+            class="form-control"
+            name="niveau"
+            id="field_niveau"
+            data-cy="niveau"
+            formControlName="niveau"
+            min="1"
+            max="3"
+            step="1"
+            value="1"
+            [(ngModel)]="firstvalue"
+          />
         </div>
 
         <div class="mb-3">
@@ -112,7 +122,7 @@
             [compareWith]="compareMatiere"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="matiereOption" *ngFor="let matiereOption of matieresSharedCollection">
+            <option [ngValue]="matiereOption" *ngFor="let matiereOption of matieresenseignant">
               {{ matiereOption.matiereName }}
             </option>
           </select>

@@ -3,17 +3,14 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { EtudiantFormService, EtudiantFormGroup } from './etudiant-form.service';
 import { IEtudiant } from '../etudiant.model';
 import { EtudiantService } from '../service/etudiant.service';
 import { IGroupe } from 'app/entities/groupe/groupe.model';
 import { GroupeService } from 'app/entities/groupe/service/groupe.service';
 import { Filiere } from 'app/entities/enumerations/filiere.model';
-
 import { NUMINSCRIPTION_ALREADY_USED_TYPE } from 'app/config/error.constants';
 
 @Component({
@@ -27,7 +24,7 @@ export class EtudiantUpdateComponent implements OnInit {
   etudiant: IEtudiant | null = null;
   filiereValues = Object.keys(Filiere);
   errorNumInscritExists = false;
-
+  firstvalue: number = 1;
   groupesSharedCollection: IGroupe[] = [];
 
   editForm: EtudiantFormGroup = this.etudiantFormService.createEtudiantFormGroup();

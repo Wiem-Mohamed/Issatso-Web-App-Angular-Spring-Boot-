@@ -13,6 +13,9 @@ import { EntityArrayResponseType, SupportDeCoursService } from '../service/suppo
 import { SupportDeCoursDeleteDialogComponent } from '../delete/support-de-cours-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { SortService } from 'app/shared/sort/sort.service';
+import { AccountService } from '../../../core/auth/account.service';
+import { MatiereService } from '../../matiere/service/matiere.service';
+import { IMatiere } from '../../matiere/matiere.model';
 
 @Component({
   standalone: true,
@@ -32,9 +35,11 @@ import { SortService } from 'app/shared/sort/sort.service';
 export class SupportDeCoursComponent implements OnInit {
   supportDeCours?: ISupportDeCours[];
   isLoading = false;
-
   predicate = 'id';
   ascending = true;
+  idtest!: number;
+  matieresenseignant: IMatiere[] = [];
+  login!: String | undefined;
 
   constructor(
     protected supportDeCoursService: SupportDeCoursService,
@@ -42,15 +47,39 @@ export class SupportDeCoursComponent implements OnInit {
     public router: Router,
     protected sortService: SortService,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected matiereService: MatiereService,
+    protected accountService: AccountService
   ) {}
 
   trackId = (_index: number, item: ISupportDeCours): number => this.supportDeCoursService.getSupportDeCoursIdentifier(item);
 
   ngOnInit(): void {
     this.load();
-  }
+    this.accountService.identity().subscribe(account => (this.login = account?.email));
+    if (this.login !== undefined) {
+      this.supportDeCoursService.getIdEnseigantConnecte(this.login).subscribe(
+        (id: number) => {
+          this.idtest = id;
+          this.matiereService.findByEnseignantId(this.idtest).subscribe((matieres: IMatiere[]) => {
+            this.matieresenseignant = matieres;
+          });
+          console.log('spcourst' + this.idtest);
+          this.load();
+        },
+        (error: any) => {
+          console.error("Une erreur s'est produite :", error);
+        }
+      );
+    } else {
+      console.error("Erreur : L'adresse e-mail n'est pas définie.");
+    }
+    this.matiereService.findByEnseignantId(this.idtest).subscribe((matieres: IMatiere[]) => {
+      this.matieresenseignant = matieres;
+    });
 
+    this.load();
+  }
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);
   }
@@ -102,11 +131,19 @@ export class SupportDeCoursComponent implements OnInit {
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.supportDeCours = this.refineData(dataFromBody);
+    this.supportDeCours = this.refineData(dataFromBody, this.matieresenseignant);
   }
 
-  protected refineData(data: ISupportDeCours[]): ISupportDeCours[] {
-    return data.sort(this.sortService.startSort(this.predicate, this.ascending ? 1 : -1));
+  protected refineData(data: ISupportDeCours[], matieresenseignant: IMatiere[]): ISupportDeCours[] {
+    // Obtenez les IDs des matières associées à l'enseignant connecté
+    const matiereIds = matieresenseignant.map(matiere => matiere.id);
+    // Filtrez les supports de cours en fonction des matières associées à l'enseignant connecté
+    return data.filter(supportDeCours => {
+      if (supportDeCours.matiere && supportDeCours.matiere.id !== undefined) {
+        return matiereIds.includes(supportDeCours.matiere.id);
+      }
+      return false;
+    });
   }
 
   protected fillComponentAttributesFromResponseBody(data: ISupportDeCours[] | null): ISupportDeCours[] {
