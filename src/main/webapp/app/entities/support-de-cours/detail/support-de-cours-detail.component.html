@@ -1,7 +1,9 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="supportDeCours">
-      <h2 data-cy="supportDeCoursDetailsHeading"><span jhiTranslate="issatsoApp.supportDeCours.detail.title">Support De Cours</span></h2>
+      <h2 data-cy="supportDeCoursDetailsHeading">
+        <span jhiTranslate="issatsoApp.supportDeCours.detail.title" class="titre">Support De Cours</span>
+      </h2>
 
       <hr />
 
@@ -11,49 +13,59 @@
 
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ supportDeCours.id }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.titre">Titre</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ supportDeCours.titre }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.description">Description</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ supportDeCours.description }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.contenu">Contenu</span></dt>
-        <dd>
+        <dd class="element">
           <div *ngIf="supportDeCours.contenu">
-            <a (click)="openFile(supportDeCours.contenu, supportDeCours.contenuContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
-            {{ supportDeCours.contenuContentType }}, {{ byteSize(supportDeCours.contenu) }}
+            <a
+              (click)="openFile(supportDeCours.contenu, supportDeCours.contenuContentType)"
+              jhiTranslate="entity.action.open"
+              STYLE="color: red; font-weight: bold;"
+              >Ouvrir</a
+            >
+            {{ byteSize(supportDeCours.contenu) }}
           </div>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.dateDepot">Date Depot</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ supportDeCours.dateDepot | formatMediumDatetime }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.filiere">Filiere</span></dt>
-        <dd>
+        <dd class="element">
           <span jhiTranslate="{{ 'issatsoApp.Filiere.' + supportDeCours.filiere }}">{{ supportDeCours.filiere }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.niveau">Niveau</span></dt>
-        <dd>
+        <dd class="element">
           <span>{{ supportDeCours.niveau }}</span>
         </dd>
         <dt><span jhiTranslate="issatsoApp.supportDeCours.matiere">Matiere</span></dt>
-        <dd>
+        <dd class="element">
           <div *ngIf="supportDeCours.matiere">
-            <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']">{{ supportDeCours.matiere.matiereName }}</a>
+            <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']" class="nomg">{{ supportDeCours.matiere.matiereName }}</a>
           </div>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" (click)="previousState()" class="btn btn-outline-success" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/support-de-cours', supportDeCours.id, 'edit']" class="btn btn-primary">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
+        type="button"
+        [routerLink]="['/support-de-cours', supportDeCours.id, 'edit']"
+        class="btn btn-outline-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>

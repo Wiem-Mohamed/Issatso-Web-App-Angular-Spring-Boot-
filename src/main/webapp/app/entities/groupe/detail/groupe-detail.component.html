@@ -40,6 +40,38 @@
       >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <!-- Section pour afficher les étudiants associés au groupe -->
+      <h3 class="titre">Liste des étudiants du groupe</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Numéro d'inscription</th>
+            <th scope="col">Filière</th>
+            <th scope="col">Niveau</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let etudiant of groupe.etudiants">
+            <td>{{ etudiant.id }}</td>
+            <td>{{ etudiant.nom }}</td>
+            <td>{{ etudiant.prenom }}</td>
+            <td>{{ etudiant.numInscription }}</td>
+            <td>{{ etudiant.filiere }}</td>
+            <td>{{ etudiant.niveau }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #noStudents>
+        <p>Aucun étudiant associé à ce groupe.</p>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -32,7 +32,7 @@ public class Groupe implements Serializable {
     @Column(name = "niveau")
     private Integer niveau;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "groupe")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupe")
     @JsonIgnoreProperties(value = { "groupe" }, allowSetters = true)
     private Set<Etudiant> etudiants = new HashSet<>();
 

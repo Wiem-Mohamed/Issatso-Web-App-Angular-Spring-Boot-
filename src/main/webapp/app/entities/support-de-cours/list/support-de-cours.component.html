@@ -1,17 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="SupportDeCoursHeading">
-    <span jhiTranslate="issatsoApp.supportDeCours.home.title">SupportDeCours</span>
+    <span jhiTranslate="issatsoApp.supportDeCours.home.title" class="titre">SupportDeCours</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="issatsoApp.supportDeCours.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-support-de-cours"
+        class="btn btn-outline-primary jh-create-entity create-support-de-cours"
         [routerLink]="['/support-de-cours/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -76,7 +77,7 @@
         <tr *ngFor="let supportDeCours of supportDeCours; trackBy: trackId" data-cy="entityTable">
           <td>
             <a
-              style="color: blue; text-decoration: underline"
+              style="text-decoration: none; color: red"
               *ngIf="supportDeCours.contenu"
               (click)="openFile(supportDeCours.contenu, supportDeCours.contenuContentType)"
               >{{ supportDeCours.titre }}</a
@@ -89,7 +90,9 @@
           <td>{{ supportDeCours.niveau }}</td>
           <td>
             <div *ngIf="supportDeCours.matiere">
-              <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']">{{ supportDeCours.matiere.matiereName }}</a>
+              <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']" style="text-decoration: none; color: green">{{
+                supportDeCours.matiere.matiereName
+              }}</a>
             </div>
           </td>
           <td class="text-end">
@@ -97,7 +100,7 @@
               <button
                 type="submit"
                 [routerLink]="['/support-de-cours', supportDeCours.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-dark btn-sm"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -105,6 +108,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
                 type="submit"
                 [routerLink]="['/support-de-cours', supportDeCours.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -114,7 +118,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(supportDeCours)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'"
+                type="submit"
+                (click)="delete(supportDeCours)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

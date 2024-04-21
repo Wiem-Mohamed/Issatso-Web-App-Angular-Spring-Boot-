@@ -43,7 +43,8 @@ public class Etudiant implements Serializable {
     @Column(name = "niveau")
     private Integer niveau;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "groupe_id")
     @JsonIgnoreProperties(value = { "etudiants", "enseigants" }, allowSetters = true)
     private Groupe groupe;
 

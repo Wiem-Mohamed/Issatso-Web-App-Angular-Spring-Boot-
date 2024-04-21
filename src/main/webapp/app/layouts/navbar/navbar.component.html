@@ -186,7 +186,7 @@
                 <span jhiTranslate="global.menu.entities.partenaire">Partenaire</span>
               </a>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_ENSEIGNANT'">
+            <li *jhiHasAnyAuthority="['ROLE_ENSEIGNANT', 'ROLE_ETUDIANT']">
               <a
                 class="dropdown-item"
                 routerLink="/support-de-cours"

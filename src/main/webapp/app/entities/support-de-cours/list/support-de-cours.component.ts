@@ -16,6 +16,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 import { AccountService } from '../../../core/auth/account.service';
 import { MatiereService } from '../../matiere/service/matiere.service';
 import { IMatiere } from '../../matiere/matiere.model';
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 
 @Component({
   standalone: true,
@@ -30,6 +31,7 @@ import { IMatiere } from '../../matiere/matiere.model';
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    HasAnyAuthorityDirective,
   ],
 })
 export class SupportDeCoursComponent implements OnInit {

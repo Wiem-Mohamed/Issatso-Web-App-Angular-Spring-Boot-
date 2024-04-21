@@ -22,6 +22,7 @@ export class GroupeUpdateComponent implements OnInit {
   isSaving = false;
   groupe: IGroupe | null = null;
   filiereValues = Object.keys(Filiere);
+  firstvalue: number = 1;
 
   editForm: GroupeFormGroup = this.groupeFormService.createGroupeFormGroup();
 
