@@ -34,4 +34,6 @@ public interface EnseignantRepository extends EnseignantRepositoryWithBagRelatio
 
     @Query("SELECT e.id FROM Enseignant e WHERE e.email = :email")
     Long findIdByEmail(@Param("email") String email);
+
+    Optional<Enseignant> findByEmail(String email);
 }

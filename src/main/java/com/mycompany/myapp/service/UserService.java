@@ -220,6 +220,7 @@ public class UserService {
      * @param userDTO user to update.
      * @return updated user.
      */
+    //
     public Optional<AdminUserDTO> updateUser(AdminUserDTO userDTO) {
         return userRepository
             .findById(userDTO.getId())
@@ -247,57 +248,27 @@ public class UserService {
                 userRepository.save(user);
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
-                // Vérifier si l'utilisateur est un enseignant
-                boolean isEnseignant = user
-                    .getAuthorities()
-                    .stream()
-                    .anyMatch(authority -> authority.getName().equals(AuthoritiesConstants.ENSEIGNANT));
 
-                // Si l'utilisateur est un enseignant mais n'existe pas dans la table Enseignant, l'ajouter
-                if (isEnseignant) {
-                    Enseignant existingEnseignant = enseignantRepository.findById(user.getId()).orElse(null);
-                    if (existingEnseignant == null) {
-                        Enseignant newEnseignant = new Enseignant();
-                        newEnseignant.setNom(userDTO.getFirstName());
-                        newEnseignant.setPrenom(userDTO.getLastName());
-                        newEnseignant.setEmail(userDTO.getEmail());
-                        enseignantRepository.save(newEnseignant);
-                        log.debug("Added Enseignant entry for User: {}", user);
-                    }
-                } else {
-                    // Si l'utilisateur n'est plus un enseignant, supprimer l'entrée correspondante dans la table Enseignant s'il existe
-                    Enseignant existingEnseignant = enseignantRepository.findById(user.getId()).orElse(null);
-                    if (existingEnseignant != null) {
-                        enseignantRepository.delete(existingEnseignant);
-                        log.debug("Deleted Enseignant entry for User: {}", user);
-                    }
-                }
+                // Récupérer l'utilisateur correspondant dans la table des enseignants (si existant)
+                Optional<Enseignant> existingEnseignantOptional = enseignantRepository.findByEmail(user.getEmail());
+                existingEnseignantOptional.ifPresent(existingEnseignant -> {
+                    existingEnseignant.setNom(userDTO.getFirstName());
+                    existingEnseignant.setPrenom(userDTO.getLastName());
+                    existingEnseignant.setEmail(userDTO.getEmail());
+                    enseignantRepository.save(existingEnseignant);
+                    log.debug("Updated Enseignant entry for User: {}", user);
+                });
 
-                // Vérifier si l'utilisateur est un étudiant
-                boolean isEtudiant = user
-                    .getAuthorities()
-                    .stream()
-                    .anyMatch(authority -> authority.getName().equals(AuthoritiesConstants.ETUDIANT));
+                // Récupérer l'utilisateur correspondant dans la table des étudiants (si existant)
+                Optional<Etudiant> existingEtudiantOptional = etudiantRepository.findByEmail(user.getEmail());
+                existingEtudiantOptional.ifPresent(existingEtudiant -> {
+                    existingEtudiant.setNom(userDTO.getFirstName());
+                    existingEtudiant.setPrenom(userDTO.getLastName());
+                    existingEtudiant.setEmail(userDTO.getEmail());
+                    etudiantRepository.save(existingEtudiant);
+                    log.debug("Updated Etudiant entry for User: {}", user);
+                });
 
-                // Si l'utilisateur est un étudiant mais n'existe pas dans la table Etudiant, l'ajouter
-                if (isEtudiant) {
-                    Etudiant existingEtudiant = etudiantRepository.findById(user.getId()).orElse(null);
-                    if (existingEtudiant == null) {
-                        Etudiant newEtudiant = new Etudiant();
-                        newEtudiant.setNom(userDTO.getFirstName());
-                        newEtudiant.setPrenom(userDTO.getLastName());
-                        newEtudiant.setEmail(userDTO.getEmail());
-                        etudiantRepository.save(newEtudiant);
-                        log.debug("Added Etudiant entry for User: {}", user);
-                    }
-                } else {
-                    // Si l'utilisateur n'est plus un étudiant, supprimer l'entrée correspondante dans la table Etudiant s'il existe
-                    Etudiant existingEtudiant = etudiantRepository.findById(user.getId()).orElse(null);
-                    if (existingEtudiant != null) {
-                        etudiantRepository.delete(existingEtudiant);
-                        log.debug("Deleted Etudiant entry for User: {}", user);
-                    }
-                }
                 return user;
             })
             .map(AdminUserDTO::new);
