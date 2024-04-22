@@ -1,6 +1,7 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Etudiant;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

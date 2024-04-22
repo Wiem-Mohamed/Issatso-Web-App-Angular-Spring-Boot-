@@ -1,0 +1,91 @@
+<div>
+  <h2 id="page-heading" data-cy="SupportDeCoursHeading">
+    <span jhiTranslate="issatsoApp.supportDeCours.home.title" class="titre">SupportDeCours</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-outline-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="issatsoApp.supportDeCours.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="supportDeCours?.length === 0">
+    <span jhiTranslate="issatsoApp.supportDeCours.home.notFound">Aucun Support De Cours trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="supportDeCours && supportDeCours.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="matiere.matiereName">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.supportDeCours.matiere">Matiere</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contenu">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.supportDeCours.contenu">Contenu</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.supportDeCours.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+
+          <th scope="col" jhiSortBy="dateDepot">
+            <div class="d-flex">
+              <span jhiTranslate="issatsoApp.supportDeCours.dateDepot">Date Depot</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let supportDeCours of supportDeCours">
+          <tr *ngIf="!filiere || supportDeCours.filiere === filiere; else skipRow" data-cy="entityTable">
+            <td>
+              <div *ngIf="supportDeCours.matiere">
+                <a [routerLink]="['/matiere', supportDeCours.matiere.id, 'view']" style="text-decoration: none; color: green">{{
+                  supportDeCours.matiere.matiereName
+                }}</a>
+              </div>
+            </td>
+            <td>
+              <a
+                style="text-decoration: none; color: red"
+                *ngIf="supportDeCours.contenu"
+                (click)="openFile(supportDeCours.contenu, supportDeCours.contenuContentType)"
+                >{{ supportDeCours.titre }}</a
+              >
+            </td>
+
+            <td>{{ supportDeCours.description }}</td>
+            <td>{{ supportDeCours.dateDepot | formatMediumDatetime }}</td>
+            <td>
+              <button
+                type="submit"
+                [routerLink]="['/support-de-cours', supportDeCours.id, 'view']"
+                class="btn btn-dark btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+            </td>
+          </tr>
+          <ng-template #skipRow></ng-template>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

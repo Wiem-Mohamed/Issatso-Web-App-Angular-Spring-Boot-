@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Groupe;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import com.mycompany.myapp.repository.GroupeRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -179,5 +180,15 @@ public class GroupeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/groupes/filiere/{etudiantId}")
+    public ResponseEntity<String> getFiliereByEtudiantId(@PathVariable Long etudiantId) {
+        String filiere = groupeRepository.findFiliereByEtudiantId(etudiantId);
+        if (filiere != null) {
+            return ResponseEntity.ok().body(filiere);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

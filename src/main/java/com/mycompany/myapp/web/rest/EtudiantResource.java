@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Etudiant;
+import com.mycompany.myapp.domain.enumeration.Filiere;
 import com.mycompany.myapp.repository.EtudiantRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import com.mycompany.myapp.web.rest.errors.NumInscriptionAlreadyUsedException;

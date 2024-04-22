@@ -10,6 +10,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IEtudiant, NewEtudiant } from '../etudiant.model';
+import { Filiere } from '../../enumerations/filiere.model';
 
 export type PartialUpdateEtudiant = Partial<IEtudiant> & Pick<IEtudiant, 'id'>;
 
@@ -29,6 +30,7 @@ export type EntityArrayResponseType = HttpResponse<IEtudiant[]>;
 @Injectable({ providedIn: 'root' })
 export class EtudiantService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/etudiants');
+  protected resourceUrlg = this.applicationConfigService.getEndpointFor('api/groupes');
   protected resourceUrl3 = this.applicationConfigService.getEndpointFor('api/mailetudiant');
   protected baseUrl = this.applicationConfigService.getEndpointFor('api/listeg');
 
@@ -134,5 +136,8 @@ export class EtudiantService {
   }
   getEtudiantsSameGroupe(etudiantId: number): Observable<IEtudiant[]> {
     return this.http.get<IEtudiant[]>(`${this.baseUrl}/${etudiantId}`);
+  }
+  getEtudiantFiliere(etudiantId: number): Observable<String> {
+    return this.http.get<Filiere>(`${this.resourceUrlg}/filiere/${etudiantId}`);
   }
 }

@@ -6,6 +6,7 @@ import { SupportDeCoursDetailComponent } from './detail/support-de-cours-detail.
 import { SupportDeCoursUpdateComponent } from './update/support-de-cours-update.component';
 import SupportDeCoursResolve from './route/support-de-cours-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
+import { CoursetudiantComponent } from './coursetudiant/coursetudiant.component';
 
 const supportDeCoursRoute: Routes = [
   {
@@ -27,6 +28,14 @@ const supportDeCoursRoute: Routes = [
   {
     path: 'new',
     component: SupportDeCoursUpdateComponent,
+    resolve: {
+      supportDeCours: SupportDeCoursResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'coursetudiant',
+    component: CoursetudiantComponent,
     resolve: {
       supportDeCours: SupportDeCoursResolve,
     },
