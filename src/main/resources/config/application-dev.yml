@@ -49,8 +49,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ecommerceprojetecoomerce@gmail.com
-    password: hadil123
+    username: your application mail
+    password: password
     protocol: smtp
     tls: true
     properties.mail.smtp:

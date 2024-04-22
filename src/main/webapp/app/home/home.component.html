@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-md-9">
-    <h1 class="display-4"><span jhiTranslate="home.title">Bienvenue dans MyStock</span></h1>
+    <h1 class="display-4"><span jhiTranslate="home.title">Bienvenue, ISSATSO !</span></h1>
 
     <div [ngSwitch]="account !== null">
       <div *ngSwitchCase="true" class="menu">
@@ -20,7 +20,7 @@
       </button>
 
       <button class="btn_creer" (click)="navigateToRegister()" *ngSwitchCase="false">
-        <a class="creer" jhiTranslate="global.messages.info.register.link">Créer un compte</a>
+        <a class="creer" jhiTranslate="global.messages.info.register.link">S'inscrire</a>
       </button>
     </div>
   </div>
